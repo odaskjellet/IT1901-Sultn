@@ -3,6 +3,7 @@ package core;
 /**
  * Ingredient class with constructor for name, amount and unit.
  * Contains "getters" and "setters" for each of the three variables.
+ * Throws exception if strings are empty or amount is < 0.0
 */
 
 public class Ingredient {
