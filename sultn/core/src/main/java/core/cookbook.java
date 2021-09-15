@@ -1,3 +1,5 @@
-public class cookbook {
+package core;
+
+public class CookBook {
     
 }

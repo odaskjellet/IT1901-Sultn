@@ -1,3 +1,5 @@
-public class ingredient {
+package core;
+
+public class Ingredient {
     
 }
