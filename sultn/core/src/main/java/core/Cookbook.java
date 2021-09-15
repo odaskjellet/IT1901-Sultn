@@ -1,29 +1,68 @@
+import java.util.Map;
+
 public class Cookbook {
-
-    private Ingredient ingredients;
-    private Recipe recipe;
     
-    public Cookbook (Ingredient ingredients, Recipe recipe) {
-        this.ingredients = ingredients;
-        this.recipe = recipe;
-    
-    } 
-    //enkel konstruktør
-    //kan senere endres til å eks inneholde bilde  
+    private Map<Integer, Recipe> recipeMap = new HashMap<>();
+    private int counter = 0; //variabel for id-ene til recipes
 
-    private validateIngredients(Ingredient ingredients) {
-        if(ingredients.size() == 0) {
-            throw new IllegalArgumentException("Ingredients can't be empty!");
+
+    public Cookbook(HashMap<Integer, Recipe> recipeMap) { //konstruktør
+        this.recipeMap = recipeMap;
+    }
+     
+
+    public Collection<Integer> getIds() { //returnerer en liste med alle id-ene
+        return new ArrayList<>(recipeMap.keySet());
+    }
+
+    public Collection<Recipe> getRecipes() { //returnerer en liste med alle oppskriftene 
+        Collection<String> recipeCollection = new ArrayList<>();
+		for(Integer id : ingredientMap.keySet()) {
+		    recipeCollection.add(ingredientMap.get(id));
+        }
+        return recipeCollection;
+    }
+
+    public void makeNewRecipe(String name, List<String> instructions) { //oppretter en ny oppskrift
+        int id = counter;
+        
+        Recipe newRecipe = new Recipe(name, instructions, id);
+        //må ha beskrivelse, navn og ingredienser, og id. 
+
+        addRecipe(newRecipe);
+        counter++;
+    }
+    
+    public void deleteRecipe(Recipe recipe) { //fjerner en oppskrift
+    
+        if(recipeMap.containsKey(recipe.getId())) {
+            recipeMap.remove(recipe.getId());
+        }
+
+        else {
+            throw new IllegalArgumentException("Recipe " + recipe.getName() " not found. Invalid id.");
         }
     }
-    //sjekker om ingredients listen er tom
-    //kan også allerede valideres i ingredients, slik at man ikke oppretter en tom ingredient
+    //forslag, la vær recipe få en unik id når man oprretter den, 
+    //slik at man kan ha reciepes med samme navn, men fortsatt slette riktig. 
+    //eksempel sjekke om navn er brukt fra før, og legge til et tall hvis det er brukt, slik at det blir unikt. (while-loop)
+    
 
-    private validateRecipe(Recipe recipe) {
-        if(recipe.size() == 0) {
-            throw new IllegalArgumentException("Recipe can't be empty!");
-        }
+    public void addRecipe(Recipe recipe) {//legger til en oppskrift i HashMap
+        int id = recipe.getId();
+        recipeMap.put(id, recipe);
     }
-    //kan valideres i recipe, slik at man ikke oppretter en tom instans
+    
+
+    public Recipe editRecipe(Recipe recipe) {
+        //denne burde kunne kalle på andre funksjoner slik at man kan endre på beskrivelsen og ingredienser.  
+
+        recipe.edit(); //gjøres i recipe
+
+        return recipe;
+    }
+
+    
+    
 
 }
