@@ -20,11 +20,12 @@ public class CookbookTest {
     public void testMakeNewRecipe();
 
     @Test
-    public void deleteRecipe();
+    public void testDeleteRecipe() {
+    };
 
     @Test
-    public void addRecipe();
+    public void testAddRecipe();
 
     @Test
-    public void editRecipe();
+    public void testEditRecipe();
 }

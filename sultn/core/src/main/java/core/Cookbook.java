@@ -40,7 +40,6 @@ public class Cookbook {
         if(recipeMap.containsKey(recipe.getId())) {
             recipeMap.remove(recipe.getId());
         }
-
         else {
             throw new IllegalArgumentException("Recipe " + recipe.getName() " not found. Invalid id.");
         }
