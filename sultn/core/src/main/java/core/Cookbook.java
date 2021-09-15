@@ -3,10 +3,12 @@ import java.util.Map;
 public class Cookbook {
     
     private Map<Integer, Recipe> recipeMap = new HashMap<>();
-    private int counter = 0; //variabel for id-ene til recipes
 
+    //variabel for id-ene til recipes
+    private int counter = 0; 
 
-    public Cookbook(HashMap<Integer, Recipe> recipeMap) { //konstruktør
+    //Constructor
+    public Cookbook(HashMap<Integer, Recipe> recipeMap) { 
         this.recipeMap = recipeMap;
     }
      
