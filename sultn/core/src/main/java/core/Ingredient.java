@@ -15,9 +15,28 @@ public class Ingredient {
 
     // Constructor
     public Ingredient(String name, double amount, String unit) {
-        setIngredientName(name);
-        setIngredientAmount(amount);
-        setIngredientUnit(unit);
+        validateString(name);
+        validateNumber(amount);
+        validateString(unit);
+
+        this.name = name;
+        this.amount = amount;
+        this.unit = unit;
+    }
+
+    // Validates
+    public boolean validateNumber(double number){
+        if (number <= 0.0){
+            throw new IllegalArgumentException("Amount must be a positive number (0 or larger).");
+        }
+        return true;
+    }
+
+    public boolean validateString(String string){
+        if (string.isEmpty()){
+            throw new IllegalArgumentException("Name has no content.");
+        }
+        return true;
     }
 
     // Gets
@@ -35,26 +54,17 @@ public class Ingredient {
 
     // Sets
     public void setIngredientName(String name){
-        if (name.isEmpty()){
-            throw new IllegalArgumentException("Name has no content.");
-        }
-        
+        validateString(name);
         this.name = name;
     }
 
     public void setIngredientAmount(double amount){
-        if (amount <= 0.0){
-            throw new IllegalArgumentException("Amount must be a positive number (0 or larger).");
-        }
-        
+        validateNumber(amount);
         this.amount = amount;
     }
 
     public void setIngredientUnit(String unit){
-        if (unit.isEmpty()){
-            throw new IllegalArgumentException("Unit must be defined.");
-        }
-
+        validateString(unit);
         this.unit = unit;
     }
 }
