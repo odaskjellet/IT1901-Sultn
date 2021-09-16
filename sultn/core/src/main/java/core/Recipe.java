@@ -1,5 +1,10 @@
 package core;
 
+/*
+Class represents one recipe containing name of recipe, id for CookBook class' hash map,
+array of ingredients objects and array of string instructions.
+*/
+
 public class Recipe {
     private static String name;
     private static int id;
