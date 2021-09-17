@@ -6,54 +6,76 @@ array of ingredients objects and array of string instructions.
 */
 
 public class Recipe {
-    private static String name;
-    private static int id;
-    private static Ingredient[] ingredients;
-    private static String[] instructions;
+    private String name;
+    private int id;
+    private Ingredient[] ingredients;
+    private String[] instructions;
 
 
-    Recipe(String aName, int aId, Ingredient[] aIngredients, String[] aInstructions) {
-        setName(aName);
-        setId(aId);
-        setIngredients(aIngredients);
-        setInstructions(aInstructions);
+    Recipe(String name, int id, Ingredient[] ingredients, String[] instructions) {
+        validateString(name);
+        validateInt(id);
+        validateIngArray(ingredients);
+        validateStrArray(instructions);
+
+        this.name = name;
+        this.id = id;
+        this.ingredients = ingredients;
+        this.instructions = instructions;
     }
 
     // Getters
-    public static String getName() {
+    public String getName() {
         return name;
     }
 
-    public static int getId() {
+    public int getId() {
         return id;
     }
 
-    public static Ingredient[] getIngredients() {
+    public Ingredient[] getIngredients() {
         return ingredients;
     }
 
-    public static String[] getInstructions() {
+    public String[] getInstructions() {
         return instructions;
     }
 
     // Setters
-    public static void setName(String newName) {
-        if (newName.isEmpty()) throw new IllegalArgumentException("Name cannot be empty.");
-        name = newName;
+    public void setName(String newName) {
+        validateString(newName);
+        this.name = newName;
     }
 
-    public static void setId(int newId) {
-        if (newId < 0) throw new IllegalArgumentException("ID must be larger than 0.");
-        id = newId;
+    public void setId(int newId) {
+        validateInt(newId);
+        this.id = newId;
     }
     
-    public static void setIngredients(Ingredient[] newIngredients) {
-        if (newIngredients.length == 0) throw new IllegalArgumentException("Recipe must contain at least one ingredient.");
-        ingredients = newIngredients;
+    public void setIngredients(Ingredient[] newIngredients) {
+        validateIngArray(newIngredients);
+        this.ingredients = newIngredients;
     }
 
-    public static void setInstructions(String[] newInstructions) {
-        if (newInstructions.length == 0) throw new IllegalArgumentException("Recipe must contain at least one instruction.");
-        instructions = newInstructions;
+    public void setInstructions(String[] newInstructions) {
+        validateStrArray(newInstructions);
+        this.instructions = newInstructions;
+    }
+
+    // Validation
+    private void validateString(String toValidate) {
+        if (toValidate.isEmpty()) throw new IllegalArgumentException("Name cannot be empty.");
+    }
+    
+    private void validateInt(int toValidate) {
+        if (toValidate < 0) throw new IllegalArgumentException("ID must be larger than 0.");
+    }
+
+    private void validateIngArray(Ingredient[] toValidate) {
+        if (toValidate.length == 0) throw new IllegalArgumentException("Recipe must contain at least one ingredient.");
+    }
+
+    private void validateStrArray(String[] toValidate) {
+        if (toValidate.length == 0) throw new IllegalArgumentException("Recipe must contain at least one instruction.");
     }
 }
