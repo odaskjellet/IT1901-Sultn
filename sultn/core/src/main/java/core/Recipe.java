@@ -68,7 +68,7 @@ public class Recipe {
     }
     
     private void validateInt(int toValidate) {
-        if (toValidate < 0) throw new IllegalArgumentException("ID must be larger than 0.");
+        if (toValidate < 0) throw new IllegalArgumentException("ID cannot be negative.");
     }
 
     private void validateIngArray(Ingredient[] toValidate) {
