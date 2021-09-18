@@ -25,18 +25,16 @@ public class Ingredient {
     }
 
     // Validates
-    public boolean validateNumber(double number){
+    public void validateNumber(double number){
         if (number <= 0.0){
             throw new IllegalArgumentException("Amount must be a positive number (0 or larger).");
         }
-        return true;
     }
 
-    public boolean validateString(String string){
+    public void validateString(String string){
         if (string.isEmpty()){
             throw new IllegalArgumentException("Name has no content.");
         }
-        return true;
     }
 
     // Gets
