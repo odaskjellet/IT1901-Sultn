@@ -15,7 +15,7 @@ public class RecipeTest {
 
     @BeforeEach
     public void setUp() {
-        Ingredient ing = new Ingredient();
+        Ingredient ing = new Ingredient("Eggs", 2.0, "pcs");
         Ingredient[] ings = {ing};
         String[] instr = new String[] 
             {"Fry guanciale in a pan.",
