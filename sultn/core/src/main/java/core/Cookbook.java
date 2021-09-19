@@ -1,23 +1,25 @@
+package core;
+
+import java.util.HashMap;
 import java.util.Map;
 
 public class Cookbook {
     
     private Map<Integer, Recipe> recipeMap = new HashMap<>();
-
-    //variabel for id-ene til recipes
-    private int counter = 0; 
+    private int counter = 0;  //variabel for id-ene til recipes
 
     //Constructor
     public Cookbook(HashMap<Integer, Recipe> recipeMap) { 
         this.recipeMap = recipeMap;
     }
      
-
-    public Collection<Integer> getIds() { //returnerer en liste med alle id-ene
+    //returnerer en liste med alle id-ene
+    public Collection<Integer> getIds() { 
         return new ArrayList<>(recipeMap.keySet());
     }
 
-    public Collection<Recipe> getRecipes() { //returnerer en liste med alle oppskriftene 
+    //returnerer en liste med alle oppskriftene 
+    public Collection<Recipe> getRecipes(HashMap<Integer, Recipe> ingredientMap) { 
         Collection<String> recipeCollection = new ArrayList<>();
 		for(Integer id : ingredientMap.keySet()) {
 		    recipeCollection.add(ingredientMap.get(id));
@@ -25,17 +27,16 @@ public class Cookbook {
         return recipeCollection;
     }
 
-    public void makeNewRecipe(String name, List<String> instructions) { //oppretter en ny oppskrift
+    //oppretter en ny oppskrift og legger den til
+    public void makeNewRecipe(String name, String[] instructions, Ingredient[] ingredients) { 
         int id = counter;
-        
-        Recipe newRecipe = new Recipe(name, instructions, id);
-        //må ha beskrivelse, navn og ingredienser, og id. 
-
+        Recipe newRecipe = new Recipe(name, id, ingredients, instructions);
         addRecipe(newRecipe);
         counter++;
     }
     
-    public void deleteRecipe(Recipe recipe) { //fjerner en oppskrift
+    //fjerner en oppskrift
+    public void deleteRecipe(Recipe recipe) { 
     
         if(recipeMap.containsKey(recipe.getId())) {
             recipeMap.remove(recipe.getId());
@@ -44,23 +45,17 @@ public class Cookbook {
             throw new IllegalArgumentException("Recipe " + recipe.getName() " not found. Invalid id.");
         }
     }
-    //forslag, la vær recipe få en unik id når man oprretter den, 
-    //slik at man kan ha reciepes med samme navn, men fortsatt slette riktig. 
-    //eksempel sjekke om navn er brukt fra før, og legge til et tall hvis det er brukt, slik at det blir unikt. (while-loop)
     
-
     public void addRecipe(Recipe recipe) {//legger til en oppskrift i HashMap
         int id = recipe.getId();
         recipeMap.put(id, recipe);
     }
     
 
-    public Recipe editRecipe(Recipe recipe) {
-        //denne burde kunne kalle på andre funksjoner slik at man kan endre på beskrivelsen og ingredienser.  
-
-        recipe.edit(); //gjøres i recipe
-
-        return recipe;
+    //denne burde kunne kalle på andre funksjoner slik at man kan endre på beskrivelsen og ingredienser. 
+    //public Recipe editRecipe(Recipe recipe) {  
+        //recipe.edit(); //gjøres i recipe
+        //return recipe;
     }
 
     
