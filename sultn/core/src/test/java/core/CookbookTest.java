@@ -2,6 +2,19 @@ package core;
 
 import core.Ingredient;
 import jdk.jfr.Timestamp;
+import java.util.stream.*;
+import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 public class CookbookTest {
 
@@ -12,7 +25,7 @@ public class CookbookTest {
     private Ingredient egg = new Ingredient("egg", 2, "ost");
     private Ingredient ost = new Ingredient("ost", 5, "stk");
     private Ingredient tomatsaus = new Ingredient("tomatsaus", 1, "glass");
-    private INgredient melk = new Ingredient("melk", 2, "l");
+    private Ingredient melk = new Ingredient("melk", 2, "l");
 
 
     
@@ -55,13 +68,12 @@ public class CookbookTest {
         List<Recipe> recipes = cookbook.getRecipes();
 
         assertFalse(recipes.stream().anyMatch(p -> p.getName().equals("Pannekake"), 
-        "Should return false, and shouldn't contain pizza");
-        
+        "Should return false, and shouldn't contain pizza"));
     }
 
     @Test
     public void testAddRecipe() {
-        Liste<String> kInstructions = {"1.Bak en kake"};
+        List<String> kInstructions = {"1.Bak en kake"};
         List<Ingredient> kIngredients = {melk, mel, egg};
 
         Recipe kake = new Recipe("Kake", 3, kIngredients, kInstructions);

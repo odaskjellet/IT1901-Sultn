@@ -2,6 +2,11 @@ package core;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+
 
 public class Cookbook {
     
@@ -26,21 +31,22 @@ public class Cookbook {
 
      
     //returnerer en liste med alle id-ene
-    public Collection<Integer> getIds() { 
+    public List<Integer> getIds() { 
         return new ArrayList<>(recipeMap.keySet());
     }
 
     //returnerer en liste med alle oppskriftene 
-    public Collection<Recipe> getRecipes() { //HashMap<Integer, Recipe> ingredientMap
-        Collection<String> recipeCollection = new ArrayList<>();
-		for(Integer id : this.recipeMap.keySet()) {
-		    recipeCollection.add(ingredientMap.get(id));
+    public List<Recipe> getRecipes() { //HashMap<Integer, Recipe> ingredientMap
+        List<Recipe> recipeCollection = new ArrayList<>();
+		
+        for(Integer id : this.recipeMap.keySet()) {
+		    recipeCollection.add(recipeMap.get(id));
         }
         return recipeCollection;
     }
 
     //oppretter en ny oppskrift og legger den til
-    public void makeNewRecipe(String name, String[] instructions, Ingredient[] ingredients) { 
+    public void makeNewRecipe(String name, List<String> instructions, List<Ingredient> ingredients) { 
         int id = counter;
         Recipe newRecipe = new Recipe(name, id, ingredients, instructions);
         addRecipe(newRecipe);
@@ -54,7 +60,7 @@ public class Cookbook {
             recipeMap.remove(recipe.getId());
         }
         else {
-            throw new IllegalArgumentException("Recipe " + recipe.getName() " not found. Invalid id.");
+            throw new IllegalArgumentException("Recipe " + recipe.getName() + " not found. Invalid id.");
         }
     }
     
@@ -68,9 +74,7 @@ public class Cookbook {
     //public Recipe editRecipe(Recipe recipe) {  
         //recipe.edit(); //gjøres i recipe
         //return recipe;
-    }
-
-    
-    
+    //}
 
 }
+

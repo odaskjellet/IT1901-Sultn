@@ -1,5 +1,8 @@
 package core;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 /*
 Class represents one recipe containing name of recipe, id for CookBook class' hash map,
 array of ingredients objects and array of string instructions.
@@ -8,8 +11,8 @@ array of ingredients objects and array of string instructions.
 public class Recipe {
     private String name;
     private int id;
-    private List<Ingredient> ingredients = new ArrayLisy<>();
-    private List<String> instructions = new ArrayLisy<>();
+    private List<Ingredient> ingredients = new ArrayList<>();
+    private List<String> instructions = new ArrayList<>();
 
 
     Recipe(String name, int id, List<Ingredient> ingredients, List<String> instructions) {
@@ -72,10 +75,10 @@ public class Recipe {
     }
 
     private void validateIngArray(List<Ingredient> toValidate) {
-        if (toValidate.length == 0) throw new IllegalArgumentException("Recipe must contain at least one ingredient.");
+        if (toValidate.size() == 0) throw new IllegalArgumentException("Recipe must contain at least one ingredient.");
     }
 
     private void validateStrArray(List<String> toValidate) {
-        if (toValidate.length == 0) throw new IllegalArgumentException("Recipe must contain at least one instruction.");
+        if (toValidate.size() == 0) throw new IllegalArgumentException("Recipe must contain at least one instruction.");
     }
 }
