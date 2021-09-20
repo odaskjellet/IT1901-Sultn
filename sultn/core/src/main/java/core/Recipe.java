@@ -8,11 +8,11 @@ array of ingredients objects and array of string instructions.
 public class Recipe {
     private String name;
     private int id;
-    private Ingredient[] ingredients;
-    private String[] instructions;
+    private List<Ingredient> ingredients = new ArrayLisy<>();
+    private List<String> instructions = new ArrayLisy<>();
 
 
-    Recipe(String name, int id, Ingredient[] ingredients, String[] instructions) {
+    Recipe(String name, int id, List<Ingredient> ingredients, List<String> instructions) {
         validateString(name);
         validateInt(id);
         validateIngArray(ingredients);
@@ -33,11 +33,11 @@ public class Recipe {
         return id;
     }
 
-    public Ingredient[] getIngredients() {
+    public List<Ingredient> getIngredients() {
         return ingredients;
     }
 
-    public String[] getInstructions() {
+    public List<String> getInstructions() {
         return instructions;
     }
 
@@ -52,12 +52,12 @@ public class Recipe {
         this.id = newId;
     }
     
-    public void setIngredients(Ingredient[] newIngredients) {
+    public void setIngredients(List<Ingredient> newIngredients) {
         validateIngArray(newIngredients);
         this.ingredients = newIngredients;
     }
 
-    public void setInstructions(String[] newInstructions) {
+    public void setInstructions(List<String> newInstructions) {
         validateStrArray(newInstructions);
         this.instructions = newInstructions;
     }
@@ -71,11 +71,11 @@ public class Recipe {
         if (toValidate < 0) throw new IllegalArgumentException("ID cannot be negative.");
     }
 
-    private void validateIngArray(Ingredient[] toValidate) {
+    private void validateIngArray(List<Ingredient> toValidate) {
         if (toValidate.length == 0) throw new IllegalArgumentException("Recipe must contain at least one ingredient.");
     }
 
-    private void validateStrArray(String[] toValidate) {
+    private void validateStrArray(List<String> toValidate) {
         if (toValidate.length == 0) throw new IllegalArgumentException("Recipe must contain at least one instruction.");
     }
 }
