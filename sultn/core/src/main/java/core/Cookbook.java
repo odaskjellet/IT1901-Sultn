@@ -12,6 +12,18 @@ public class Cookbook {
     public Cookbook(HashMap<Integer, Recipe> recipeMap) { 
         this.recipeMap = recipeMap;
     }
+
+    //Getters
+    public int getCounter() {
+        return this.counter;
+    }
+
+
+    //Setters
+    public void setCounter(int newCounter) {
+        this.counter = newCounter;
+    }
+
      
     //returnerer en liste med alle id-ene
     public Collection<Integer> getIds() { 
@@ -19,9 +31,9 @@ public class Cookbook {
     }
 
     //returnerer en liste med alle oppskriftene 
-    public Collection<Recipe> getRecipes(HashMap<Integer, Recipe> ingredientMap) { 
+    public Collection<Recipe> getRecipes() { //HashMap<Integer, Recipe> ingredientMap
         Collection<String> recipeCollection = new ArrayList<>();
-		for(Integer id : ingredientMap.keySet()) {
+		for(Integer id : this.recipeMap.keySet()) {
 		    recipeCollection.add(ingredientMap.get(id));
         }
         return recipeCollection;
