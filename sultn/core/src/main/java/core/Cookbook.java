@@ -7,10 +7,16 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+/*
+The cookbook class is a collection with recipes, and contains methods that add,
+delete, edit and make new recipes. 
+The constructor contains a hash map with recipes and their ids.
+*/
+
 
 public class Cookbook {
     
-    private Map<Integer, Recipe> recipeMap = new HashMap<>();
+    private HashMap<Integer, Recipe> recipeMap = new HashMap<>();
     private int counter = 0;  //variabel for id-ene til recipes
 
     //Constructor
@@ -55,13 +61,11 @@ public class Cookbook {
     
     //fjerner en oppskrift
     public void deleteRecipe(Recipe recipe) { 
-    
-        if(recipeMap.containsKey(recipe.getId())) {
-            recipeMap.remove(recipe.getId());
-        }
-        else {
-            throw new IllegalArgumentException("Recipe " + recipe.getName() + " not found. Invalid id.");
-        }
+        int id = recipe.getId();
+        recipeMap.remove(id);  
+      
+        //throw new IllegalArgumentException("Recipe " + recipe.getName() + " not found. Invalid id.");
+        
     }
     
     public void addRecipe(Recipe recipe) {//legger til en oppskrift i HashMap
