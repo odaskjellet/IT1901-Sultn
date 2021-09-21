@@ -20,7 +20,11 @@ public class Cookbook {
     //variabel for id-ene til recipes
     private int counter = 0;  
 
-    //Constructor
+    //Constructors
+    public Cookbook() {
+        this.recipeMap = recipeMap;
+    }
+
     public Cookbook(HashMap<Integer, Recipe> recipeMap) { 
         this.recipeMap = recipeMap;
     }
