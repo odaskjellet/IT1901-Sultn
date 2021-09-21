@@ -17,7 +17,8 @@ The constructor contains a hash map with recipes and their ids.
 public class Cookbook {
     
     private HashMap<Integer, Recipe> recipeMap = new HashMap<>();
-    private int counter = 0;  //variabel for id-ene til recipes
+    //variabel for id-ene til recipes
+    private int counter = 0;  
 
     //Constructor
     public Cookbook(HashMap<Integer, Recipe> recipeMap) { 
@@ -42,14 +43,16 @@ public class Cookbook {
     }
 
     //returnerer en liste med alle oppskriftene 
-    public List<Recipe> getRecipes() { //HashMap<Integer, Recipe> ingredientMap
-        List<Recipe> recipeCollection = new ArrayList<>();
-		
-        for(Integer id : this.recipeMap.keySet()) {
+    /*public List<Recipe> getRecipes() { 
+        
+        Collection<Recipe> values = recipeMap.values();
+        List<Recipe> recipeCollection = new ArrayList<>(values);
+        return recipeCollection;
+
+         for(Integer id : this.recipeMap.keySet()) {
 		    recipeCollection.add(recipeMap.get(id));
         }
-        return recipeCollection;
-    }
+    }*/ //denne funker ikke enn så lenge :)
 
     //oppretter en ny oppskrift og legger den til
     public void makeNewRecipe(String name, List<String> instructions, List<Ingredient> ingredients) { 
@@ -62,23 +65,27 @@ public class Cookbook {
     //fjerner en oppskrift
     public void deleteRecipe(Recipe recipe) { 
         int id = recipe.getId();
-        recipeMap.remove(id);  
-      
-        //throw new IllegalArgumentException("Recipe " + recipe.getName() + " not found. Invalid id.");
-        
+
+        if(recipeMap.containsKey(id)) {
+            recipeMap.remove(id); 
+        }
+        else {
+            throw new IllegalArgumentException("Recipe " + recipe.getName() + " not found. Invalid id.");
+        }
     }
-    
-    public void addRecipe(Recipe recipe) {//legger til en oppskrift i HashMap
+        
+    //legger til en oppskrift i HashMap
+    public void addRecipe(Recipe recipe) {
         int id = recipe.getId();
         recipeMap.put(id, recipe);
     }
     
-
     //denne burde kunne kalle på andre funksjoner slik at man kan endre på beskrivelsen og ingredienser. 
     //public Recipe editRecipe(Recipe recipe) {  
         //recipe.edit(); //gjøres i recipe
         //return recipe;
     //}
+        
 
 }
 

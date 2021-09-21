@@ -1,7 +1,6 @@
 package core;
 
 import core.Ingredient;
-//import jdk.jfr.Timestamp;
 import java.util.stream.*;
 import java.util.List;
 import java.util.HashMap;
@@ -32,7 +31,6 @@ public class CookbookTest {
     private Ingredient melk = new Ingredient("melk", 2, "l");
 
    
-    
 
     
     @BeforeEach
@@ -40,9 +38,6 @@ public class CookbookTest {
         List<String> kInstructions = new ArrayList<String>(Arrays.asList("1.Bak en kake"));
         List<Ingredient> kIngredients = new ArrayList<Ingredient>(Arrays.asList(melk, mel, egg));
     
-        
-    
-
         List<Ingredient> cIngredients = new ArrayList<Ingredient>(Arrays.asList(egg, ost));
         List<Ingredient> pIngredients = new ArrayList<Ingredient>(Arrays.asList(mel, ost, tomatsaus));
 
@@ -71,40 +66,23 @@ public class CookbookTest {
 
         cookbook.makeNewRecipe("Pannekake", pannekakeInstructions, pannekakeIngredients);
 
-        List<Recipe> recipes = cookbook.getRecipes();
-
-        assertTrue(recipes.stream().anyMatch(p -> p.getName().equals("Pannekake")),
-         "Should be true and contain the recipe 'Pannekake'");
+        assertTrue(testMap.containsKey(kake.getId()));
     }
 
-    /*@Test
+    @Test
     public void testDeleteRecipe() {
         cookbook.deleteRecipe(pizza);
 
-        List<Recipe> recipes = cookbook.getRecipes();
-
-        /*for(Recipe recipe : recipes) {
-            if(recipe.getName().equals(pizza.getName())) {
-                throw new IllegalArgumentException("Should be false");
-            }
-        }*/
-
-        /*assertFalse(recipes.stream().anyMatch(p -> p.getName().equals(pizza.getName()), 
-        "Should return false, and shouldn't contain pizza"));*/
-
-        //assertFalse(recipes.contains(pizza));
-        //assertThrows(Exception.class, cookbook.deleteRecipe(kake), "Kake is not in list, should throw IllegalArgumentException");
-   // }
-   // */
+        assertFalse(testMap.containsKey(pizza.getId()));
+        assertThrows(Exception.class, () -> cookbook.deleteRecipe(kake), 
+            "Kake is not in list, should throw IllegalArgumentException");
+    }
+   
 
     @Test
     public void testAddRecipe() {
-
         cookbook.addRecipe(kake);
-        List<Recipe> recipes = cookbook.getRecipes();
-
-        assertTrue(recipes.stream().anyMatch(p -> p.getName().equals("Kake")),
-        "Should be true and contain the recipe 'Kake'");
+        assertTrue(testMap.containsKey(kake.getId()));
     }
 
 
