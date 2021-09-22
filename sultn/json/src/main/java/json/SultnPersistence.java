@@ -8,7 +8,7 @@ import java.nio.file.Path;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import core.CookBook;
+import core.Cookbook;
 
 public class SultnPersistence {
     private ObjectMapper mapper;
@@ -19,16 +19,16 @@ public class SultnPersistence {
         mapper.registerModule(new SultnModule());
     }
 
-    public void writeCookBook(CookBook cookBook, Writer writer) throws IOException {
-        mapper.writerWithDefaultPrettyPrinter().writeValue(writer, cookBook);
+    public void writeCookBook(Cookbook cookbook, Writer writer) throws IOException {
+        mapper.writerWithDefaultPrettyPrinter().writeValue(writer, cookbook);
     }
 
-    public void saveCookBook(CookBook cookBook) throws IOException, IllegalStateException {
+    public void saveCookBook(Cookbook cookbook) throws IOException, IllegalStateException {
         if (saveFilePath == null) {
             throw new IllegalStateException("Save file path not set...");
         }
         try (Writer writer = new FileWriter(saveFilePath.toFile(), StandardCharsets.UTF_8)) {
-            writeCookBook(cookBook, writer);
+            writeCookBook(cookbook, writer);
         }
     }
 }

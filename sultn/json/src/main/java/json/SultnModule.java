@@ -3,7 +3,7 @@ package json;
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
-import core.CookBook;
+import core.Cookbook;
 import core.Ingredient;
 import core.Recipe;
 
@@ -15,7 +15,7 @@ public class SultnModule extends SimpleModule {
         super(NAME, Version.unknownVersion());
         addSerializer(Ingredient.class, new IngredientSerializer());
         addSerializer(Recipe.class, new RecipeSerializer());
-        // addSerializer(CookBook.class, new CookBookSerializer());
+        addSerializer(Cookbook.class, new CookBookSerializer());
     }
 
     public SultnModule() {

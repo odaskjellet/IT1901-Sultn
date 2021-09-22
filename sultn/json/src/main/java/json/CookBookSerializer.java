@@ -6,14 +6,13 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
-import core.CookBook;
+import core.Cookbook;
 
-public class CookBookSerializer extends JsonSerializer<CookBook> {
+public class CookBookSerializer extends JsonSerializer<Cookbook> {
     
     @Override
-    public void serialize(CookBook cookBook, JsonGenerator jsonGen, SerializerProvider serializerProvider) throws IOException {
+    public void serialize(Cookbook cookBook, JsonGenerator jsonGen, SerializerProvider serializerProvider) throws IOException {
         jsonGen.writeStartObject();
-        
         
 
         jsonGen.writeEndObject();
