@@ -17,7 +17,7 @@
       </Label>
       <VBox layoutX="2.0" layoutY="109.0" prefHeight="354.0" prefWidth="296.0">
          <children>
-            <Label prefHeight="31.0" prefWidth="600.0" style="-fx-background-color: #f6c7bc; -fx-border-color: black;" text="            My recipes" textAlignment="RIGHT">
+            <Label alignment="CENTER" prefHeight="31.0" prefWidth="600.0" style="-fx-background-color: #f6c7bc; -fx-border-color: black;" text="My recipes" textAlignment="RIGHT">
                <font>
                   <Font name="Century Gothic Italic" size="24.0" />
                </font>

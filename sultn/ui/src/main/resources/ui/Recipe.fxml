@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="300.0" style="-fx-background-color: #6f9e98;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.AppController">
+   <children>
+      <Label fx:id="lblRecipeName" alignment="CENTER" layoutY="111.0" prefHeight="36.0" prefWidth="300.0" style="-fx-background-color: #f6c7bc; -fx-border-color: black;" text="#Navn" textAlignment="CENTER">
+         <font>
+            <Font name="Century Gothic Italic" size="24.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutY="436.0" prefHeight="33.0" prefWidth="300.0" style="-fx-border-width: 1 0 0 0; -fx-border-color: black;" text="Copyright Sultn | Made by alle oss fire | Trademark">
+         <font>
+            <Font name="Calibri" size="12.0" />
+         </font>
+      </Label>
+      <TextFlow fx:id="ingredientField" layoutY="153.0" prefHeight="284.0" prefWidth="112.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ingredienser" />
+         </children>
+      </TextFlow>
+      <TextFlow fx:id="directionField" layoutX="114.0" layoutY="153.0" prefHeight="276.0" prefWidth="179.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Veiledning" />
+         </children>
+      </TextFlow>
+      <Label id="title" layoutX="104.0" layoutY="27.0" prefHeight="58.0" prefWidth="92.0" text="Sultn" textFill="#f6c7bc">
+         <font>
+            <Font name="Century Gothic Bold Italic" size="40.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnRecipeBack" layoutX="14.0" layoutY="27.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="70.0" style="-fx-background-color: #6f9e98;" text="X" textFill="#f6c7bc" AnchorPane.bottomAnchor="410.6" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="250.6" AnchorPane.topAnchor="27.0">
+         <font>
+            <Font size="36.0" />
+         </font>
+         <padding>
+            <Insets bottom="-15.0" left="-15.0" right="-15.0" top="-15.0" />
+         </padding>
+      </Button>
+   </children>
+</AnchorPane>
