@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Assertions;
 
-public class RecipeTest {
+/*public class RecipeTest {
     public Recipe recipe;
 
     @BeforeEach
@@ -49,4 +49,4 @@ public class RecipeTest {
         Throwable exception = assertThrows(IllegalArgumentException.class, () -> recipe.setId(-1));
         assertEquals("ID cannot be negative.", exception.getMessage());
     }
-}
+}*/
