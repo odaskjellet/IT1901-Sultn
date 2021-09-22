@@ -47,16 +47,10 @@ public class Cookbook {
     }
 
     //returnerer en liste med alle oppskriftene 
-    /*public List<Recipe> getRecipes() { 
-        
-        Collection<Recipe> values = recipeMap.values();
-        List<Recipe> recipeCollection = new ArrayList<>(values);
-        return recipeCollection;
-
-         for(Integer id : this.recipeMap.keySet()) {
-		    recipeCollection.add(recipeMap.get(id));
-        }
-    }*/ //denne funker ikke enn så lenge :)
+    public List<Recipe> getRecipes() {
+        List<Recipe> allRecipes = new ArrayList<Recipe>(recipeMap.values());
+        return allRecipes;
+    } //denne funker ikke enn så lenge :)
 
     //oppretter en ny oppskrift og legger den til
     public void makeNewRecipe(String name, List<String> instructions, List<Ingredient> ingredients) { 
