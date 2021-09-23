@@ -2,7 +2,7 @@
 
 # SULTN (en kokebokapp)
 
-Dette er kodelageret til utviklingen av applikasjonen "sultn", en kokebokapp med trelagsarkitektur hvor du kan se/lese, legge til/endre eller fjerne dine egne oppskrifter.
+Dette er kodelageret til utviklingen av applikasjonen "sultn", en kokebokapp med trelagsarkitektur (domene, brukergrensesnitt, persistens).
 
 ## Struktur
 
