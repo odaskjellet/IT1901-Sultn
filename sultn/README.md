@@ -12,6 +12,7 @@ Prosjektet inneholder foreløpig noen tester for å lage, legge til og slette en
 
 - sultn/core/src/main/java for klasser og logikk.
 - sultn/ui/src/main/java/ for UI og ressurser tilhørende dette.
+- sultn/json/src/main/java for persistenshåndtering.
 
 ## Bygging og kjøring av prosjektet
 
