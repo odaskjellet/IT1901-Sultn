@@ -39,11 +39,11 @@ Her har vi laget flere deloppgaver:
 (UserStory) Opprette ny oppskrift // issue #6
 *"Som bruker ønsker jeg å kunne legge til ny oppskrifter i min kokebok. Jeg vil kunne benytte et skjema for å lage en ny oppskrift, som så legges til i den eksisterende lista over oppskrifter."*
 
-Tilhørende deloppgaver:
-- Funksjonalitet for å hente/lagre oppskrifter.
-- Knapp --> Skjema for å lagre recipe.
-
 ### Tredje brukerhistorie
 
 (UserStory) Se på oppskrift // issue #18
 *"Jeg vil som bruker kunne velge en av oppskriftene på hovedsiden. Denne skal ta meg til en ny side som viser oppskriften. Oppskriften skal inneholde navn, ingrediensliste og instruksjoner på hvordan den lages."*
+
+## Visuell støtte
+
+![](img/sultn-design.png)
