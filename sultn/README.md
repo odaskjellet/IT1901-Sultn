@@ -1,8 +1,8 @@
 [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.stud.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2118/gr2118)
 
-# SULTN 
-
 ![](img/sultn-logo.png)
+
+# SULTN
 
 Dette prosjektet er en applikasjon som bruker en trelagsarkitektur med domene, brukergrensesnitt (UI) og persistenslag (lagring).
 Applikasjonen er en kokebok, hvor man (når den er ferdig) skal kunne ha oversikt og lese, lagre, legge til og redigere oppskrifter.

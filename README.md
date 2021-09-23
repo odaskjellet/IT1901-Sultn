@@ -12,3 +12,5 @@ Prosjektet er modulert og består av:
 - sultn.json:   Persistenslaget.
 
 Kodingsprosjektets rotmappe ligger på "gr2118.sultn".
+
+For mer detaljert beskrivelse av applikasjon se [readme.md i sultn.core](sultn/readme.md)
