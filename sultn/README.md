@@ -6,6 +6,12 @@
 
 Dette prosjektet er en applikasjon som bruker en trelagsarkitektur med domene, brukergrensesnitt (UI) og persistenslag (lagring).
 Applikasjonen er en kokebok, hvor man (når den er ferdig) skal kunne ha oversikt og lese, lagre, legge til og redigere oppskrifter.
+Prosjektet inneholder foreløpig noen tester for å lage, legge til og slette en oppskrift i kokebok-klassen.
+
+## Organisering
+
+- sultn/core/src/main/java for klasser og logikk.
+- sultn/ui/src/main/java/ for UI og ressurser tilhørende dette.
 
 ## Bygging og kjøring av prosjektet
 
@@ -13,7 +19,7 @@ Bygges, kjøres og testes med maven.
 
 - Kodelageret og riktig utgivelse ligger på greinen ***main***.
 - Klon repoet lokalt eller kjør det med bruk av Gitpod (bruk Gitpod-knappen øverst).
-- Prosjektet bygges fra rotmappen "gr2118.sultn".
+- Prosjektet bygges fra rotmappen "gr2118/sultn/".
 - Kjør kommandoen ***mvn compile***.
 - Kan så enten kjøres med run eller med test:
     - ***mvn javafx:run***
