@@ -52,4 +52,4 @@ Her har vi laget flere deloppgaver:
 ## Visuell støtte
 
 ![](img/sultn-design.png)
-<img src="img/sultn-desgin.png" height="120">
+<img src="/img/sultn-desgin.png" height="120">
