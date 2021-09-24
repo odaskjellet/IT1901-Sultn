@@ -11,7 +11,7 @@ Prosjektet inneholder foreløpig noen tester for å lage, legge til og slette en
 ## Organisering
 
 - sultn/core/src/main/java for klasser og logikk.
-- sultn/ui/src/main/java/ for UI og ressurser tilhørende dette.
+- sultn/ui/src/main/java for UI og ressurser tilhørende dette.
 - sultn/json/src/main/java for persistenshåndtering.
 
 ## Bygging og kjøring av prosjektet
@@ -20,7 +20,7 @@ Bygges, kjøres og testes med maven.
 
 - Kodelageret og riktig utgivelse ligger på greinen ***main***.
 - Klon repoet lokalt eller kjør det med bruk av Gitpod (bruk Gitpod-knappen øverst).
-- Prosjektet bygges fra rotmappen "gr2118/sultn/".
+- Prosjektet bygges fra mappen "gr2118/sultn/ui".
 - Kjør kommandoen ***mvn compile***.
 - Kan så enten kjøres med run eller med test:
     - ***mvn javafx:run***
