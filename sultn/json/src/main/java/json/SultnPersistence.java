@@ -25,7 +25,7 @@ public class SultnPersistence {
     }
 
     public void setSaveFile(String saveFile) {
-        this.saveFilePath = Paths.get(System.getProperty("user.dir", saveFile));
+        this.saveFilePath = Paths.get(System.getProperty("user.dir"), saveFile);
     }
 
     public void saveCookBook(Cookbook cookbook) throws IOException, IllegalStateException {
