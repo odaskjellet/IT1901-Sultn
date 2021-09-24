@@ -8,35 +8,39 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.jupiter.api.Assertions;
 
-/*public class RecipeTest {
+public class RecipeTest {
     public Recipe recipe;
 
     @BeforeEach
     public void setUp() {
         Ingredient ing = new Ingredient("Eggs", 2.0, "pcs");
-        Ingredient[] ings = {ing};
-        String[] instr = new String[] 
-            {"Fry guanciale in a pan.",
+        List<Ingredient> ings = new ArrayList<Ingredient>(Arrays.asList(ing));
+        List<String> instr = new ArrayList<String>(Arrays.asList( 
+            "Fry guanciale in a pan.",
             "Cook pasta.",
             "Make slurry of eggs, parmigiano, and pepper.",
             "Add al dente pasta to frying pan along with slurry",
             "Stir constantly",
-            "Add salt to taste"};
+            "Add salt to taste"));
         
         recipe = new Recipe("Carbonara", 123, ings, instr);
     }
 
 
     @Test
-    void testTest() {
+    public void testTest() {
         assertTrue(true);
     }
 
     @Test
     @DisplayName("Testing setName() and getName()")
-    void testName() {
+    public void testName() {
         String newName = "Pasta carbonara";
         recipe.setName(newName);
         String checkName = recipe.getName();
@@ -45,8 +49,8 @@ import org.junit.jupiter.api.Assertions;
 
     @Test
     @DisplayName("Testing id")
-    void testId() {
+    public void testId() {
         Throwable exception = assertThrows(IllegalArgumentException.class, () -> recipe.setId(-1));
         assertEquals("ID cannot be negative.", exception.getMessage());
     }
-}*/
+}
