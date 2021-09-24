@@ -1,10 +1,7 @@
 package core;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 /*
@@ -22,7 +19,7 @@ public class Cookbook {
 
     //Constructors
     public Cookbook() {
-        this.recipeMap = recipeMap;
+
     }
 
     public Cookbook(HashMap<Integer, Recipe> recipeMap) { 
@@ -32,6 +29,10 @@ public class Cookbook {
     //Getters
     public int getCounter() {
         return this.counter;
+    }
+
+    public HashMap<Integer, Recipe> getRecipeMap() {
+        return this.recipeMap;
     }
 
 
