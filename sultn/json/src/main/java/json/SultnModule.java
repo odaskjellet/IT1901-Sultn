@@ -16,6 +16,10 @@ public class SultnModule extends SimpleModule {
         addSerializer(Ingredient.class, new IngredientSerializer());
         addSerializer(Recipe.class, new RecipeSerializer());
         addSerializer(Cookbook.class, new CookBookSerializer());
+
+        addDeserializer(Ingredient.class, new IngredientDeserializer());
+        addDeserializer(Recipe.class, new RecipeDeserializer());
+        addDeserializer(Cookbook.class, new CookBookDeserializer());
     }
 
     public SultnModule() {
