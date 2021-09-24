@@ -28,7 +28,7 @@ public class SultnController {
         //cookbook.makeNewRecipe(saveHandler.load());
 
 
-        // Mistenker at vi ikke kan launche med tom kokebok
+        // Mistenker at vi ikke kan launche med tom kokebok, så her er litt dummykode slik at vi har en recipe
         List<Ingredient> testIngredients = new ArrayList<>();
         List<String> testInstructions = new ArrayList<>();
         Ingredient testTomat = new Ingredient("tomat", 2, "stk");
@@ -63,25 +63,27 @@ public class SultnController {
 
 
    private void createRecipeList(){
+       
+        List<HBoxCell> list = new ArrayList<>();
 
-    List<HBoxCell> list = new ArrayList<>();
+        /*for(int key : cookbook.getRecipeMap().keySet()) {
+            list.add(new HBoxCell(cookbook.getRecipeMap().get(key).getName(), 
+            cookbook.getRecipeMap().get(key).getId()));
+        }*/
 
-    for(int key : cookbook.getRecipeMap().keySet()) {
-        list.add(new HBoxCell(cookbook.getRecipeMap().get(key).getName(), 
-        cookbook.getRecipeMap().get(key).getId()));
-    }
+        list.add(new HBoxCell("Test", 0)); // Bruker denne til vi finner ut hvorfor løkken over ikke funker
 
-    ListView<HBoxCell> recipeView = new ListView<HBoxCell>();
-    ObservableList<HBoxCell> observableList = FXCollections.observableList(list);
-    recipeView.setItems(observableList);
+        ListView<HBoxCell> recipeView = new ListView<HBoxCell>();
+        ObservableList<HBoxCell> observableList = FXCollections.observableList(list);
+        recipeView.setItems(observableList);
 
-    bPane.setCenter(recipeView);
+        bPane.setCenter(recipeView);
 
-    /*ListView recipeView = new ListView(); 
-    List<Recipe> recipeList = cookbook.getRecipes(); //we assume this works
-    for(Recipe recipe: recipeList) {
-        recipeView.getItems().add(recipe);
-    }*/
+        /*ListView recipeView = new ListView(); 
+        List<Recipe> recipeList = cookbook.getRecipes(); //we assume this works
+        for(Recipe recipe: recipeList) {
+            recipeView.getItems().add(recipe);
+        }*/
 
 
     }

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="300.0" style="-fx-background-color: #6f9e98; -fx-border-color: black;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.SultnController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="300.0" style="-fx-background-color: #6f9e98; -fx-border-color: black;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.SultnController">
    <children>
       <Label id="title" layoutX="104.0" layoutY="14.0" prefHeight="58.0" prefWidth="92.0" text="Sultn" textFill="#f6c7bc">
          <font>
@@ -21,7 +21,7 @@
                   <Font name="Century Gothic Italic" size="24.0" />
                </font>
             </Label>
-            <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #F6C7BC;" />
+            <BorderPane fx:id="bPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #F6C7BC;" />
             <Label prefHeight="33.0" prefWidth="296.0" style="-fx-border-width: 1 0 0 0; -fx-border-color: black;" text="Copyright Sultn | Made by alle oss fire | Trademark" />
          </children>
       </VBox>
