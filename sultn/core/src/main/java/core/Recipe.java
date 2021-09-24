@@ -15,7 +15,7 @@ public class Recipe {
     private List<String> instructions = new ArrayList<>();
 
 
-    Recipe(String name, int id, List<Ingredient> ingredients, List<String> instructions) {
+    public Recipe(String name, int id, List<Ingredient> ingredients, List<String> instructions) {
         validateString(name);
         validateInt(id);
         validateIngArray(ingredients);
