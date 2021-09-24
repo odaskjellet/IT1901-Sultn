@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -21,6 +22,10 @@ public class SultnPersistence {
 
     public void writeCookBook(Cookbook cookbook, Writer writer) throws IOException {
         mapper.writerWithDefaultPrettyPrinter().writeValue(writer, cookbook);
+    }
+
+    public void setSaveFile(String saveFile) {
+        this.saveFilePath = Paths.get(System.getProperty("user.dir", saveFile));
     }
 
     public void saveCookBook(Cookbook cookbook) throws IOException, IllegalStateException {
