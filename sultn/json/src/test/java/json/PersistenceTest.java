@@ -1,6 +1,5 @@
 package json;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,6 +10,15 @@ import org.junit.jupiter.api.Test;
 import core.Cookbook;
 import core.Ingredient;
 import core.Recipe;
+
+/*
+IMPORTANT:
+
+These tests does not actually test anything, and are only used as a way to
+save and load a cookbook without having to run the gui.
+The tests give feedback in the form of an output file and printing to console.
+*/
+
 
 public class PersistenceTest {
 
@@ -63,8 +71,8 @@ public class PersistenceTest {
                         );
                 }
 
-                for (String instr : r.getInstructions()) {
-                    System.out.println(instr);
+                for (String i : r.getInstructions()) {
+                    System.out.println(i);
                 }
             }
         } catch (Exception e) {

@@ -42,7 +42,9 @@ public class SultnPersistence {
         this.saveFilePath = Paths.get(System.getProperty("user.dir"), saveFile);
     }
 
-
+    /*
+    Call this class to load a cookbook from file.
+    */
     public Cookbook loadCookbook() throws IOException, IllegalStateException {
         if (saveFilePath == null) {
             throw new IllegalStateException("Save file path not set...");
