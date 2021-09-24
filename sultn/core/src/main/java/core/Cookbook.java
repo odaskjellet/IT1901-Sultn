@@ -50,7 +50,7 @@ public class Cookbook {
     public List<Recipe> getRecipes() {
         List<Recipe> allRecipes = new ArrayList<Recipe>(recipeMap.values());
         return allRecipes;
-    } //denne funker ikke enn så lenge :)
+    }
 
     //oppretter en ny oppskrift og legger den til
     public void makeNewRecipe(String name, List<String> instructions, List<Ingredient> ingredients) { 
