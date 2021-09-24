@@ -40,7 +40,8 @@ Disse utviklingsoppgavene er markert etter viktighet, type oppgave, hvilket nåv
 
 Her har vi laget flere deloppgaver:
 - Lag kokebok (oversikt over oppskrifter).
-- Lag oppskriftt-klasse med tilhørende ingrediens-klasse.
+- Lag oppskriftt-klasse 
+- Lag ingrediens-klasse.
 - Lag grafisk brukergrensesnitt for å vise kokebok og oppskrifter.
 - Populer database med demo-oppskrifter.
 
