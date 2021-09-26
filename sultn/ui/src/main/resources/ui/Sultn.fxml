@@ -54,7 +54,7 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <Label fx:id="instructionsTitle" layoutX="325.0" layoutY="210.0" text="Instrucitons" visible="false">
+      <Label fx:id="instructionsTitle" layoutX="325.0" layoutY="210.0" text="Instructions" visible="false">
          <font>
             <Font size="15.0" />
          </font>
