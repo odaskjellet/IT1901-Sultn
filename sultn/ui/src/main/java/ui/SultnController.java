@@ -224,6 +224,12 @@ public class SultnController {
         
         //makes new recipe
         cookbook.makeNewRecipe(name, listInstr, newIngredients);
+        
+        try {
+            persistence.saveCookBook(cookbook);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         btnAddRecipe.setVisible(true);
         titleTitle.setVisible(false);
