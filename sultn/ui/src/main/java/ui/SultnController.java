@@ -72,18 +72,6 @@ public class SultnController {
             e.printStackTrace();
         }
 
-
-        // Mistenker at vi ikke kan launche med tom kokebok, så her er litt dummykode slik at vi har en recipe
-        // List<Ingredient> testIngredients = new ArrayList<>();
-        // List<String> testInstructions = new ArrayList<>();
-        // Ingredient testTomat = new Ingredient("tomat", 2, " stk");
-        // testIngredients.add(testTomat);
-        // testInstructions.add("kok tomat");
-        // testInstructions.add("Spis den");
-        // cookbook.makeNewRecipe("Test", testInstructions, testIngredients);
-        // -------------------------------------
-
-
         createRecipeList();
     }
 
