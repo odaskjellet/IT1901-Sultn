@@ -19,7 +19,7 @@ public class Cookbook {
 
     //Constructors
     public Cookbook() {
-
+        
     }
 
     public Cookbook(HashMap<Integer, Recipe> recipeMap) { 
