@@ -21,6 +21,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 public class SultnController {
@@ -35,6 +37,9 @@ public class SultnController {
 
     @FXML
     Pane recipePane;
+
+    @FXML
+    TextFlow ingredientField;
 
     public void initialize(){
         cookbook = new Cookbook();
@@ -103,21 +108,30 @@ public class SultnController {
 
    private void createRecipeList(){
        
-        String title = "";
         List<String> instructions = new ArrayList<>();
         List<Ingredient> ingredients = new ArrayList<>();
 
 
         List<Recipe> recipes = cookbook.getRecipes();
+
         for(int i = 0; i < recipes.size(); i++){
-            recipePane.getChildren().               ///////////////
-            put(recipes.get(i).getName());          ///////////////
-            
+           
             instructions = recipes.get(i).getInstructions();
             ingredients = recipes.get(i).getIngredients();
+
+            Text title = new Text(recipes.get(i).getName());
+
+            recipePane.getChildren().add(title);
+
+
+            for(int x = 0; x < ingredients.size(); x++) {
+                Text ingredient = new Text(ingredients.get(x).toString());
+                recipePane.getChildren().add(ingredient);
+            }
             
             for(int y = 0; y < instructions.size(); y++){
-                instructions[y].ge
+                Text instruct = new Text(instructions.get(y));
+                recipePane.getChildren().add(instruct);
             }
         }
 
