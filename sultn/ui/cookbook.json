@@ -1,0 +1,21 @@
+{
+  "recipes" : [ {
+    "name" : "Kjeks",
+    "id" : 0,
+    "ingredients" : [ {
+      "name" : "Kjeksstoff",
+      "unit" : "kg",
+      "amount" : 1.0
+    } ],
+    "instructions" : [ "Hell kjeksstoff i kjelen", "kok", "feridg" ]
+  }, {
+    "name" : "Carbonara",
+    "id" : 123,
+    "ingredients" : [ {
+      "name" : "Eggs",
+      "unit" : "pcs",
+      "amount" : 2.0
+    } ],
+    "instructions" : [ "Fry guanciale in a pan.", "Cook pasta.", "Make slurry of eggs, parmigiano, and pepper.", "Add al dente pasta to frying pan along with slurry", "Stir constantly", "Add salt to taste" ]
+  } ]
+}
