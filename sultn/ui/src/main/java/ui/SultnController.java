@@ -17,11 +17,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
-import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
@@ -29,8 +29,6 @@ public class SultnController {
 
     
     private static Cookbook cookbook;
-
-
 
     @FXML 
     BorderPane bPane;
@@ -41,6 +39,9 @@ public class SultnController {
     @FXML
     TextFlow ingredientField;
 
+    @FXML
+    TextArea rText;
+
     public void initialize(){
         cookbook = new Cookbook();
         //cookbook.makeNewRecipe(saveHandler.load());
@@ -49,9 +50,10 @@ public class SultnController {
         // Mistenker at vi ikke kan launche med tom kokebok, så her er litt dummykode slik at vi har en recipe
         List<Ingredient> testIngredients = new ArrayList<>();
         List<String> testInstructions = new ArrayList<>();
-        Ingredient testTomat = new Ingredient("tomat", 2, "stk");
+        Ingredient testTomat = new Ingredient("tomat", 2, " stk");
         testIngredients.add(testTomat);
         testInstructions.add("kok tomat");
+        testInstructions.add("Spis den");
         cookbook.makeNewRecipe("Test", testInstructions, testIngredients);
         // -------------------------------------
 
@@ -111,7 +113,6 @@ public class SultnController {
         List<String> instructions = new ArrayList<>();
         List<Ingredient> ingredients = new ArrayList<>();
 
-
         List<Recipe> recipes = cookbook.getRecipes();
 
         for(int i = 0; i < recipes.size(); i++){
@@ -119,26 +120,22 @@ public class SultnController {
             instructions = recipes.get(i).getInstructions();
             ingredients = recipes.get(i).getIngredients();
 
-            Text title = new Text(recipes.get(i).getName());
-
-            recipePane.getChildren().add(title);
-
+            //Text title = new Text(recipes.get(i).getName());
+            rText.appendText(recipes.get(i).getName() + '\n');
 
             for(int x = 0; x < ingredients.size(); x++) {
-                Text ingredient = new Text(ingredients.get(x).toString());
-                recipePane.getChildren().add(ingredient);
+                //Text ingredient = new Text(ingredients.get(x).toString());
+
+                Ingredient listIngr = ingredients.get(x);
+           
+                rText.appendText(listIngr.getIngredientName() + 
+                "      Antall:  " + listIngr.getIngredientAmount() + ' ' + listIngr.getIngredientUnit() + '\n');
             }
             
             for(int y = 0; y < instructions.size(); y++){
-                Text instruct = new Text(instructions.get(y));
-                recipePane.getChildren().add(instruct);
+                rText.appendText(instructions.get(y).toString() + '\n');
             }
         }
-
-
-
-
-
 
         List<HBoxCell> list = new ArrayList<>();
 

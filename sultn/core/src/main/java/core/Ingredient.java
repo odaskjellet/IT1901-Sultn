@@ -65,4 +65,10 @@ public class Ingredient {
         validateString(unit);
         this.unit = unit;
     }
+    
+    @Override
+    public String toString(){
+        String str = getIngredientName() + "      Antall: " + getIngredientAmount() + getIngredientUnit();
+        return str;
+    }
 }
