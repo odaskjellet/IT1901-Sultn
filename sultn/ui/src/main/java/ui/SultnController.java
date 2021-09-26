@@ -1,5 +1,6 @@
 package ui;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,18 +9,25 @@ import core.Ingredient;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
 public class SultnController {
 
     
-    private Cookbook cookbook;
+    private static Cookbook cookbook;
     
     @FXML BorderPane bPane;
 
@@ -55,11 +63,36 @@ public class SultnController {
              button.setText("Open");
              button.setId("" + id); //should be the same as recipe id.
 
-            // button.setOnAction(value); //must put on an "OnAction" or an action event 
+            // button.setOnAction(value); //must put on an "OnAction" or an action event
+            button.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    try {
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Recipe.fxml"));
+                    Parent root1 = (Parent) fxmlLoader.load();
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(root1));
+                    stage.show();
+                    //fxmlLoader.setLocation(getClass().getClassLoader().getResource("Recipe.fxml"));
+                    //StackPane secondaryLayout = new StackPane();
+                    //Scene scene = new Scene(secondaryLayout, 300, 467);
+                    //Stage stage = new Stage();
+                    //stage.setTitle("Hallo"); //cookbook.getRecipeMap().get(button.getId()).getName();
+                    //stage.setScene(scene);
+                    //stage.show();
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+                
+              //must put on an "OnAction" or an action event 
 
              this.getChildren().addAll(label, button);
         }
-   }
+    }
 
 
    private void createRecipeList(){
