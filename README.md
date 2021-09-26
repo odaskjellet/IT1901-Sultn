@@ -7,10 +7,10 @@ Dette er kodelageret til utviklingen av applikasjonen "sultn", en kokebokapp med
 ## Struktur
 
 Prosjektet er modulert og består av:
-- sultn.core:   Domenelogikk.
-- sultn.ui:     Brukergrensesnittet.
-- sultn.json:   Persistenslaget.
+- sultn/core:   Domenelogikk.
+- sultn/ui:     Brukergrensesnittet.
+- sultn/json:   Persistenslaget.
 
-Kodingsprosjektets rotmappe ligger på "gr2118.sultn".
+Kodingsprosjektets rotmappe ligger på "gr2118/sultn".
 
 For mer detaljert beskrivelse av applikasjon se [readme.md i /sultn](sultn)
