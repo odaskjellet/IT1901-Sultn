@@ -1,12 +1,11 @@
 package ui;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import core.Cookbook;
 import core.Ingredient;
-
+import core.Recipe;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,16 +19,22 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class SultnController {
 
     
     private static Cookbook cookbook;
-    
-    @FXML BorderPane bPane;
+
+
+
+    @FXML 
+    BorderPane bPane;
+
+    @FXML
+    Pane recipePane;
 
     public void initialize(){
         cookbook = new Cookbook();
@@ -71,9 +76,10 @@ public class SultnController {
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Recipe.fxml"));
                     Parent root1 = (Parent) fxmlLoader.load();
                     Stage stage = new Stage();
+                    stage.setTitle("Recipe");
                     stage.setScene(new Scene(root1));
                     stage.show();
-                    //fxmlLoader.setLocation(getClass().getClassLoader().getResource("Recipe.fxml"));
+
                     //StackPane secondaryLayout = new StackPane();
                     //Scene scene = new Scene(secondaryLayout, 300, 467);
                     //Stage stage = new Stage();
@@ -97,6 +103,29 @@ public class SultnController {
 
    private void createRecipeList(){
        
+        String title = "";
+        List<String> instructions = new ArrayList<>();
+        List<Ingredient> ingredients = new ArrayList<>();
+
+
+        List<Recipe> recipes = cookbook.getRecipes();
+        for(int i = 0; i < recipes.size(); i++){
+            recipePane.getChildren().               ///////////////
+            put(recipes.get(i).getName());          ///////////////
+            
+            instructions = recipes.get(i).getInstructions();
+            ingredients = recipes.get(i).getIngredients();
+            
+            for(int y = 0; y < instructions.size(); y++){
+                instructions[y].ge
+            }
+        }
+
+
+
+
+
+
         List<HBoxCell> list = new ArrayList<>();
 
         /*for(int key : cookbook.getRecipeMap().keySet()) {
@@ -117,6 +146,7 @@ public class SultnController {
         for(Recipe recipe: recipeList) {
             recipeView.getItems().add(recipe);
         }*/
+
 
 
     }
