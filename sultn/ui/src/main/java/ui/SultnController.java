@@ -19,19 +19,20 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
-import javafx.scene.text.Text;
-import javafx.scene.control.TextField;
+import json.SultnPersistence;
 
 public class SultnController {
 
     
-    private Cookbook cookbook;
+    private static Cookbook cookbook;
+    private static SultnPersistence persistence = new SultnPersistence();
 
     @FXML 
     BorderPane bPane;
@@ -61,20 +62,15 @@ public class SultnController {
     @FXML TextField instructionsText;
 
     public void initialize(){
-        cookbook = new Cookbook();
-        //cookbook.makeNewRecipe(saveHandler.load());
+        persistence.setSaveFile("cookbook.json");
 
-
-        // Mistenker at vi ikke kan launche med tom kokebok, så her er litt dummykode slik at vi har en recipe
-        List<Ingredient> testIngredients = new ArrayList<>();
-        List<String> testInstructions = new ArrayList<>();
-        Ingredient testTomat = new Ingredient("tomat", 2, " stk");
-        testIngredients.add(testTomat);
-        testInstructions.add("kok tomat");
-        testInstructions.add("Spis den");
-        cookbook.makeNewRecipe("Test", testInstructions, testIngredients);
-        // -------------------------------------
-
+        try {
+            cookbook = persistence.loadCookbook();
+        } catch (Exception e) {
+            cookbook = new Cookbook();
+            System.out.println("No cookbook found. Creating a new one.");
+            e.printStackTrace();
+        }
 
         createRecipeList();
     }
@@ -228,6 +224,12 @@ public class SultnController {
         
         //makes new recipe
         cookbook.makeNewRecipe(name, listInstr, newIngredients);
+        
+        try {
+            persistence.saveCookBook(cookbook);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         btnAddRecipe.setVisible(true);
         titleTitle.setVisible(false);
