@@ -22,7 +22,7 @@ public class Cookbook {
 
     //Constructors
     public Cookbook() {
-        this.recipeMap = recipeMap;
+        //this.recipeMap = recipeMap;
     }
 
     public Cookbook(HashMap<Integer, Recipe> recipeMap) { 
