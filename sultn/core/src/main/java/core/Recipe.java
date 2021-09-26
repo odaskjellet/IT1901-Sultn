@@ -44,6 +44,15 @@ public class Recipe {
         return instructions;
     }
 
+    @Override
+    public String toString(){
+        String empt = "";
+        for(String str :this.getInstructions()){
+            empt.concat(str + "/n");
+        }
+        return empt;
+    }
+
     // Setters
     public void setName(String newName) {
         validateString(newName);
