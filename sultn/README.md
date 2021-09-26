@@ -18,13 +18,13 @@ Prosjektet inneholder foreløpig noen tester for å lage, legge til og slette en
 
 Bygges, kjøres og testes med maven.
 
-- Kodelageret og riktig utgivelse ligger på greinen ***main***.
+- Kodelageret og riktig utgivelse ligger på greinen ***master***.
 - Klon repoet lokalt eller kjør det med bruk av Gitpod (bruk Gitpod-knappen øverst).
 - Prosjektet bygges fra mappen "gr2118/sultn/ui".
 - Kjør kommandoen ***mvn compile***.
 - Kan så enten kjøres med run eller med test:
     - ***mvn javafx:run***
-    - ***mvn test***
+    - ***mvn test*** 
 
 ## Testdekningsgrad
 
@@ -53,6 +53,7 @@ Her har vi laget flere deloppgaver:
 - Lag ingrediens-klasse.
 - Lag grafisk brukergrensesnitt for å vise kokebok og oppskrifter.
 - Populer database med demo-oppskrifter.
+- Last inn oppskrifter med json.
 
 ### Andre brukerhistorie
 
@@ -64,6 +65,11 @@ Her har vi laget flere deloppgaver:
 
 (UserStory) Se på oppskrift // issue #18
 
+Denne brukerhistorien ble ikke fullført i sprint 1 pga. tidsmangel. Dermed valgte vi å omformulere brukerhistorien slik at den kunne gjennomføres, og heller utsette den opprinnelige brukerhistorien til neste sprint.
+
+*"Jeg vil som bruker kunne bla nedover på hovedsiden til appen og lese oppskriftene som ligger i kokeboken slik. Disse oppskriftene skal inneholde navn, ingrediensliste og instruksjoner på hvordan retten lages."*
+
+#### Tidligere brukerhistorie:
 *"Jeg vil som bruker kunne velge en av oppskriftene på hovedsiden. Denne skal ta meg til en ny side som viser oppskriften. Oppskriften skal inneholde navn, ingrediensliste og instruksjoner på hvordan den lages."*
 
 ## Visuell støtte
