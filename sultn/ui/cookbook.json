@@ -1,5 +1,14 @@
 {
   "recipes" : [ {
+    "name" : "Kjeks",
+    "id" : 0,
+    "ingredients" : [ {
+      "name" : "Kjeksstoff",
+      "unit" : "kg",
+      "amount" : 1.0
+    } ],
+    "instructions" : [ "Hell kjeksstoff i kjelen", "kok", "feridg" ]
+  }, {
     "name" : "Carbonara",
     "id" : 123,
     "ingredients" : [ {
