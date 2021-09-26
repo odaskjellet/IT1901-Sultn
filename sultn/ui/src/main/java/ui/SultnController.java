@@ -1,6 +1,7 @@
 package ui;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import core.Cookbook;
@@ -24,11 +25,13 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
+import javafx.scene.text.Text;
+import javafx.scene.control.TextField;
 
 public class SultnController {
 
     
-    private static Cookbook cookbook;
+    private Cookbook cookbook;
 
     @FXML 
     BorderPane bPane;
@@ -41,6 +44,21 @@ public class SultnController {
 
     @FXML
     TextArea rText;
+
+
+    @FXML
+    Button btnAddRecipe;
+    @FXML Button finish;
+    @FXML Button cancel;
+
+    @FXML Label titleTitle;
+    @FXML Label title;
+    @FXML Label  ingredientTitle;
+    @FXML Label instructionsTitle;
+    
+    @FXML TextField titleText;
+    @FXML TextField ingredientText;
+    @FXML TextField instructionsText;
 
     public void initialize(){
         cookbook = new Cookbook();
@@ -109,7 +127,8 @@ public class SultnController {
 
 
    private void createRecipeList(){
-       
+        rText.clear();
+
         List<String> instructions = new ArrayList<>();
         List<Ingredient> ingredients = new ArrayList<>();
 
@@ -135,6 +154,7 @@ public class SultnController {
             for(int y = 0; y < instructions.size(); y++){
                 rText.appendText(instructions.get(y).toString() + '\n');
             }
+            rText.appendText("----------------------------------\n");
         }
 
         List<HBoxCell> list = new ArrayList<>();
@@ -160,5 +180,86 @@ public class SultnController {
 
 
 
+    }
+
+
+    
+   
+
+    //sett i fxml
+    //btnAddRecipe.setOnAction(addRecipe());
+    //finish.setOnAction(addNewRecipe());
+    //cancel.setOnAction(cancelNewRecipe());
+
+    
+
+    public void addRecipe() {
+
+        btnAddRecipe.setVisible(false);
+        titleTitle.setVisible(true);
+        title.setVisible(true);
+        titleText.setVisible(true);
+        ingredientText.setVisible(true);
+        ingredientTitle.setVisible(true);
+        instructionsText.setVisible(true);
+        instructionsTitle.setVisible(true);
+        finish.setVisible(true);
+        cancel.setVisible(true);
+    }
+
+    public void addNewRecipe() {
+
+        String name = titleText.getText();
+
+        //ingredient fields
+        String[] iStr = ingredientText.getText().split(" ");
+        String iName = iStr[0];
+        Double iAmount = Double.parseDouble(iStr[1]);
+        String iUnit = iStr[2];
+
+        Ingredient newIngredient = new Ingredient(iName, iAmount, iUnit);
+
+        List<Ingredient> newIngredients = new ArrayList<>();
+        newIngredients.add(newIngredient);
+
+        //instruction fields
+        String[] newInstr = instructionsText.getText().split(", ");
+        List<String> listInstr = Arrays.asList(newInstr);
+        
+        //makes new recipe
+        cookbook.makeNewRecipe(name, listInstr, newIngredients);
+
+        btnAddRecipe.setVisible(true);
+        titleTitle.setVisible(false);
+        title.setVisible(false);
+        titleText.setVisible(false);
+        ingredientText.setVisible(false);
+        ingredientTitle.setVisible(false);
+        instructionsText.setVisible(false);
+        instructionsTitle.setVisible(false);
+        finish.setVisible(false);
+        cancel.setVisible(false);
+
+        //etter adding
+        createRecipeList();  
+
+    }
+
+    public void cancelNewRecipe() {
+
+        ingredientText.clear();
+        instructionsText.clear();
+        titleText.clear();
+
+        btnAddRecipe.setVisible(true);
+        titleTitle.setVisible(false);
+        title.setVisible(false);
+        titleText.setVisible(false);
+        ingredientText.setVisible(false);
+        ingredientTitle.setVisible(false);
+        instructionsText.setVisible(false);
+        instructionsTitle.setVisible(false);
+        finish.setVisible(false);
+        cancel.setVisible(false);
     }
 }
