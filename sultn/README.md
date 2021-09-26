@@ -26,6 +26,15 @@ Bygges, kjøres og testes med maven.
     - ***mvn javafx:run***
     - ***mvn test***
 
+## Testdekningsgrad
+
+For å sjekke testdekningsgrad følges disse stegene:
+- cd inn til gr2118/sultn
+- I terminalen skriver vi:
+    - `mvn clean jacoco:prepare-agent install jacoco:report`
+- Deretter går man i Explorer til ..core/src/target/site/jacoco
+- Her høyreklikker du på `index.html`, så `Copy Path` og limer det inn i nettleseren din.
+
 ## Utvikling
 
 Utviklingen av applikasjonen gjøres med bruk av smidig-praksis og SCRUM-metoden.
