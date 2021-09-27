@@ -20,11 +20,12 @@ Bygges, kjøres og testes med maven.
 
 - Kodelageret og riktig utgivelse ligger på greinen ***master***.
 - Klon repoet lokalt eller kjør det med bruk av Gitpod (bruk Gitpod-knappen øverst).
+- Fra mappen "gr2118/sultn" kjøres først ***mvn clean install***.
 - Prosjektet bygges fra mappen "gr2118/sultn/ui".
-- Kjør kommandoen ***mvn compile***.
 - Kan så enten kjøres med run eller med test:
     - ***mvn javafx:run***
-    - ***mvn test*** 
+    - ***mvn test***
+- ***mvn test*** kan også kjøres i hver modul: ***core***, ***json*** og ***ui***.
 
 ## Testdekningsgrad
 
