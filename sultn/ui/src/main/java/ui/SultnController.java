@@ -31,7 +31,7 @@ import json.SultnPersistence;
 public class SultnController {
 
     
-    private static Cookbook cookbook;
+    private Cookbook cookbook;
     private static SultnPersistence persistence = new SultnPersistence();
 
     @FXML 
@@ -125,8 +125,8 @@ public class SultnController {
    private void createRecipeList(){
         rText.clear();
 
-        List<String> instructions = new ArrayList<>();
-        List<Ingredient> ingredients = new ArrayList<>();
+        List<String> instructions;
+        List<Ingredient> ingredients;
 
         List<Recipe> recipes = cookbook.getRecipes();
 
