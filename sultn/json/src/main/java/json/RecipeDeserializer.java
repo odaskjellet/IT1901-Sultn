@@ -18,6 +18,9 @@ import com.fasterxml.jackson.databind.node.TextNode;
 import core.Ingredient;
 import core.Recipe;
 
+/**
+ * Converts a JSON node containing a recipe into a Recipe object.
+ */
 public class RecipeDeserializer extends JsonDeserializer<Recipe> {
 
     private IngredientDeserializer ingredientDeserializer = new IngredientDeserializer();
@@ -28,18 +31,26 @@ public class RecipeDeserializer extends JsonDeserializer<Recipe> {
         return deserialize((JsonNode) treeNode);
     }
 
+    /**
+     * Deserializes Recipe nodes
+     * @param jsonNode - Node to be deserialized
+     * @return A Recipe object if jsonNode contains one, otherwise null.
+     */
     public Recipe deserialize(JsonNode jsonNode) {
         if (jsonNode instanceof ObjectNode objectnode) {
+            
             JsonNode nameNode = objectnode.get("name");
             JsonNode idNode = objectnode.get("id");
             JsonNode ingredientsNode = objectnode.get("ingredients");
             JsonNode instructionsNode = objectnode.get("instructions");
 
+            // Init Recipe constructor args.
             String name = "";
             int id = 0;
             List<Ingredient> ingredients = new ArrayList<Ingredient>();
             List<String> instructions = new ArrayList<String>();
 
+            // Define args. if JSON nodes exists.
             if (nameNode instanceof TextNode) {
                 name = nameNode.asText();
             }
@@ -62,6 +73,7 @@ public class RecipeDeserializer extends JsonDeserializer<Recipe> {
                     instructions.add(i.asText());
                 }
             }
+
             return new Recipe(name, id, ingredients, instructions);
         }
         return null;
