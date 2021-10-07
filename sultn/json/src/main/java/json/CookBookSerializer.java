@@ -9,6 +9,10 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import core.Cookbook;
 import core.Recipe;
 
+/**
+ * Converts a Cookbook object into a JSON node which can be stored as a file.
+ * Creates a node for each Recipe in Cookbook.
+ */
 public class CookBookSerializer extends JsonSerializer<Cookbook> {
     
     @Override
@@ -17,7 +21,7 @@ public class CookBookSerializer extends JsonSerializer<Cookbook> {
         
         jsonGen.writeArrayFieldStart("recipes");
         for (Recipe r : cookBook.getRecipes()) {
-            jsonGen.writeObject(r);
+            jsonGen.writeObject(r); // Uses RecipeSerializer.
         }
         jsonGen.writeEndArray();
 

@@ -8,6 +8,9 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 
 import core.Ingredient;
 
+/**
+ * Converts an Ingredient object into a JSON node.
+ */
 public class IngredientSerializer extends JsonSerializer<Ingredient> {
     
     @Override

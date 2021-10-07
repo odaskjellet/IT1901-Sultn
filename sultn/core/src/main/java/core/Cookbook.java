@@ -4,56 +4,86 @@ import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
-The cookbook class is a collection with recipes, and contains methods that add,
-delete, edit and make new recipes. 
-The constructor contains a hash map with recipes and their ids.
+/**
+* A Cookbook object.
+* 
+* A cookbook object is a collection of Recipe objects and contains methods that add,
+* delete, edit and make new Recipe-objects to be stored within the Cookbook object.
+* 
 */
-
-
 public class Cookbook {
     
     private HashMap<Integer, Recipe> recipeMap = new HashMap<>();
-    //variabel for id-ene til recipes
-    private int counter = 0;  
+    private int counter = 0;    //Recipe ID-counter
 
-    //Constructors
+    /**
+     * Cookbook - Default constructor (no parameters)
+     */
     public Cookbook() {
-        
+
     }
 
+    /**
+     * Cookbook constructor
+     * 
+     * @param recipeMap - A HashMap of Recipe-objects
+     */
     public Cookbook(HashMap<Integer, Recipe> recipeMap) { 
         this.recipeMap = recipeMap;
     }
 
-    //Getters
+    /**
+     * Get the counter for HashMap
+     * @return The counter-value
+     */
     public int getCounter() {
         return this.counter;
     }
-
+    
+    /**
+     * Get the recipe HashMap
+     * 
+     * @return The recipe HashMap
+     */
     public HashMap<Integer, Recipe> getRecipeMap() {
         return this.recipeMap;
     }
 
-
-    //Setters
+    /**
+     * Set the counter value
+     * 
+     * @param newCounter - The new value for the counter variable.
+     */
     public void setCounter(int newCounter) {
         this.counter = newCounter;
     }
 
-     
-    //returnerer en liste med alle id-ene
+    /**
+     * Get an ArrayList of all IDs in Cookbook.
+     * 
+     * @return An ArrayList for IDs in Cookbook.
+     */     
     public List<Integer> getIds() { 
         return new ArrayList<>(recipeMap.keySet());
     }
 
-    //returnerer en liste med alle oppskriftene 
+    /**
+     * Gets a list of all the Recipe-objects in Cookbook.
+     * 
+     * @return The ArrayList of all Recipes.
+     */
     public List<Recipe> getRecipes() {
         List<Recipe> allRecipes = new ArrayList<Recipe>(recipeMap.values());
         return allRecipes;
     }
 
-    //oppretter en ny oppskrift og legger den til
+    /**
+     * Makes a new Recipe and add it to Cookbook. Increments counter after adding.
+     * 
+     * @param name - Name of the Recipe
+     * @param instructions - List of instructions
+     * @param ingredients - List of Ingredient-objects
+     */
     public void makeNewRecipe(String name, List<String> instructions, List<Ingredient> ingredients) { 
         int id = counter;
         Recipe newRecipe = new Recipe(name, id, ingredients, instructions);
@@ -61,7 +91,11 @@ public class Cookbook {
         counter++;
     }
     
-    //fjerner en oppskrift
+    /**
+     * Delete a Recipe from Coobkook.
+     * 
+     * @param recipe - Recipe-object to be deleted
+     */
     public void deleteRecipe(Recipe recipe) { 
         int id = recipe.getId();
 
@@ -73,7 +107,11 @@ public class Cookbook {
         }
     }
         
-    //legger til en oppskrift i HashMap
+    /**
+     * Add a Recipe to the recipeMap
+     * 
+     * @param recipe - Recipe-object to be added.
+     */
     public void addRecipe(Recipe recipe) {
         int id = recipe.getId();
         recipeMap.put(id, recipe);

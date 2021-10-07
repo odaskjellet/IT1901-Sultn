@@ -9,10 +9,14 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * JavaFX App
+ * Sultn Application
+ * 
  */
 public class Sultn extends Application {
 
+    /**
+     * Loads Sultn.fxml as a Scene in a Stage and shows
+     */
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("Sultn.fxml"));

@@ -14,6 +14,10 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import core.Cookbook;
 import core.Recipe;
 
+/**
+ * Converts a JSON node containing a Cookbook into a Cookbook object.
+ * 
+ */
 public class CookBookDeserializer extends JsonDeserializer<Cookbook> {
 
     private RecipeDeserializer recipeDeserializer = new RecipeDeserializer();
@@ -23,20 +27,29 @@ public class CookBookDeserializer extends JsonDeserializer<Cookbook> {
         TreeNode treeNode = parser.getCodec().readTree(parser);
         return deserialize((JsonNode) treeNode);
     }
-
+    /**
+     * Deserialize a JSON node
+     * @param jsonNode - Node to be deserialized
+     * @return A Cookbook object with all the recipes found in the JSON file (may be empty).
+     */
     public Cookbook deserialize(JsonNode jsonNode) {
+        
+        // Init Cookbook.
+        Cookbook cookbook = new Cookbook();
+        
         if (jsonNode instanceof ObjectNode objectnode) {
-            Cookbook cookbook = new Cookbook();
+            
+            // Get all Recipe nodes.
             JsonNode recipes = objectnode.get("recipes");
 
+            // Add each Recipe object to Cookbook if JSON nodes exists.
             if (recipes instanceof ArrayNode) {
                 for (JsonNode node : ((ArrayNode) recipes)) {
                     Recipe r = recipeDeserializer.deserialize(node);
                     cookbook.addRecipe(r);
                 }
             }
-            return cookbook;
         }
-        return null;
+        return cookbook;
     }
 }
