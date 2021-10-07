@@ -13,37 +13,64 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import core.Cookbook;
 
-/*
-This class handles reading and writing to file.
-It uses the SutnModule to handle creating files.
-This class should be invoked to save/load cookbook.
+/**
+* Class handles reading and writing to file.
+* Uses the SultnModule to serialize object to be stored and deserialize
+* JSON to be loaded into application.
+* Should be invoked to save/load Cookbook.
+* 
 */
-
 public class SultnPersistence {
     private ObjectMapper mapper;
     private Path saveFilePath = null;
 
+    /**
+     * Default constructor
+     * 
+     */
     public SultnPersistence() {
         mapper = new ObjectMapper();
         mapper.registerModule(new SultnModule());
     }
 
-    public Cookbook readCookbook(Reader reader) throws IOException {
+    /**
+     * Reads Cookbook from JSON file (deserializers provide objects)
+     * 
+     * @param reader - Object to be read as character stream
+     * @return mapper
+     * @throws IOException
+     */
+    private Cookbook readCookbook(Reader reader) throws IOException {
+        // mapper provides deserializers via the registered SultnModule.
         return mapper.readValue(reader, Cookbook.class);
     }
 
-    public void writeCookBook(Cookbook cookbook, Writer writer) throws IOException {
-        // Writes cookbook as a formatted file (serializers provide json)
+    /**
+     * Writes Cookbook as a formatted file (serializers provide json)
+     * 
+     * @param cookbook - Cookbook to be formatted
+     * @param writer - Write to character streams
+     * @throws IOException
+     */
+    private void writeCookBook(Cookbook cookbook, Writer writer) throws IOException {
+        // mapper provides serializers via the registered SultnModule.
         mapper.writerWithDefaultPrettyPrinter().writeValue(writer, cookbook);
     }
 
-    // Sets file location to working direcotry with the provided filename.
+    /**
+     * Set path to working directory with filename.
+     * 
+     * @param saveFile - Filename
+     */
     public void setSaveFile(String saveFile) {
+        // user.dir is the current working directory. 
+        // Will change depending on where the code is run from.
         this.saveFilePath = Paths.get(System.getProperty("user.dir"), saveFile);
     }
 
-    /*
-    Call this class to load a cookbook from file.
+    /**
+    * Load a cookbook from file.
+    * 
     */
     public Cookbook loadCookbook() throws IOException, IllegalStateException {
         if (saveFilePath == null) {
@@ -54,10 +81,13 @@ public class SultnPersistence {
         }
     }
 
-    /*
-    Call this class to save a cookbook to json in your working directory.
-    Save path must be set beforehand.
-    */
+    /**
+     * Save a Cookbook to JSON in your working directory. Path must be set prior to function call.
+     * 
+     * @param cookbook - Cookbook to be saved
+     * @throws IOException
+     * @throws IllegalStateException
+     */
     public void saveCookBook(Cookbook cookbook) throws IOException, IllegalStateException {
         if (saveFilePath == null) {
             throw new IllegalStateException("Save file path not set...");

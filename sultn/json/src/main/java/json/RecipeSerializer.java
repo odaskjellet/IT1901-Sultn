@@ -9,6 +9,10 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import core.Ingredient;
 import core.Recipe;
 
+/**
+ * Converts a Recipe object into a JSON node.
+ * 
+ */
 public class RecipeSerializer extends JsonSerializer<Recipe> {
     @Override
     public void serialize(Recipe recipe, JsonGenerator jsonGen, SerializerProvider serializerProvider) throws IOException {
@@ -19,7 +23,7 @@ public class RecipeSerializer extends JsonSerializer<Recipe> {
         // Write ingredients
         jsonGen.writeArrayFieldStart("ingredients");
         for (Ingredient i : recipe.getIngredients()) {
-            jsonGen.writeObject(i);
+            jsonGen.writeObject(i); // Uses IngredientSerialiser.
         }
         jsonGen.writeEndArray();
 
@@ -30,7 +34,6 @@ public class RecipeSerializer extends JsonSerializer<Recipe> {
         }
         jsonGen.writeEndArray();
         
-        // End
         jsonGen.writeEndObject();
     }
 }

@@ -28,6 +28,10 @@ import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import json.SultnPersistence;
 
+/**
+ * SultnController class
+ * 
+ */
 public class SultnController {
 
     
@@ -46,9 +50,7 @@ public class SultnController {
     @FXML
     TextArea rText;
 
-
-    @FXML
-    Button btnAddRecipe;
+    @FXML Button btnAddRecipe;
     @FXML Button finish;
     @FXML Button cancel;
 
@@ -61,6 +63,10 @@ public class SultnController {
     @FXML TextField ingredientText;
     @FXML TextField instructionsText;
 
+    /**
+     * Initializes a Cookbook with stored Recipes from JSON
+     * 
+     */
     public void initialize(){
         persistence.setSaveFile("cookbook.json");
 
@@ -87,9 +93,8 @@ public class SultnController {
              HBox.setHgrow(label, Priority.ALWAYS);
 
              button.setText("Open");
-             button.setId("" + id); //should be the same as recipe id.
+             button.setId("" + id);
 
-            // button.setOnAction(value); //must put on an "OnAction" or an action event
             button.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
@@ -100,28 +105,20 @@ public class SultnController {
                     stage.setTitle("Recipe");
                     stage.setScene(new Scene(root1));
                     stage.show();
-
-                    //StackPane secondaryLayout = new StackPane();
-                    //Scene scene = new Scene(secondaryLayout, 300, 467);
-                    //Stage stage = new Stage();
-                    //stage.setTitle("Hallo"); //cookbook.getRecipeMap().get(button.getId()).getName();
-                    //stage.setScene(scene);
-                    //stage.show();
                     }
                     catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
             });
-
-                
-              //must put on an "OnAction" or an action event 
-
              this.getChildren().addAll(label, button);
         }
     }
 
-
+    /**
+     * Makes a list of Recipes to be displayed
+     * 
+     */
    private void createRecipeList(){
         rText.clear();
 
@@ -135,12 +132,9 @@ public class SultnController {
             instructions = recipes.get(i).getInstructions();
             ingredients = recipes.get(i).getIngredients();
 
-            //Text title = new Text(recipes.get(i).getName());
             rText.appendText(recipes.get(i).getName() + '\n');
 
             for(int x = 0; x < ingredients.size(); x++) {
-                //Text ingredient = new Text(ingredients.get(x).toString());
-
                 Ingredient listIngr = ingredients.get(x);
            
                 rText.appendText(listIngr.getIngredientName() + 
@@ -155,11 +149,6 @@ public class SultnController {
 
         List<HBoxCell> list = new ArrayList<>();
 
-        /*for(int key : cookbook.getRecipeMap().keySet()) {
-            list.add(new HBoxCell(cookbook.getRecipeMap().get(key).getName(), 
-            cookbook.getRecipeMap().get(key).getId()));
-        }*/
-
         list.add(new HBoxCell("Test", 0)); // Bruker denne til vi finner ut hvorfor løkken over ikke funker
 
         ListView<HBoxCell> recipeView = new ListView<HBoxCell>();
@@ -173,22 +162,17 @@ public class SultnController {
         for(Recipe recipe: recipeList) {
             recipeView.getItems().add(recipe);
         }*/
-
-
-
     }
-
-
-    
-   
 
     //sett i fxml
     //btnAddRecipe.setOnAction(addRecipe());
     //finish.setOnAction(addNewRecipe());
     //cancel.setOnAction(cancelNewRecipe());
 
-    
-
+    /**
+     * Displays a form to the GUI so users can add a new Recipe.
+     * 
+     */
     public void addRecipe() {
 
         btnAddRecipe.setVisible(false);
@@ -203,11 +187,15 @@ public class SultnController {
         cancel.setVisible(true);
     }
 
+    /**
+     * The information filled out in the form gets passed to a new Recipe, which is added to the Cookbokk
+     * 
+     */
     public void addNewRecipe() {
 
         String name = titleText.getText();
 
-        //ingredient fields
+        //----- ingredient fields -----
         String[] iStr = ingredientText.getText().split(" ");
         String iName = iStr[0];
         Double iAmount = Double.parseDouble(iStr[1]);
@@ -218,11 +206,10 @@ public class SultnController {
         List<Ingredient> newIngredients = new ArrayList<>();
         newIngredients.add(newIngredient);
 
-        //instruction fields
+        //----- instruction fields -----
         String[] newInstr = instructionsText.getText().split(", ");
         List<String> listInstr = Arrays.asList(newInstr);
         
-        //makes new recipe
         cookbook.makeNewRecipe(name, listInstr, newIngredients);
         
         try {
@@ -242,11 +229,13 @@ public class SultnController {
         finish.setVisible(false);
         cancel.setVisible(false);
 
-        //etter adding
         createRecipeList();  
-
     }
 
+    /**
+     * Handles the press of the "X"-button which hides the form for making a new Recipe
+     * 
+     */
     public void cancelNewRecipe() {
 
         ingredientText.clear();

@@ -14,6 +14,9 @@ import com.fasterxml.jackson.databind.node.TextNode;
 
 import core.Ingredient;
 
+/**
+ * Converts a JSON node containing an ingredient into an Ingredient object.
+ */
 public class IngredientDeserializer extends JsonDeserializer<Ingredient> {
 
     @Override
@@ -21,17 +24,26 @@ public class IngredientDeserializer extends JsonDeserializer<Ingredient> {
         TreeNode treeNode = parser.getCodec().readTree(parser);
         return deserialize((JsonNode) treeNode);
     }
-    
+
+    /**
+     * Gets nodes from JSON file
+     * @param jsonNode - Node to deserialize.
+     * @return - An Ingredient object if jsonNode contains one, otherwise null.
+     */
     public Ingredient deserialize(JsonNode jsonNode) {
         if (jsonNode instanceof ObjectNode objectnode) {
+
+            // Get nodes from JSON file.
             JsonNode nameNode = objectnode.get("name");
             JsonNode amountNode = objectnode.get("amount");
             JsonNode unitNode = objectnode.get("unit");
 
+            // Init Ingredient constructor args.
             String name = "";
             double amount = 0.0;
             String unit = "";
 
+            // Define args. if nodes exists.
             if (nameNode instanceof TextNode) {
                 name = nameNode.asText();   
             }
