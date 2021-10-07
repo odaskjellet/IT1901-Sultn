@@ -25,8 +25,10 @@ public class CookBookDeserializer extends JsonDeserializer<Cookbook> {
     }
 
     public Cookbook deserialize(JsonNode jsonNode) {
+
+        Cookbook cookbook = new Cookbook();
+
         if (jsonNode instanceof ObjectNode objectnode) {
-            Cookbook cookbook = new Cookbook();
             JsonNode recipes = objectnode.get("recipes");
 
             if (recipes instanceof ArrayNode) {
@@ -35,8 +37,7 @@ public class CookBookDeserializer extends JsonDeserializer<Cookbook> {
                     cookbook.addRecipe(r);
                 }
             }
-            return cookbook;
         }
-        return null;
+        return cookbook;
     }
 }
