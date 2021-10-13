@@ -21,7 +21,7 @@ public class Ingredient {
      * @param amount - The amount of said ingredient
      * @param unit - The unit (kg, lbs, tbs) of the amount
      */
-    public Ingredient(String name, double amount, String unit) {
+    public Ingredient(String name, double amount, String unit) throws IllegalArgumentException {
         validateString(name);
         validateNumber(amount);
         validateString(unit);
@@ -36,7 +36,7 @@ public class Ingredient {
      * 
      * @param number - Number to be validated
      */
-    public void validateNumber(double number){
+    public void validateNumber(double number) throws IllegalArgumentException {
         if (number <= 0.0){
             throw new IllegalArgumentException("Amount must be a positive number (0 or larger).");
         }
@@ -47,7 +47,7 @@ public class Ingredient {
      * 
      * @param string - String to be validated
      */
-    public void validateString(String string){
+    public void validateString(String string) throws IllegalArgumentException {
         if (string.isEmpty()){
             throw new IllegalArgumentException("Name has no content.");
         }
@@ -85,7 +85,7 @@ public class Ingredient {
      * 
      * @param name - The new name of the Ingredient
      */
-    public void setIngredientName(String name){
+    public void setIngredientName(String name) throws IllegalArgumentException {
         validateString(name);
         this.name = name;
     }
@@ -95,7 +95,7 @@ public class Ingredient {
      * 
      * @param amount - The new Ingredient amount
      */
-    public void setIngredientAmount(double amount){
+    public void setIngredientAmount(double amount) throws IllegalArgumentException {
         validateNumber(amount);
         this.amount = amount;
     }
@@ -105,7 +105,7 @@ public class Ingredient {
      * 
      * @param unit - The new Ingredient unit 
      */
-    public void setIngredientUnit(String unit){
+    public void setIngredientUnit(String unit) throws IllegalArgumentException {
         validateString(unit);
         this.unit = unit;
     }

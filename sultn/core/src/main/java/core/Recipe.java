@@ -23,7 +23,7 @@ public class Recipe {
      * @param ingredients - List of Ingredients
      * @param instructions - List of instructions
      */
-    public Recipe(String name, int id, List<Ingredient> ingredients, List<String> instructions) {
+    public Recipe(String name, int id, List<Ingredient> ingredients, List<String> instructions) throws IllegalArgumentException {
         validateString(name);
         validateInt(id);
         validateIngArray(ingredients);
@@ -88,7 +88,7 @@ public class Recipe {
      * 
      * @param newName - The new name for the Recipe
      */
-    public void setName(String newName) {
+    public void setName(String newName) throws IllegalArgumentException {
         validateString(newName);
         this.name = newName;
     }
@@ -98,7 +98,7 @@ public class Recipe {
      * 
      * @param newId - The new ID for Recipe
      */
-    public void setId(int newId) {
+    public void setId(int newId) throws IllegalArgumentException {
         validateInt(newId);
         this.id = newId;
     }
@@ -108,7 +108,7 @@ public class Recipe {
      * 
      * @param newIngredients - List of new Ingredient(s)
      */
-    public void setIngredients(List<Ingredient> newIngredients) {
+    public void setIngredients(List<Ingredient> newIngredients) throws IllegalArgumentException {
         validateIngArray(newIngredients);
         this.ingredients = newIngredients;
     }
@@ -118,7 +118,7 @@ public class Recipe {
      * 
      * @param newInstructions - List of new instructions
      */
-    public void setInstructions(List<String> newInstructions) {
+    public void setInstructions(List<String> newInstructions) throws IllegalArgumentException {
         validateStrArray(newInstructions);
         this.instructions = newInstructions;
     }
@@ -128,7 +128,7 @@ public class Recipe {
      * 
      * @param toValidate - String to be validated
      */
-    private void validateString(String toValidate) {
+    private void validateString(String toValidate) throws IllegalArgumentException {
         if (toValidate.isEmpty()) throw new IllegalArgumentException("Name cannot be empty.");
     }
     
@@ -137,7 +137,7 @@ public class Recipe {
      * 
      * @param toValidate - Int to be validated
      */
-    private void validateInt(int toValidate) {
+    private void validateInt(int toValidate) throws IllegalArgumentException {
         if (toValidate < 0) throw new IllegalArgumentException("ID cannot be negative.");
     }
 
@@ -146,7 +146,7 @@ public class Recipe {
      * 
      * @param toValidate - List of Ingredient(s) to be validated
      */
-    private void validateIngArray(List<Ingredient> toValidate) {
+    private void validateIngArray(List<Ingredient> toValidate) throws IllegalArgumentException {
         if (toValidate.size() == 0) throw new IllegalArgumentException("Recipe must contain at least one ingredient.");
     }
 
@@ -155,7 +155,7 @@ public class Recipe {
      * 
      * @param toValidate - List to be validated
      */
-    private void validateStrArray(List<String> toValidate) {
+    private void validateStrArray(List<String> toValidate) throws IllegalArgumentException {
         if (toValidate.size() == 0) throw new IllegalArgumentException("Recipe must contain at least one instruction.");
     }
 }

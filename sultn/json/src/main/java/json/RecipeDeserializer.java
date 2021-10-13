@@ -35,8 +35,9 @@ public class RecipeDeserializer extends JsonDeserializer<Recipe> {
      * Deserializes Recipe nodes
      * @param jsonNode - Node to be deserialized
      * @return A Recipe object if jsonNode contains one, otherwise null.
+     * @throws IOException
      */
-    public Recipe deserialize(JsonNode jsonNode) {
+    public Recipe deserialize(JsonNode jsonNode) throws IOException {
         if (jsonNode instanceof ObjectNode objectnode) {
             
             JsonNode nameNode = objectnode.get("name");
@@ -61,9 +62,11 @@ public class RecipeDeserializer extends JsonDeserializer<Recipe> {
 
             if (ingredientsNode instanceof ArrayNode) {
                 for (JsonNode i : ((ArrayNode) ingredientsNode)) {
-                    Ingredient ingr = ingredientDeserializer.deserialize(i);
-                    if (ingr != null) {
+                    try {
+                        Ingredient ingr = ingredientDeserializer.deserialize(i);
                         ingredients.add(ingr);
+                    } catch (IllegalArgumentException e) {
+                        throw new IOException("Illegal ingredient field. " + e.getMessage());
                     }
                 }
             }
@@ -76,6 +79,8 @@ public class RecipeDeserializer extends JsonDeserializer<Recipe> {
 
             return new Recipe(name, id, ingredients, instructions);
         }
-        return null;
+        else {
+            throw new IOException("Incorrect recipe format.");
+        }
     }
 }
