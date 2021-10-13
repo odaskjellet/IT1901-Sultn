@@ -94,10 +94,9 @@ public class Cookbook {
     /**
      * Delete a Recipe from Coobkook.
      * 
-     * @param Recipe - Recipe to be deleted
+     * @param recipe - Recipe to be deleted
      */
-    public void deleteRecipe(Recipe recipe) { 
-        int id = recipe.getId();
+    public void deleteRecipe(int id) { 
         if(recipeMap.containsKey(id)) {
             recipeMap.remove(id); 
         }

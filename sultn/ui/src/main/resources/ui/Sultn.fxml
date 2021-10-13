@@ -62,7 +62,8 @@
       </Label>
       <Button fx:id="finish" layoutX="518.0" layoutY="246.0" mnemonicParsing="false" onAction="#addNewRecipe" text="Finish" visible="false" />
       <Button fx:id="cancel" layoutX="413.0" layoutY="246.0" mnemonicParsing="false" onAction="#cancelNewRecipe" text="Cancel" visible="false" />
-      <Button fx:id="commitEdit" layoutX="413.0" layoutY="413.0" mnemonicParsing="false" onAction="#doEdit" text="Save changes" />
+      <Button fx:id="delete" layoutX="224.0" layoutY="72.0" mnemonicParsing="false" onAction="#deleteRecipe" text="Delete" />
+      <Button fx:id="commitEdit" layoutX="413.0" layoutY="373.0" mnemonicParsing="false" onAction="#doEdit" text="Save changes" />
 
    </children>
 </AnchorPane>

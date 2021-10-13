@@ -71,10 +71,10 @@ public class CookbookTest {
 
     @Test
     public void testDeleteRecipe() {
-        cookbook.deleteRecipe(pizza);
+        cookbook.deleteRecipe(1);
 
         assertFalse(testMap.containsKey(pizza.getId()));
-        assertThrows(Exception.class, () -> cookbook.deleteRecipe(kake), 
+        assertThrows(Exception.class, () -> cookbook.deleteRecipe(3), 
             "Kake is not in list, should throw IllegalArgumentException");
     }
    

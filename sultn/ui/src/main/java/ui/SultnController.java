@@ -55,6 +55,7 @@ public class SultnController {
     @FXML Button cancel;
     @FXML Button edit;
     @FXML Button commitEdit;
+    @FXML Button delete;
 
     @FXML Label titleTitle;
     @FXML Label title;
@@ -312,6 +313,18 @@ public class SultnController {
         edit.setVisible(true);
 
         createRecipeList();  
+    }
+
+    public void deleteRecipe(){
+        cookbook.deleteRecipe(0); // Must get from button
+
+        try {
+            persistence.saveCookBook(cookbook);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        createRecipeList();
     }
 
     /**
