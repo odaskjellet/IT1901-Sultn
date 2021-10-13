@@ -91,7 +91,6 @@ public class SultnController {
 
             // button.setOnAction(value); //must put on an "OnAction" or an action event
             button.setOnAction(new EventHandler<ActionEvent>() {
-                
                 @Override
                 public void handle(ActionEvent event) {
                     try {
@@ -178,13 +177,17 @@ public class SultnController {
 
 
     }
-       
+
+
+    
+   
 
     //sett i fxml
     //btnAddRecipe.setOnAction(addRecipe());
     //finish.setOnAction(addNewRecipe());
     //cancel.setOnAction(cancelNewRecipe());
 
+    
 
     public void addRecipe() {
 
