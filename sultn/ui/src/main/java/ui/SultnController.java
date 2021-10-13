@@ -99,7 +99,18 @@ public class SultnController {
             button.setText("Open");
             button.setId("" + id);
 
-            button.setOnAction(switchToRecipeScene());
+            button.setOnAction(new EventHandler<ActionEvent>() {
+
+                @Override
+                public void handle(ActionEvent event) {
+                    Parent root = FXMLLoader.load(getClass().getResource("Recipe.fxml"));
+                    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+
+                }
+            });
 
             this.getChildren().addAll(label, button);
         }
@@ -141,7 +152,8 @@ public class SultnController {
     }
 
     /**
-     * Switches scene to a form for adding a new recipe
+     * Switches scene to add a new recipe form
+     * 
      */
 
     public void switchToSultnForm(ActionEvent event) throws IOException {

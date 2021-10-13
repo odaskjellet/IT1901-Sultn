@@ -2,27 +2,34 @@ package ui;
 
 import java.io.IOException;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 public class SultnFormController {
 
-    @FXML
-    Button btnRecipeBack;
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
 
-    /*
-     * @FXML private void switchSultn() throws IOException { Sultn.setRoot("Sultn");
-     * }
+    @FXML
+    Button btnCancel;
+
+    /**
+     * Switches scene to add a new recipe form
+     * 
      */
 
-    @FXML
-    void initialize() {
-
+    public void switchToSultnMenu(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("Sultn.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
-
-    /*
-     * public void setBackButtonTarget(SceneTarget sceneTarget) {
-     * btnRecipeBack.setOnAction(sceneTarget.getActionEventHandler()); }
-     */
 
 }
