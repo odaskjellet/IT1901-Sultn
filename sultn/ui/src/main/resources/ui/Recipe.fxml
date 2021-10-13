@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="300.0" style="-fx-background-color: #6f9e98;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.SultnController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="300.0" style="-fx-background-color: #6f9e98;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.SultnController">
    <children>
       <Label fx:id="lblRecipeName" alignment="CENTER" layoutY="111.0" prefHeight="36.0" prefWidth="300.0" style="-fx-background-color: #f6c7bc; -fx-border-color: black;" text="#Navn" textAlignment="CENTER">
          <font>
@@ -43,5 +43,6 @@
             <Insets bottom="-15.0" left="-15.0" right="-15.0" top="-15.0" />
          </padding>
       </Button>
+      <Button fx:id="doEdit" layoutX="173.0" layoutY="417.0" mnemonicParsing="false" onAction="#doEdit" text="Save changes" />
    </children>
 </AnchorPane>

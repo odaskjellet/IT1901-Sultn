@@ -53,6 +53,8 @@ public class SultnController {
     @FXML Button btnAddRecipe;
     @FXML Button finish;
     @FXML Button cancel;
+    @FXML Button edit;
+    @FXML Button commitEdit;
 
     @FXML Label titleTitle;
     @FXML Label title;
@@ -228,6 +230,86 @@ public class SultnController {
         instructionsTitle.setVisible(false);
         finish.setVisible(false);
         cancel.setVisible(false);
+        commitEdit.setVisible(false);
+
+        createRecipeList();  
+    }
+
+    public void editRecipe(){
+        int id = 0; //id must be passed from button push
+        Recipe recipe = cookbook.editRecipe(id);
+        titleText.setText(recipe.getName());
+
+        List<Ingredient> ingredList = recipe.getIngredients();
+        String ingreds = "";
+        for(int i = 0; i < ingredList.size(); i++){
+            ingreds += (ingredList.get(i).getIngredientName() + " ");
+            ingreds += (Double.toString(ingredList.get(i).getIngredientAmount()) + " ");
+            ingreds += (ingredList.get(i).getIngredientUnit() + " "); 
+        }
+        ingredientText.setText(ingreds);
+
+        List<String> instruct = recipe.getInstructions();
+        String instrct = "";
+        for(int i = 0; i < instruct.size(); i++){
+            instrct += (instruct.get(i) + ", ");
+        }
+        instructionsText.setText(instrct);
+
+        btnAddRecipe.setVisible(false);
+        titleTitle.setVisible(true);
+        title.setVisible(true);
+        titleText.setVisible(true);
+        ingredientText.setVisible(true);
+        ingredientTitle.setVisible(true);
+        instructionsText.setVisible(true);
+        instructionsTitle.setVisible(true);
+        commitEdit.setVisible(true);
+        cancel.setVisible(true);
+        edit.setVisible(false);
+    }
+
+    public void doEdit() {
+        int id = 0;
+        Recipe recipe = cookbook.editRecipe(id);
+        
+        recipe.setName(titleText.getText());
+
+        //----- ingredient fields -----
+        String[] iStr = ingredientText.getText().split(" ");
+        String iName = iStr[0];
+        Double iAmount = Double.parseDouble(iStr[1]);
+        String iUnit = iStr[2];
+
+        Ingredient newIngredient = new Ingredient(iName, iAmount, iUnit);
+
+        List<Ingredient> newIngredients = new ArrayList<>();
+        newIngredients.add(newIngredient);
+        recipe.setIngredients(newIngredients);
+
+        //----- instruction fields -----
+        String[] newInstr = instructionsText.getText().split(", ");
+        List<String> listInstr = Arrays.asList(newInstr);
+        recipe.setInstructions(listInstr);
+        
+        try {
+            persistence.saveCookBook(cookbook);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        btnAddRecipe.setVisible(true);
+        titleTitle.setVisible(false);
+        title.setVisible(false);
+        titleText.setVisible(false);
+        ingredientText.setVisible(false);
+        ingredientTitle.setVisible(false);
+        instructionsText.setVisible(false);
+        instructionsTitle.setVisible(false);
+        finish.setVisible(false);
+        cancel.setVisible(false);
+        commitEdit.setVisible(false);
+        edit.setVisible(true);
 
         createRecipeList();  
     }
@@ -252,5 +334,6 @@ public class SultnController {
         instructionsTitle.setVisible(false);
         finish.setVisible(false);
         cancel.setVisible(false);
+        commitEdit.setVisible(false);
     }
 }

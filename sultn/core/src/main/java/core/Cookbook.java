@@ -94,16 +94,15 @@ public class Cookbook {
     /**
      * Delete a Recipe from Coobkook.
      * 
-     * @param recipe - Recipe-object to be deleted
+     * @param Recipe - Recipe to be deleted
      */
     public void deleteRecipe(Recipe recipe) { 
         int id = recipe.getId();
-
         if(recipeMap.containsKey(id)) {
             recipeMap.remove(id); 
         }
         else {
-            throw new IllegalArgumentException("Recipe " + recipe.getName() + " not found. Invalid id.");
+            throw new IllegalArgumentException("Recipe with ID " + id + " not found. Invalid id.");
         }
     }
         
@@ -117,12 +116,14 @@ public class Cookbook {
         recipeMap.put(id, recipe);
     }
     
-    //denne burde kunne kalle på andre funksjoner slik at man kan endre på beskrivelsen og ingredienser. 
-    //public Recipe editRecipe(Recipe recipe) {  
-        //recipe.edit(); //gjøres i recipe
-        //return recipe;
-    //}
-        
+    public Recipe editRecipe(int id) {  
+        if(recipeMap.containsKey(id)){
+            return recipeMap.get(id);
+        }
+        else {
+            throw new IllegalArgumentException("Recipe with ID " + id + " not found. Invalid id.");
+        }
+    }
 
 }
 
