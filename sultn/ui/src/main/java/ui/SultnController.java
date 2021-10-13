@@ -22,6 +22,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -54,26 +55,12 @@ public class SultnController {
 
     @FXML
     Button btnAddRecipe;
-    @FXML
-    Button finish;
-    @FXML
-    Button cancel;
 
     @FXML
-    Label titleTitle;
-    @FXML
-    Label title;
-    @FXML
-    Label ingredientTitle;
-    @FXML
-    Label instructionsTitle;
+    SultnFormController sultnFormController;
 
     @FXML
-    TextField titleText;
-    @FXML
-    TextField ingredientText;
-    @FXML
-    TextField instructionsText;
+    RecipeController recipeController;
 
     /**
      * Initializes a Cookbook with stored Recipes from JSON
@@ -93,15 +80,13 @@ public class SultnController {
         createRecipeList();
     }
 
-    @FXML
-    private void switchToRecipeForm() throws IOException {
-        Sultn.setRoot("SultnForm");
-    }
-
-    @FXML
-    private void switchToRecipeView() throws IOException {
-        Sultn.setRoot("Recipe");
-    }
+    /*
+     * @FXML private void switchToRecipeForm() throws IOException {
+     * Sultn.setRoot("SultnForm"); }
+     * 
+     * @FXML private void switchToRecipeView() throws IOException {
+     * Sultn.setRoot("Recipe"); }
+     */
 
     public static class HBoxCell extends HBox {
         Label label = new Label();
@@ -142,7 +127,7 @@ public class SultnController {
     private void createRecipeList() {
 
         List<HBoxCell> hBoxList = new ArrayList<>();
-        List<Recipe> recipeList = cookbook.getRecipes(); // we assume this works
+        List<Recipe> recipeList = cookbook.getRecipes();
         for (Recipe recipe : recipeList) {
             hBoxList.add(new HBoxCell(recipe.getName(), recipe.getId()));
         }
