@@ -20,7 +20,7 @@ public class SultnFormController {
     Button btnCancel;
 
     /**
-     * Switches scene to add a new recipe form
+     * Switches scene back to Sultn menu
      * 
      */
 
