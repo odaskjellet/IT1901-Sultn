@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -62,6 +63,10 @@ public class SultnController {
     @FXML
     RecipeController recipeController;
 
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
+
     /**
      * Initializes a Cookbook with stored Recipes from JSON
      * 
@@ -80,14 +85,6 @@ public class SultnController {
         createRecipeList();
     }
 
-    /*
-     * @FXML private void switchToRecipeForm() throws IOException {
-     * Sultn.setRoot("SultnForm"); }
-     * 
-     * @FXML private void switchToRecipeView() throws IOException {
-     * Sultn.setRoot("Recipe"); }
-     */
-
     public static class HBoxCell extends HBox {
         Label label = new Label();
         Button button = new Button();
@@ -102,17 +99,7 @@ public class SultnController {
             button.setText("Open");
             button.setId("" + id);
 
-            // button.setOnAction(switchToRecipeView());
-
-            /*
-             * button.setOnAction(new EventHandler<ActionEvent>() {
-             * 
-             * @Override public void handle(ActionEvent event) { try { FXMLLoader fxmlLoader
-             * = new FXMLLoader(getClass().getResource("Recipe.fxml")); Parent root1 =
-             * (Parent) fxmlLoader.load(); Stage stage = new Stage();
-             * stage.setTitle("Recipe"); stage.setScene(new Scene(root1)); stage.show(); }
-             * catch (Exception e) { e.printStackTrace(); } } });
-             */
+            button.setOnAction(switchToRecipeScene());
 
             this.getChildren().addAll(label, button);
         }
@@ -138,6 +125,31 @@ public class SultnController {
 
         bPane.setCenter(recipeView);
 
+    }
+
+    /**
+     * Switches scene to the chosen Recipe
+     * 
+     */
+
+    public void switchToRecipeScene(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("Recipe.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    /**
+     * Switches scene to a form for adding a new recipe
+     */
+
+    public void switchToSultnForm(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("SultnForm.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
 }
