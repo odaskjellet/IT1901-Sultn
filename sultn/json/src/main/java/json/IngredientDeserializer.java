@@ -29,10 +29,10 @@ public class IngredientDeserializer extends JsonDeserializer<Ingredient> {
      * Gets nodes from JSON file
      * @param jsonNode - Node to deserialize.
      * @return - An Ingredient object if jsonNode contains one, otherwise null.
+     * @throws IOException
      */
-    public Ingredient deserialize(JsonNode jsonNode) {
+    public Ingredient deserialize(JsonNode jsonNode) throws IOException, IllegalArgumentException {
         if (jsonNode instanceof ObjectNode objectnode) {
-
             // Get nodes from JSON file.
             JsonNode nameNode = objectnode.get("name");
             JsonNode amountNode = objectnode.get("amount");
@@ -58,8 +58,9 @@ public class IngredientDeserializer extends JsonDeserializer<Ingredient> {
 
             return new Ingredient(name, amount, unit);
         }
-
-        return null;
+        else {
+            throw new IOException("Incorrect ingredient format.");
+        }
     }
     
 }

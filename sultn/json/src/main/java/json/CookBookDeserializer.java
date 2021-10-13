@@ -45,8 +45,13 @@ public class CookBookDeserializer extends JsonDeserializer<Cookbook> {
             // Add each Recipe object to Cookbook if JSON nodes exists.
             if (recipes instanceof ArrayNode) {
                 for (JsonNode node : ((ArrayNode) recipes)) {
-                    Recipe r = recipeDeserializer.deserialize(node);
-                    cookbook.addRecipe(r);
+                    try {
+                        Recipe r = recipeDeserializer.deserialize(node);
+                        cookbook.addRecipe(r);
+                    } catch (IOException e) {
+                        // If exception is thrown the recipe is skipped.
+                        System.err.println(e);
+                    }
                 }
             }
         }

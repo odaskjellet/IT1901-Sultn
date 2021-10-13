@@ -1,24 +1,20 @@
 package json;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import core.Cookbook;
 import core.Ingredient;
 import core.Recipe;
-
-/*
-IMPORTANT:
-
-These tests does not actually test anything, and are only used as a way to
-save and load a cookbook without having to run the gui.
-The tests give feedback in the form of an output file and printing to console.
-*/
-
 
 public class PersistenceTest {
 
@@ -39,45 +35,67 @@ public class PersistenceTest {
         
         Recipe recipe = new Recipe("Carbonara", 123, ings, instr);
         cookbook.addRecipe(recipe);
+    }
 
-        persistence.setSaveFile("cookbook.json");
+    @AfterAll
+    public static void clean() {
+        File f = new File(System.getProperty("user.dir"), "cookbook.json");
+        f.delete();
     }
 
     @Test
-    public void testWriteCookbook() {
+    public void testLoadCookbook() {
+        assertThrows(IllegalStateException.class, () -> persistence.loadCookbook(), "Save file path not set...");
+    }
+
+    @Test
+    public void testSaveCookbook() {
+        assertThrows(IllegalStateException.class, () -> persistence.saveCookBook(cookbook), "Save file path not set...");
+    }
+
+    @Test
+    public void testWriteReadCookbook() {
+        persistence.setSaveFile("cookbook.json");
+
+        // Save cookbook to file.
         try {
             persistence.saveCookBook(cookbook);
         } catch (Exception e) {
             System.err.println(e);
             e.printStackTrace();
         }
-    }
-
-    @Test
-    public void testReadCookbook() {
+    
+        // Read cookbook from file.
+        Cookbook cbFromFile;
         try {
-            Cookbook cb = persistence.loadCookbook();
-
-            for (Recipe r : cb.getRecipes()) {
-                System.out.println("name: " + r.getName());
-                System.out.println("id: " + r.getId());
-                
-                System.out.println("ingredients: ");
-                for (Ingredient i : r.getIngredients()) {
-                    System.out.println(
-                        i.getIngredientName() + " " +
-                        i.getIngredientAmount() + " " +
-                        i.getIngredientUnit()
-                        );
-                }
-
-                for (String i : r.getInstructions()) {
-                    System.out.println(i);
-                }
-            }
+            cbFromFile = persistence.loadCookbook();
         } catch (Exception e) {
             System.err.println(e);
             e.printStackTrace();
+            
+            cbFromFile = new Cookbook();
+        }
+
+        List<Recipe> origRecipes = cookbook.getRecipes();
+        List<Recipe> fileRecipes = cbFromFile.getRecipes();
+
+        for (int i = 0; i < origRecipes.size(); ++i) {
+            Recipe origRecipe = origRecipes.get(i);
+            Recipe fileRecipe = fileRecipes.get(i);
+
+            assertEquals(fileRecipe.getName(), origRecipe.getName());
+            assertEquals(fileRecipe.getId(), origRecipe.getId());
+            assertEquals(fileRecipe.getInstructions(), origRecipe.getInstructions());
+
+            List<Ingredient> origIngs = origRecipe.getIngredients();
+            List<Ingredient> fileIngs = fileRecipe.getIngredients();
+
+            for (int j = 0; j < fileIngs.size(); ++j) {
+                Ingredient origSingleIng = origIngs.get(j);
+                Ingredient fileSingleIng = fileIngs.get(j);
+
+                assertEquals(fileSingleIng.getIngredientName(), origSingleIng.getIngredientName());
+            }
         }
     }
 }
