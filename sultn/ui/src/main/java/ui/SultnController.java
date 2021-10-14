@@ -108,6 +108,7 @@ public class SultnController {
                         root = FXMLLoader.load(getClass().getResource("Recipe.fxml"));
                         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         scene = new Scene(root);
+                        stage.setResizable(false);
                         stage.setScene(scene);
                         stage.show();
                     } catch (IOException e) {
@@ -155,6 +156,7 @@ public class SultnController {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 
@@ -168,6 +170,7 @@ public class SultnController {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 
