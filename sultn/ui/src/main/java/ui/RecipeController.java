@@ -9,7 +9,6 @@ import core.Recipe;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -51,8 +50,11 @@ public class RecipeController {
 
     /**
      * Method for passing data from sultnController to recipeController
+     * 
+     * @param cookbook - Cookbook-object to get recipe from
+     * @param id       - id to the chosen recipe from sultnController, used to get
+     *                 chosen recipe from cookbook
      */
-
     public void initData(Cookbook cookbook, int id) {
         Recipe loadRecipe = cookbook.getRecipeMap().get(id);
 
@@ -66,8 +68,9 @@ public class RecipeController {
 
     /**
      * Method for showing the ingredients in the Recipe view
+     * 
+     * @param recipe - Recipe-object to get ingredients from
      */
-
     public void writeIngredientField(Recipe recipe) {
 
         List<Ingredient> ingredients = recipe.getIngredients();
@@ -83,8 +86,9 @@ public class RecipeController {
 
     /**
      * Method for showing the units of ingredients in the Recipe view
+     * 
+     * @param recipe - Recipe-object to get ingredient units from
      */
-
     public void writeUnitField(Recipe recipe) {
 
         List<Ingredient> ingredients = recipe.getIngredients();
@@ -100,8 +104,9 @@ public class RecipeController {
 
     /**
      * Method for showing the instructions in the Recipe view
+     * 
+     * @param recipe - Recipe-object to get instructions from
      */
-
     public void writeDirectionField(Recipe recipe) {
 
         List<String> instructions = recipe.getInstructions();
@@ -122,7 +127,6 @@ public class RecipeController {
      * Switches scene back to Sultn menu
      * 
      */
-
     public void handRecipeBack(ActionEvent event) throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Sultn.fxml"));

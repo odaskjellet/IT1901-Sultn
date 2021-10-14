@@ -2,11 +2,9 @@ package ui;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import core.Cookbook;
-import core.Ingredient;
 import core.Recipe;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -15,20 +13,15 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.StackPane;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import json.SultnPersistence;
@@ -65,7 +58,6 @@ public class SultnController {
 
     private static Stage stage;
     private static Scene scene;
-    private Parent root;
 
     /**
      * Initializes a Cookbook with stored Recipes from JSON
@@ -85,6 +77,16 @@ public class SultnController {
         createRecipeList();
     }
 
+    /**
+     * HBoxCell class inhereted from HBox Makes cells in an HBox
+     * 
+     * @param recipeName - recipeName to label the HBox
+     * @param id         - id of chosen recipe to be parsed to a RecipeController
+     *                   through a button
+     * @param cookbook   - cookbook-object to be parsed to a RecipeController
+     * 
+     */
+
     public static class HBoxCell extends HBox {
         Label label = new Label();
         Button button = new Button();
@@ -103,7 +105,6 @@ public class SultnController {
 
                 @Override
                 public void handle(ActionEvent event) {
-                    Parent root;
                     try {
 
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("Recipe.fxml"));
@@ -121,7 +122,6 @@ public class SultnController {
                         stage.show();
 
                     } catch (IOException e) {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
 
@@ -137,7 +137,6 @@ public class SultnController {
      * with selected recipe in
      * 
      */
-
     private void createRecipeList() {
 
         List<HBoxCell> hBoxList = new ArrayList<>();
@@ -159,7 +158,6 @@ public class SultnController {
      * Switches scene to add a new recipe form
      * 
      */
-
     public void switchToSultnForm(ActionEvent event) throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("SultnForm.fxml"));
