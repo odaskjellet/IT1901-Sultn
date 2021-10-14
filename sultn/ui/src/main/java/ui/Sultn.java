@@ -22,6 +22,7 @@ public class Sultn extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("Sultn.fxml"));
         Parent parent = fxmlLoader.load();
         stage.setScene(new Scene(parent));
+        stage.setResizable(false);
         stage.show();
     }
 
