@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="300.0" style="-fx-background-color: #6f9e98;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
@@ -20,16 +19,8 @@
             <Font name="Calibri" size="12.0" />
          </font>
       </Label>
-      <TextFlow fx:id="ingredientField" layoutY="153.0" prefHeight="284.0" prefWidth="112.0">
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ingredienser" />
-         </children>
-      </TextFlow>
-      <TextFlow fx:id="directionField" layoutX="114.0" layoutY="153.0" prefHeight="276.0" prefWidth="179.0">
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Veiledning" />
-         </children>
-      </TextFlow>
+      <TextFlow fx:id="ingredientField" layoutX="7.0" layoutY="203.0" prefHeight="231.0" prefWidth="66.0" />
+      <TextFlow fx:id="directionField" layoutX="136.0" layoutY="208.0" prefHeight="221.0" prefWidth="157.0" />
       <Label id="title" layoutX="104.0" layoutY="27.0" prefHeight="58.0" prefWidth="92.0" text="Sultn" textFill="#f6c7bc">
          <font>
             <Font name="Century Gothic Bold Italic" size="40.0" />
@@ -43,5 +34,26 @@
             <Insets bottom="-15.0" left="-15.0" right="-15.0" top="-15.0" />
          </padding>
       </Button>
+      <Label layoutX="12.0" layoutY="154.0" text="Ingredienser">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="143.0" layoutY="154.0" text="Fremgangsmåte">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextFlow fx:id="unitFlow" layoutX="78.0" layoutY="203.0" prefHeight="231.0" prefWidth="66.0" />
+      <Label layoutX="15.0" layoutY="188.0" text="Navn">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="86.0" layoutY="188.0" text="Antall">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

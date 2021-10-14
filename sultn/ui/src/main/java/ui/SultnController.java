@@ -110,12 +110,13 @@ public class SultnController {
 
                         RecipeController buttonRecipeController = new RecipeController();
                         loader.setController(buttonRecipeController);
-                        buttonRecipeController.initData(cookbook, id);
 
                         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         scene = new Scene(loader.load());
                         stage.setScene(scene);
                         stage.setResizable(false);
+
+                        buttonRecipeController.initData(cookbook, id);
 
                         stage.show();
 
