@@ -13,6 +13,11 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 
+/**
+ * RecipeController class
+ * 
+ */
+
 public class RecipeController {
 
     private Stage stage;
@@ -25,8 +30,7 @@ public class RecipeController {
     Button btnRecipeBack;
 
     /**
-     * Missing: load the cookbook - should pass it through maybe get the chosen
-     * recipe
+     * Method for passing data from sultnController to recipeController
      */
 
     void initData(Cookbook cookbook, int id) {
