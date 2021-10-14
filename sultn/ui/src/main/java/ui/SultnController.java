@@ -236,6 +236,10 @@ public class SultnController {
         createRecipeList();  
     }
 
+    /**
+     * Gets the content of a Recipe and passes to the form so it can be edited.
+     *  
+     */
     public void editRecipe(){
         int id = 0; //id must be passed from button push
         Recipe recipe = cookbook.editRecipe(id);
@@ -270,8 +274,12 @@ public class SultnController {
         edit.setVisible(false);
     }
 
+    /**
+     * Commits the edit when the save changes button is pressed. Gets the ID of which recipe to be deleted from button.
+     * 
+     */
     public void doEdit() {
-        int id = 0;
+        int id = 0; //This gets changed to recive the id from button
         Recipe recipe = cookbook.editRecipe(id);
         
         recipe.setName(titleText.getText());
@@ -315,6 +323,9 @@ public class SultnController {
         createRecipeList();  
     }
 
+    /**
+     * Deletes a recipe from cookbook by passing ID to Cookbook delete function. Stores and then creates recipe list.
+     */
     public void deleteRecipe(){
         cookbook.deleteRecipe(0); // Must get from button
 
