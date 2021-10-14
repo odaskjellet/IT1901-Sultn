@@ -63,8 +63,8 @@ public class SultnController {
     @FXML
     RecipeController recipeController;
 
-    private Stage stage;
-    private Scene scene;
+    private static Stage stage;
+    private static Scene scene;
     private Parent root;
 
     /**
@@ -103,11 +103,17 @@ public class SultnController {
 
                 @Override
                 public void handle(ActionEvent event) {
-                    Parent root = FXMLLoader.load(getClass().getResource("Recipe.fxml"));
-                    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    scene = new Scene(root);
-                    stage.setScene(scene);
-                    stage.show();
+                    Parent root;
+                    try {
+                        root = FXMLLoader.load(getClass().getResource("Recipe.fxml"));
+                        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.show();
+                    } catch (IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
 
                 }
             });
@@ -128,6 +134,7 @@ public class SultnController {
         List<Recipe> recipeList = cookbook.getRecipes();
         for (Recipe recipe : recipeList) {
             hBoxList.add(new HBoxCell(recipe.getName(), recipe.getId()));
+
         }
 
         ListView<HBoxCell> recipeView = new ListView<HBoxCell>();
