@@ -29,22 +29,15 @@ public class SultnFormController {
      * 
      */
 
-    /*
-     * public void switchToSultnMenuFromRecipe(ActionEvent event) throws IOException
-     * { Parent root = FXMLLoader.load(getClass().getResource("Sultn.fxml")); stage
-     * = (Stage) ((Node) event.getSource()).getScene().getWindow(); scene = new
-     * Scene(root); stage.setScene(scene); stage.show(); }
-     */
+    public void handleCancel(ActionEvent event) throws IOException {
 
-    /*
-     * public void setBackButtonTarget() {
-     * btnCancel.setOnAction(getActionEventHandler()); }
-     * 
-     * 
-     * public EventHandler<ActionEvent> getActionEventHandler() { return actionEvent
-     * -> { Control control = (Control) actionEvent.getSource(); stage = (Stage)
-     * ((Node) control.getSource()).getScene().getWindow();
-     * stage.setResizable(false); stage.setScene(scene); }; }
-     */
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Sultn.fxml"));
+        loader.setController(sultnController);
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(loader.load());
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+    }
 
 }

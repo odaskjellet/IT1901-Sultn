@@ -35,7 +35,7 @@
             <Font name="Century Gothic Bold Italic" size="40.0" />
          </font>
       </Label>
-      <Button fx:id="btnRecipeBack" layoutX="14.0" layoutY="27.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="70.0" style="-fx-background-color: #6f9e98;" text="X" textFill="#f6c7bc" AnchorPane.bottomAnchor="410.6" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="250.6" AnchorPane.topAnchor="27.0">
+      <Button fx:id="btnRecipeBack" layoutX="14.0" layoutY="27.0" mnemonicParsing="false" onAction="#handRecipeBack" prefHeight="46.0" prefWidth="70.0" style="-fx-background-color: #6f9e98;" text="X" textFill="#f6c7bc" AnchorPane.bottomAnchor="410.6" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="250.6" AnchorPane.topAnchor="27.0">
          <font>
             <Font size="36.0" />
          </font>

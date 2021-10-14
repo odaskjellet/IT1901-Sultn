@@ -61,7 +61,7 @@ public class SultnController {
     SultnFormController sultnFormController;
 
     @FXML
-    RecipeController recipeController;
+    static RecipeController recipeController;
 
     private static Stage stage;
     private static Scene scene;
@@ -105,12 +105,21 @@ public class SultnController {
                 public void handle(ActionEvent event) {
                     Parent root;
                     try {
-                        root = FXMLLoader.load(getClass().getResource("Recipe.fxml"));
+
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("Recipe.fxml"));
+                        loader.setController(recipeController);
                         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                        scene = new Scene(root);
-                        stage.setResizable(false);
+                        scene = new Scene(loader.load());
                         stage.setScene(scene);
+                        stage.setResizable(false);
                         stage.show();
+
+                        /*
+                         * root = FXMLLoader.load(getClass().getResource("Recipe.fxml")); stage =
+                         * (Stage) ((Node) event.getSource()).getScene().getWindow(); scene = new
+                         * Scene(root); stage.setResizable(false); stage.setScene(scene); stage.show();
+                         */
+
                     } catch (IOException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
@@ -152,12 +161,20 @@ public class SultnController {
      */
 
     public void switchToRecipeScene(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("Recipe.fxml"));
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Recipe.fxml"));
+        loader.setController(recipeController);
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        scene = new Scene(loader.load());
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
+
+        /*
+         * Parent root = FXMLLoader.load(getClass().getResource("Recipe.fxml")); stage =
+         * (Stage) ((Node) event.getSource()).getScene().getWindow(); scene = new
+         * Scene(root); stage.setScene(scene); stage.setResizable(false); stage.show();
+         */
     }
 
     /**
@@ -166,12 +183,21 @@ public class SultnController {
      */
 
     public void switchToSultnForm(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("SultnForm.fxml"));
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("SultnForm.fxml"));
+        loader.setController(sultnFormController);
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        scene = new Scene(loader.load());
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
+
+        /*
+         * Parent root = FXMLLoader.load(getClass().getResource("SultnForm.fxml"));
+         * stage = (Stage) ((Node) event.getSource()).getScene().getWindow(); scene =
+         * new Scene(root); stage.setScene(scene); stage.setResizable(false);
+         * stage.show();
+         */
     }
 
 }
