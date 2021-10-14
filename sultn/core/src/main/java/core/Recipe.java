@@ -36,7 +36,7 @@ public class Recipe {
 
   /**
    * Get the name of the Recipe.
-   * 
+   *
    * @return - Name of Recipe.
    */
   public String getName() {
@@ -45,7 +45,7 @@ public class Recipe {
 
   /**
    * Get the ID of Recipe.
-   * 
+   *
    * @return - ID of Recipe.
    */
   public int getId() {
@@ -54,7 +54,7 @@ public class Recipe {
 
   /**
    * Get the Ingredient list.
-   * 
+   *
    * @return - List of Ingredients.
    */
   public List<Ingredient> getIngredients() {
@@ -63,7 +63,7 @@ public class Recipe {
 
   /**
    * Get the instructions list.
-   * 
+   *
    * @return - List of instructions.
    */
   public List<String> getInstructions() {
@@ -84,7 +84,7 @@ public class Recipe {
 
   /**
    * Set the name of the Recipe.
-   * 
+   *
    * @param newName - The new name for the Recipe.
    */
   public void setName(String newName) throws IllegalArgumentException {
@@ -94,7 +94,7 @@ public class Recipe {
 
   /**
    * Set the ID for Recipe.
-   * 
+   *
    * @param newId - The new ID for Recipe.
    */
   public void setId(int newId) throws IllegalArgumentException {
@@ -104,7 +104,7 @@ public class Recipe {
 
   /**
    * Replace the Ingredient list.
-   * 
+   *
    * @param newIngredients - List of new Ingredient(s).
    */
   public void setIngredients(List<Ingredient> newIngredients) throws IllegalArgumentException {
@@ -114,7 +114,7 @@ public class Recipe {
 
   /**
    * Replace the instructions.
-   * 
+   *
    * @param newInstructions - List of new instructions.
    */
   public void setInstructions(List<String> newInstructions) throws IllegalArgumentException {
@@ -124,7 +124,7 @@ public class Recipe {
 
   /**
    * Validation of strings.
-   * 
+   *
    * @param toValidate - String to be validated.
    */
   private void validateString(String toValidate) throws IllegalArgumentException {
@@ -135,7 +135,7 @@ public class Recipe {
 
   /**
    * Validation of int.
-   * 
+   *
    * @param toValidate - Int to be validated.
    */
   private void validateInt(int toValidate) throws IllegalArgumentException {
@@ -146,7 +146,7 @@ public class Recipe {
 
   /**
    * Validation of Ingredient list.
-   * 
+   *
    * @param toValidate - List of Ingredient(s) to be validated.
    */
   private void validateIngArray(List<Ingredient> toValidate) throws IllegalArgumentException {
@@ -157,7 +157,7 @@ public class Recipe {
 
   /**
    * Validation of Array size.
-   * 
+   *
    * @param toValidate - List to be validated.
    */
   private void validateStrArray(List<String> toValidate) throws IllegalArgumentException {

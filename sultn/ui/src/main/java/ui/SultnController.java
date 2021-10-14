@@ -153,9 +153,8 @@ public class SultnController {
 
     List<HBoxCell> list = new ArrayList<>();
 
-
-    list.add(new HBoxCell("Test", 0)); // Bruker denne til vi finner ut hvorfor løkken over ikke
-                                       // funker
+    // Bruker denne til vi finner ut hvorfor løkken over ikke funker
+    list.add(new HBoxCell("Test", 0));
 
     ListView<HBoxCell> recipeView = new ListView<HBoxCell>();
     ObservableList<HBoxCell> observableList = FXCollections.observableList(list);
