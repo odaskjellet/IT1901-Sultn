@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="300.0" style="-fx-background-color: #6f9e98;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.SultnController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="300.0" style="-fx-background-color: #6f9e98;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="lblRecipeName" alignment="CENTER" layoutY="111.0" prefHeight="36.0" prefWidth="300.0" style="-fx-background-color: #f6c7bc; -fx-border-color: black;" text="#Navn" textAlignment="CENTER">
          <font>
@@ -35,7 +35,7 @@
             <Font name="Century Gothic Bold Italic" size="40.0" />
          </font>
       </Label>
-      <Button fx:id="btnRecipeBack" layoutX="14.0" layoutY="27.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="70.0" style="-fx-background-color: #6f9e98;" text="X" textFill="#f6c7bc" AnchorPane.bottomAnchor="410.6" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="250.6" AnchorPane.topAnchor="27.0">
+      <Button fx:id="btnRecipeBack" layoutX="14.0" layoutY="27.0" mnemonicParsing="false" onAction="#handRecipeBack" prefHeight="46.0" prefWidth="70.0" style="-fx-background-color: #6f9e98;" text="X" textFill="#f6c7bc" AnchorPane.bottomAnchor="410.6" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="250.6" AnchorPane.topAnchor="27.0">
          <font>
             <Font size="36.0" />
          </font>
