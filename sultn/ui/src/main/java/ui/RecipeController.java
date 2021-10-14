@@ -2,6 +2,8 @@ package ui;
 
 import java.io.IOException;
 
+import core.Cookbook;
+import core.Recipe;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +23,15 @@ public class RecipeController {
 
     @FXML
     Button btnRecipeBack;
+
+    /**
+     * Missing: load the cookbook - should pass it through maybe get the chosen
+     * recipe
+     */
+
+    void initData(Cookbook cookbook, int id) {
+        Recipe loadRecipe = cookbook.getRecipeMap().get(id);
+    }
 
     /**
      * Switches scene back to Sultn menu

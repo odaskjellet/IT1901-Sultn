@@ -89,7 +89,7 @@ public class SultnController {
         Label label = new Label();
         Button button = new Button();
 
-        HBoxCell(String recipeName, int id) {
+        HBoxCell(String recipeName, int id, Cookbook cookbook) { // -----------------------
             super();
 
             label.setText(recipeName);
@@ -107,11 +107,16 @@ public class SultnController {
                     try {
 
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("Recipe.fxml"));
-                        loader.setController(recipeController);
+
+                        RecipeController buttonRecipeController = new RecipeController();
+                        loader.setController(buttonRecipeController);
+                        buttonRecipeController.initData(cookbook, id); // -------------------------------
+
                         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         scene = new Scene(loader.load());
                         stage.setScene(scene);
                         stage.setResizable(false);
+
                         stage.show();
 
                         /*
@@ -143,7 +148,7 @@ public class SultnController {
         List<HBoxCell> hBoxList = new ArrayList<>();
         List<Recipe> recipeList = cookbook.getRecipes();
         for (Recipe recipe : recipeList) {
-            hBoxList.add(new HBoxCell(recipe.getName(), recipe.getId()));
+            hBoxList.add(new HBoxCell(recipe.getName(), recipe.getId(), this.cookbook)); // --------------------
 
         }
 
