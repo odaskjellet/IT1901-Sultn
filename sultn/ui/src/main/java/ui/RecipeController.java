@@ -123,5 +123,5 @@ public class RecipeController {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
-    |}
+    }
 }
