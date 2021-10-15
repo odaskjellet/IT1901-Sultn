@@ -12,6 +12,13 @@ import javafx.stage.Stage;
  */
 public class Sultn extends Application {
 
+  /*
+   * @Override public void start(Stage stage) throws IOException { FXMLLoader
+   * fxmlLoader = new FXMLLoader(this.getClass().getResource("Sultn.fxml"));
+   * Parent parent = fxmlLoader.load(); stage.setScene(new Scene(parent));
+   * stage.show(); }
+   */
+
   /**
    * Loads Sultn.fxml as a Scene in a Stage and shows.
    */
@@ -20,7 +27,18 @@ public class Sultn extends Application {
     FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("Sultn.fxml"));
     Parent parent = fxmlLoader.load();
     stage.setScene(new Scene(parent));
+    stage.setResizable(false);
     stage.show();
+
+    try {
+
+      Parent root = FXMLLoader.load(getClass().getResource("Sultn.fxml"));
+      Scene scene = new Scene(root);
+      stage.setScene(scene);
+      stage.show();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
   public static void main(String[] args) {

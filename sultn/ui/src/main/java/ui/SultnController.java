@@ -1,10 +1,9 @@
 package ui;
 
 import core.Cookbook;
-import core.Ingredient;
 import core.Recipe;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,13 +11,13 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -29,6 +28,7 @@ import json.SultnPersistence;
 
 /**
  * SultnController class.
+ * 
  */
 public class SultnController {
 
@@ -49,29 +49,20 @@ public class SultnController {
 
   @FXML
   Button btnAddRecipe;
-  @FXML
-  Button finish;
-  @FXML
-  Button cancel;
 
   @FXML
-  Label titleTitle;
-  @FXML
-  Label title;
-  @FXML
-  Label ingredientTitle;
-  @FXML
-  Label instructionsTitle;
+  SultnFormController sultnFormController;
 
   @FXML
-  TextField titleText;
-  @FXML
-  TextField ingredientText;
-  @FXML
-  TextField instructionsText;
+  static RecipeController recipeController;
+
+  private static Stage stage;
+  private static Scene scene;
+  private Parent root;
 
   /**
    * Initializes a Cookbook with stored Recipes from JSON.
+   * 
    */
   public void initialize() {
     persistence.setSaveFile("cookbook.json");
@@ -91,7 +82,7 @@ public class SultnController {
     Label label = new Label();
     Button button = new Button();
 
-    HBoxCell(String recipeName, int id) {
+    HBoxCell(String recipeName, int id, Cookbook cookbook) {
       super();
 
       label.setText(recipeName);
@@ -102,157 +93,73 @@ public class SultnController {
       button.setId("" + id);
 
       button.setOnAction(new EventHandler<ActionEvent>() {
+
         @Override
         public void handle(ActionEvent event) {
+          Parent root;
           try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Recipe.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setTitle("Recipe");
-            stage.setScene(new Scene(root1));
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Recipe.fxml"));
+
+            RecipeController buttonRecipeController = new RecipeController();
+            loader.setController(buttonRecipeController);
+            buttonRecipeController.initData(cookbook, id);
+
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(loader.load());
+            stage.setScene(scene);
+            stage.setResizable(false);
+
             stage.show();
-          } catch (Exception e) {
+
+          } catch (IOException e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
           }
+
         }
       });
+
       this.getChildren().addAll(label, button);
     }
   }
 
   /**
-   * Makes a list of Recipes to be displayed.
+   * Makes a list of Recipes in the cookbook with a button to open a new window
+   * with selected recipe in.
+   * 
    */
+
   private void createRecipeList() {
-    rText.clear();
 
-    List<String> instructions;
-    List<Ingredient> ingredients;
-
-    List<Recipe> recipes = cookbook.getRecipes();
-
-    for (int i = 0; i < recipes.size(); i++) {
-
-      instructions = recipes.get(i).getInstructions();
-      ingredients = recipes.get(i).getIngredients();
-
-      rText.appendText(recipes.get(i).getName() + '\n');
-
-      for (int x = 0; x < ingredients.size(); x++) {
-        Ingredient listIngr = ingredients.get(x);
-
-        rText.appendText(listIngr.getIngredientName() + "      Antall:  "
-            + listIngr.getIngredientAmount() + ' ' + listIngr.getIngredientUnit() + '\n');
-      }
-
-      for (int y = 0; y < instructions.size(); y++) {
-        rText.appendText(instructions.get(y).toString() + '\n');
-      }
-      rText.appendText("----------------------------------\n");
+    List<HBoxCell> hBoxList = new ArrayList<>();
+    List<Recipe> recipeList = cookbook.getRecipes();
+    for (Recipe recipe : recipeList) {
+      hBoxList.add(new HBoxCell(recipe.getName(), recipe.getId(), this.cookbook));
     }
 
-    List<HBoxCell> list = new ArrayList<>();
-
-    // Bruker denne til vi finner ut hvorfor løkken over ikke funker
-    list.add(new HBoxCell("Test", 0));
-
     ListView<HBoxCell> recipeView = new ListView<HBoxCell>();
-    ObservableList<HBoxCell> observableList = FXCollections.observableList(list);
+    ObservableList<HBoxCell> observableList = FXCollections.observableList(hBoxList);
     recipeView.setItems(observableList);
 
     bPane.setCenter(recipeView);
 
-    /*
-     * ListView recipeView = new ListView(); List<Recipe> recipeList = cookbook.getRecipes(); //we
-     * assume this works for(Recipe recipe: recipeList) { recipeView.getItems().add(recipe); }
-     */
-  }
-
-  // sett i fxml
-  // btnAddRecipe.setOnAction(addRecipe());
-  // finish.setOnAction(addNewRecipe());
-  // cancel.setOnAction(cancelNewRecipe());
-
-  /**
-   * Displays a form to the GUI so users can add a new Recipe.
-   */
-  public void addRecipe() {
-
-    btnAddRecipe.setVisible(false);
-    titleTitle.setVisible(true);
-    title.setVisible(true);
-    titleText.setVisible(true);
-    ingredientText.setVisible(true);
-    ingredientTitle.setVisible(true);
-    instructionsText.setVisible(true);
-    instructionsTitle.setVisible(true);
-    finish.setVisible(true);
-    cancel.setVisible(true);
   }
 
   /**
-   * The information filled out in the form gets passed to a new Recipe, which is added to the
-   * Cookbook.
+   * Switches scene to add a new recipe form.
+   * 
    */
-  public void addNewRecipe() {
 
-    String name = titleText.getText();
+  public void switchToSultnForm(ActionEvent event) throws IOException {
 
-    // ----- ingredient fields -----
-    String[] iStr = ingredientText.getText().split(" ");
-    String iName = iStr[0];
-    Double iAmount = Double.parseDouble(iStr[1]);
-    String iUnit = iStr[2];
-
-    Ingredient newIngredient = new Ingredient(iName, iAmount, iUnit);
-
-    List<Ingredient> newIngredients = new ArrayList<>();
-    newIngredients.add(newIngredient);
-
-    // ----- instruction fields -----
-    String[] newInstr = instructionsText.getText().split(", ");
-    List<String> listInstr = Arrays.asList(newInstr);
-
-    cookbook.makeNewRecipe(name, listInstr, newIngredients);
-
-    try {
-      persistence.saveCookBook(cookbook);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-
-    btnAddRecipe.setVisible(true);
-    titleTitle.setVisible(false);
-    title.setVisible(false);
-    titleText.setVisible(false);
-    ingredientText.setVisible(false);
-    ingredientTitle.setVisible(false);
-    instructionsText.setVisible(false);
-    instructionsTitle.setVisible(false);
-    finish.setVisible(false);
-    cancel.setVisible(false);
-
-    createRecipeList();
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("SultnForm.fxml"));
+    loader.setController(sultnFormController);
+    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    scene = new Scene(loader.load());
+    stage.setScene(scene);
+    stage.setResizable(false);
+    stage.show();
   }
 
-  /**
-   * Handles the press of the "X"-button which hides the form for making a new. Recipe
-   */
-  public void cancelNewRecipe() {
-
-    ingredientText.clear();
-    instructionsText.clear();
-    titleText.clear();
-
-    btnAddRecipe.setVisible(true);
-    titleTitle.setVisible(false);
-    title.setVisible(false);
-    titleText.setVisible(false);
-    ingredientText.setVisible(false);
-    ingredientTitle.setVisible(false);
-    instructionsText.setVisible(false);
-    instructionsTitle.setVisible(false);
-    finish.setVisible(false);
-    cancel.setVisible(false);
-  }
 }
