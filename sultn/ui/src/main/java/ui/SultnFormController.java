@@ -1,9 +1,6 @@
 package ui;
 
 import java.io.IOException;
-import java.util.ResourceBundle.Control;
-
-import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,30 +11,30 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 /**
- * SultnFormController class
+ * SultnFormController class.
  * 
  */
 
 public class SultnFormController {
 
-    SultnController sultnController;
+    // SultnController sultnController;
 
     private Stage stage;
     private Scene scene;
-    private Parent root;
+    // private Parent root;
 
-    @FXML
-    Button btnCancel;
+  @FXML
+  Button btnCancel;
 
-    /**
-     * Switches scene back to Sultn menu
-     * 
-     */
+  /**
+   * Switches scene back to Sultn menu.
+   * 
+   */
 
-    public void handleCancel(ActionEvent event) throws IOException {
+  public void handleCancel(ActionEvent event) throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Sultn.fxml"));
-        loader.setController(sultnController);
+        // loader.setController(sultnController);
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(loader.load());
         stage.setScene(scene);
