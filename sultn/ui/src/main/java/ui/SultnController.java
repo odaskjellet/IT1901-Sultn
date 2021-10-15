@@ -36,16 +36,13 @@ public class SultnController {
     private static SultnPersistence persistence = new SultnPersistence();
 
     @FXML
-    BorderPane bPane;
+    BorderPane borderPane;
 
     @FXML
     Pane recipePane;
 
     @FXML
     TextFlow ingredientField;
-
-    @FXML
-    TextArea rText;
 
     @FXML
     Button btnAddRecipe;
@@ -139,18 +136,18 @@ public class SultnController {
      */
     private void createRecipeList() {
 
-        List<HBoxCell> hBoxList = new ArrayList<>();
+        List<HBoxCell> horisontalBoxList = new ArrayList<>();
         List<Recipe> recipeList = cookbook.getRecipes();
         for (Recipe recipe : recipeList) {
-            hBoxList.add(new HBoxCell(recipe.getName(), recipe.getId(), this.cookbook)); // --------------------
+            horisontalBoxList.add(new HBoxCell(recipe.getName(), recipe.getId(), this.cookbook)); // --------------------
 
         }
 
         ListView<HBoxCell> recipeView = new ListView<HBoxCell>();
-        ObservableList<HBoxCell> observableList = FXCollections.observableList(hBoxList);
+        ObservableList<HBoxCell> observableList = FXCollections.observableList(horisontalBoxList);
         recipeView.setItems(observableList);
 
-        bPane.setCenter(recipeView);
+        borderPane.setCenter(recipeView);
 
     }
 

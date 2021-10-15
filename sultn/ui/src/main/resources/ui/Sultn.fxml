@@ -21,7 +21,7 @@
                   <Font name="Century Gothic Italic" size="24.0" />
                </font>
             </Label>
-            <BorderPane fx:id="bPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #F6C7BC;" />
+            <BorderPane fx:id="borderPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #F6C7BC;" />
             <Label prefHeight="33.0" prefWidth="296.0" style="-fx-border-width: 1 0 0 0; -fx-border-color: black;" text="Copyright Sultn | Made by alle oss fire | Trademark" />
          </children>
       </VBox>
