@@ -53,8 +53,8 @@ public class SultnController {
     @FXML
     static RecipeController recipeController;
 
-    private static Stage stage;
-    private static Scene scene;
+    private Stage stage;
+    private Scene scene;
 
     /**
      * Initializes a Cookbook with stored Recipes from JSON
@@ -84,7 +84,7 @@ public class SultnController {
      * 
      */
 
-    public static class HBoxCell extends HBox {
+    public class HBoxCell extends HBox {
         Label label = new Label();
         Button button = new Button();
 

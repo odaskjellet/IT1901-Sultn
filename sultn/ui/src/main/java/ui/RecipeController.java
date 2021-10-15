@@ -8,6 +8,7 @@ import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,7 +16,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
-import javafx.scene.Node;
 
 /**
  * RecipeController class
@@ -25,8 +25,6 @@ public class RecipeController {
 
     private Stage stage;
     private Scene scene;
-
-    SultnController sultnController;
 
     @FXML
     Button btnRecipeBack;
@@ -49,9 +47,9 @@ public class RecipeController {
     /**
      * 
      * Method for passing data from sultnController to recipeController
-     * 
+     *
      * @param cookbook - Cookbook-object to get recipe from
-     * 
+     *
      * @param id       - id to the chosen recipe from sultnController, used to get
      *                 chosen recipe from cookbook
      */
@@ -65,7 +63,7 @@ public class RecipeController {
 
     /**
      * Method for showing the ingredients in the Recipe view
-     * 
+     *
      * @param recipe - Recipe-object to get ingredients from
      */
     public void writeIngredientField(Recipe recipe) {
@@ -80,7 +78,7 @@ public class RecipeController {
 
     /**
      * Method for showing the units of ingredients in the Recipe view
-     * 
+     *
      * @param recipe - Recipe-object to get ingredient units from
      */
     public void writeUnitField(Recipe recipe) {
@@ -95,7 +93,7 @@ public class RecipeController {
 
     /**
      * Method for showing the instructions in the Recipe view
-     * 
+     *
      * @param recipe - Recipe-object to get instructions from
      * 
      */
@@ -112,12 +110,11 @@ public class RecipeController {
 
     /**
      * Switches scene back to Sultn menu
-     * 
+     *
      */
     public void handRecipeBack(ActionEvent event) throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Sultn.fxml"));
-        loader.setController(sultnController);
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(loader.load());
         stage.setScene(scene);
