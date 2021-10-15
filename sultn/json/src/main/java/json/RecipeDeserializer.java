@@ -1,9 +1,5 @@
 package json;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.TreeNode;
@@ -14,73 +10,77 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.NumericNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
-
 import core.Ingredient;
 import core.Recipe;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Converts a JSON node containing a recipe into a Recipe object.
  */
 public class RecipeDeserializer extends JsonDeserializer<Recipe> {
 
-    private IngredientDeserializer ingredientDeserializer = new IngredientDeserializer();
-    
-    @Override
-    public Recipe deserialize(JsonParser parser, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-        TreeNode treeNode = parser.getCodec().readTree(parser);
-        return deserialize((JsonNode) treeNode);
-    }
+  private IngredientDeserializer ingredientDeserializer = new IngredientDeserializer();
 
-    /**
-     * Deserializes Recipe nodes
-     * @param jsonNode - Node to be deserialized
-     * @return A Recipe object if jsonNode contains one, otherwise null.
-     * @throws IOException
-     */
-    public Recipe deserialize(JsonNode jsonNode) throws IOException {
-        if (jsonNode instanceof ObjectNode objectnode) {
-            
-            JsonNode nameNode = objectnode.get("name");
-            JsonNode idNode = objectnode.get("id");
-            JsonNode ingredientsNode = objectnode.get("ingredients");
-            JsonNode instructionsNode = objectnode.get("instructions");
+  @Override
+  public Recipe deserialize(JsonParser parser, DeserializationContext ctxt)
+      throws IOException, JsonProcessingException {
+    TreeNode treeNode = parser.getCodec().readTree(parser);
+    return deserialize((JsonNode) treeNode);
+  }
 
-            // Init Recipe constructor args.
-            String name = "";
-            int id = 0;
-            List<Ingredient> ingredients = new ArrayList<Ingredient>();
-            List<String> instructions = new ArrayList<String>();
+  /**
+   * Deserializes Recipe nodes.
+   *
+   * @param jsonNode - Node to be deserialized
+   * @return A Recipe object if jsonNode contains one, otherwise null.
+   * @throws IOException If recipe format is incorrect, or if it contains an illegal ingredient
+   *         field.
+   */
+  public Recipe deserialize(JsonNode jsonNode) throws IOException {
+    if (jsonNode instanceof ObjectNode objectnode) {
 
-            // Define args. if JSON nodes exists.
-            if (nameNode instanceof TextNode) {
-                name = nameNode.asText();
-            }
+      JsonNode nameNode = objectnode.get("name");
+      JsonNode idNode = objectnode.get("id");
+      JsonNode ingredientsNode = objectnode.get("ingredients");
+      JsonNode instructionsNode = objectnode.get("instructions");
 
-            if (idNode instanceof NumericNode) {
-                id = idNode.asInt();
-            }
+      // Init Recipe constructor args.
+      String name = "";
+      int id = 0;
+      List<Ingredient> ingredients = new ArrayList<Ingredient>();
+      List<String> instructions = new ArrayList<String>();
 
-            if (ingredientsNode instanceof ArrayNode) {
-                for (JsonNode i : ((ArrayNode) ingredientsNode)) {
-                    try {
-                        Ingredient ingr = ingredientDeserializer.deserialize(i);
-                        ingredients.add(ingr);
-                    } catch (IllegalArgumentException e) {
-                        throw new IOException("Illegal ingredient field. " + e.getMessage());
-                    }
-                }
-            }
+      // Define args. if JSON nodes exists.
+      if (nameNode instanceof TextNode) {
+        name = nameNode.asText();
+      }
 
-            if (instructionsNode instanceof ArrayNode) {
-                for (JsonNode i : ((ArrayNode) instructionsNode)) {
-                    instructions.add(i.asText());
-                }
-            }
+      if (idNode instanceof NumericNode) {
+        id = idNode.asInt();
+      }
 
-            return new Recipe(name, id, ingredients, instructions);
+      if (ingredientsNode instanceof ArrayNode) {
+        for (JsonNode i : ((ArrayNode) ingredientsNode)) {
+          try {
+            Ingredient ingr = ingredientDeserializer.deserialize(i);
+            ingredients.add(ingr);
+          } catch (IllegalArgumentException e) {
+            throw new IOException("Illegal ingredient field. " + e.getMessage());
+          }
         }
-        else {
-            throw new IOException("Incorrect recipe format.");
+      }
+
+      if (instructionsNode instanceof ArrayNode) {
+        for (JsonNode i : ((ArrayNode) instructionsNode)) {
+          instructions.add(i.asText());
         }
+      }
+
+      return new Recipe(name, id, ingredients, instructions);
+    } else {
+      throw new IOException("Incorrect recipe format.");
     }
+  }
 }
