@@ -18,7 +18,7 @@ import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 /**
- * RecipeController class
+ * RecipeController class.
  * 
  */
 public class RecipeController {
@@ -26,8 +26,8 @@ public class RecipeController {
     private Stage stage;
     private Scene scene;
 
-    @FXML
-    Button btnRecipeBack;
+  @FXML
+  Button btnRecipeBack;
 
     @FXML
     private Label lblRecipeName;
