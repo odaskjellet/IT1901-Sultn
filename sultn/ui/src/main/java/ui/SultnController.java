@@ -5,9 +5,6 @@ import core.Recipe;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import core.Cookbook;
-import core.Recipe;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,7 +16,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -30,15 +26,14 @@ import json.SultnPersistence;
 
 /**
  * SultnController class.
- * 
  */
 public class SultnController {
 
   private Cookbook cookbook;
   private static SultnPersistence persistence = new SultnPersistence();
 
-    @FXML
-    BorderPane borderPane;
+  @FXML
+  BorderPane borderPane;
 
   @FXML
   Pane recipePane;
@@ -46,8 +41,8 @@ public class SultnController {
   @FXML
   TextFlow ingredientField;
 
-    @FXML
-    Button btnAddRecipe;
+  @FXML
+  Button btnAddRecipe;
 
   @FXML
   SultnFormController sultnFormController;
@@ -55,12 +50,11 @@ public class SultnController {
   @FXML
   static RecipeController recipeController;
 
-    private Stage stage;
-    private Scene scene;
+  private Stage stage;
+  private Scene scene;
 
   /**
    * Initializes a Cookbook with stored Recipes from JSON.
-   * 
    */
   public void initialize() {
     persistence.setSaveFile("cookbook.json");
@@ -73,24 +67,23 @@ public class SultnController {
       e.printStackTrace();
     }
 
-    /**
-     * HBoxCell class inhereted from HBox Makes cells in an HBox
-     * 
-     * @param recipeName - recipeName to label the HBox
-     * @param id         - id of chosen recipe to be parsed to a RecipeController
-     *                   through a button
-     * @param cookbook   - cookbook-object to be parsed to a RecipeController
-     * 
-     */
+    createRecipeList();
+  }
 
-    public class HBoxCell extends HBox {
-        Label label = new Label();
-        Button button = new Button();
-
-  public static class HBoxCell extends HBox {
+  /**
+   * HBoxCell class inhereted from HBox Makes cells in an HBox
+   */
+  public class HBoxCell extends HBox {
     Label label = new Label();
     Button button = new Button();
 
+    /**
+     * HBoxCell constructor.
+     * 
+     * @param recipeName - recipeName to label the HBox
+     * @param id - id of chosen recipe to be parsed to a RecipeController through a button
+     * @param cookbook - cookbook-object to be parsed to a RecipeController
+     */
     HBoxCell(String recipeName, int id, Cookbook cookbook) {
       super();
 
@@ -101,69 +94,61 @@ public class SultnController {
       button.setText("Open");
       button.setId("" + id);
 
-                @Override
-                public void handle(ActionEvent event) {
-                    try {
+      button.setOnAction(new EventHandler<ActionEvent>() {
 
         @Override
         public void handle(ActionEvent event) {
-          Parent root;
           try {
 
-                        RecipeController buttonRecipeController = new RecipeController();
-                        loader.setController(buttonRecipeController);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Recipe.fxml"));
 
             RecipeController buttonRecipeController = new RecipeController();
             loader.setController(buttonRecipeController);
+
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(loader.load());
+            stage.setScene(scene);
+            stage.setResizable(false);
+
             buttonRecipeController.initData(cookbook, id);
 
-                        buttonRecipeController.initData(cookbook, id);
-
-                        stage.show();
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+            stage.show();
 
           } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
           }
 
         }
       });
 
-    /**
-     * Makes a list of Recipes in the cookbook with a button to open a new window
-     * with selected recipe in
-     * 
-     */
-    private void createRecipeList() {
+      this.getChildren().addAll(label, button);
+    }
+  }
 
-        List<HBoxCell> horisontalBoxList = new ArrayList<>();
-        List<Recipe> recipeList = cookbook.getRecipes();
-        for (Recipe recipe : recipeList) {
-            horisontalBoxList.add(new HBoxCell(recipe.getName(), recipe.getId(), this.cookbook)); // --------------------
+  /**
+   * Makes a list of Recipes in the cookbook with a button to open a new window with selected recipe
+   * in
+   */
+  private void createRecipeList() {
 
-    List<HBoxCell> hBoxList = new ArrayList<>();
+    List<HBoxCell> horisontalBoxList = new ArrayList<>();
     List<Recipe> recipeList = cookbook.getRecipes();
     for (Recipe recipe : recipeList) {
-      hBoxList.add(new HBoxCell(recipe.getName(), recipe.getId(), this.cookbook));
+      horisontalBoxList.add(new HBoxCell(recipe.getName(), recipe.getId(), this.cookbook));
     }
 
-        ListView<HBoxCell> recipeView = new ListView<HBoxCell>();
-        ObservableList<HBoxCell> observableList = FXCollections.observableList(horisontalBoxList);
-        recipeView.setItems(observableList);
+    ListView<HBoxCell> recipeView = new ListView<HBoxCell>();
+    ObservableList<HBoxCell> observableList = FXCollections.observableList(horisontalBoxList);
+    recipeView.setItems(observableList);
 
-        borderPane.setCenter(recipeView);
+    borderPane.setCenter(recipeView);
 
   }
 
-    /**
-     * Switches scene to add a new recipe form
-     * 
-     */
-    public void switchToSultnForm(ActionEvent event) throws IOException {
+  /**
+   * Switches scene to add a new recipe form
+   */
+  public void switchToSultnForm(ActionEvent event) throws IOException {
 
     FXMLLoader loader = new FXMLLoader(getClass().getResource("SultnForm.fxml"));
     loader.setController(sultnFormController);

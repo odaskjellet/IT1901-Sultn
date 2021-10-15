@@ -16,17 +16,26 @@ public class Cookbook {
   /**
    * Cookbook - Default constructor (no parameters).
    */
-  public Cookbook() {
+  public Cookbook() {}
 
+  /**
+   * Cookbook constructor
+   * 
+   * @param recipeMap - A HashMap of Recipe-objects
+   */
+  public Cookbook(HashMap<Integer, Recipe> recipeMap) {
+    recipeMap.forEach((key, value) -> this.recipeMap.put(key, value));
   }
 
   /**
-   * Cookbook constructor.
-   *
-   * @param recipeMap - A HashMap of Recipe-objects.
+   * Get the recipe HashMap
+   * 
+   * @return The recipe HashMap
    */
-  public Cookbook(HashMap<Integer, Recipe> recipeMap) {
-    this.recipeMap = recipeMap;
+  public HashMap<Integer, Recipe> getRecipeMap() {
+    HashMap<Integer, Recipe> returnMap = new HashMap<>();
+    returnMap.putAll(this.recipeMap);
+    return returnMap;
   }
 
   /**
@@ -39,26 +48,8 @@ public class Cookbook {
   }
 
   /**
-   * Get the recipe HashMap.
-   *
-   * @return The recipe HashMap
-   */
-  public HashMap<Integer, Recipe> getRecipeMap() {
-    return this.recipeMap;
-  }
-
-  /**
-   * Set the counter value.
-   *
-   * @param newCounter - The new value for the counter variable.
-   */
-  public void setCounter(int newCounter) {
-    this.counter = newCounter;
-  }
-
-  /**
    * Get an ArrayList of all IDs in Cookbook.
-   *
+   * 
    * @return An ArrayList for IDs in Cookbook.
    */
   public List<Integer> getIds() {
@@ -75,14 +66,27 @@ public class Cookbook {
     return allRecipes;
   }
 
+
+  /**
+   * Set the counter value.
+   *
+   * @param newCounter - The new value for the counter variable.
+   */
+  public void setCounter(int newCounter) {
+    this.counter = newCounter;
+  }
+
   /**
    * Makes a new Recipe and add it to Cookbook. Increments counter after adding.
-   *
+   * 
    * @param name - Name of the Recipe
    * @param instructions - List of instructions
    * @param ingredients - List of Ingredient-objects
    */
   public void makeNewRecipe(String name, List<String> instructions, List<Ingredient> ingredients) {
+    if (this.getIds().contains(counter)) {
+      throw new IllegalArgumentException("A recipe with this ID already exists");
+    }
     int id = counter;
     Recipe newRecipe = new Recipe(name, id, ingredients, instructions);
     addRecipe(newRecipe);
@@ -90,8 +94,8 @@ public class Cookbook {
   }
 
   /**
-   * Delete a Recipe from Coobkook.
-   *
+   * Delete a Recipe from Cookbook.
+   * 
    * @param recipe - Recipe-object to be deleted
    */
   public void deleteRecipe(Recipe recipe) {
@@ -105,8 +109,8 @@ public class Cookbook {
   }
 
   /**
-   * Add a Recipe to the recipeMap.
-   *
+   * Add a Recipe to the recipeMap
+   * 
    * @param recipe - Recipe-object to be added.
    */
   public void addRecipe(Recipe recipe) {

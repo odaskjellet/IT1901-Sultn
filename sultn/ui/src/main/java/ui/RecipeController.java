@@ -19,106 +19,101 @@ import javafx.stage.Stage;
 
 /**
  * RecipeController class.
- * 
  */
 public class RecipeController {
 
-    private Stage stage;
-    private Scene scene;
+  private Stage stage;
+  private Scene scene;
 
   @FXML
   Button btnRecipeBack;
 
-    @FXML
-    private Label lblRecipeName;
+  @FXML
+  private Label lblRecipeName;
 
-    @FXML
-    private TextFlow ingredientField;
+  @FXML
+  private TextFlow ingredientField;
 
-    @FXML
-    private TextFlow directionField;
+  @FXML
+  private TextFlow directionField;
 
-    @FXML
-    private TextFlow unitFlow;
+  @FXML
+  private TextFlow unitFlow;
 
-    public void initialize() {
+  public void initialize() {}
+
+  /**
+   * Method for passing data from sultnController to recipeController
+   *
+   * @param cookbook - Cookbook-object to get recipe from
+   * @param id - id to the chosen recipe from sultnController, used to get chosen recipe from
+   *        cookbook
+   */
+  public void initData(Cookbook cookbook, int id) {
+    Recipe loadRecipe = cookbook.getRecipeMap().get(id);
+    lblRecipeName.setText(loadRecipe.getName());
+    writeIngredientField(loadRecipe);
+    writeDirectionField(loadRecipe);
+    writeUnitField(loadRecipe);
+  }
+
+  /**
+   * Method for showing the ingredients in the Recipe view
+   *
+   * @param recipe - Recipe-object to get ingredients from
+   */
+  public void writeIngredientField(Recipe recipe) {
+    List<Ingredient> ingredients = recipe.getIngredients();
+    for (Ingredient ingredient : ingredients) {
+      Text ingredientText = new Text(ingredient.getIngredientName() + "\n");
+      ingredientText.setFont(Font.font("Helvetica", 14));
+      ingredientField.getChildren().add(ingredientText);
+
     }
+  }
 
-    /**
-     * 
-     * Method for passing data from sultnController to recipeController
-     *
-     * @param cookbook - Cookbook-object to get recipe from
-     *
-     * @param id       - id to the chosen recipe from sultnController, used to get
-     *                 chosen recipe from cookbook
-     */
-    public void initData(Cookbook cookbook, int id) {
-        Recipe loadRecipe = cookbook.getRecipeMap().get(id);
-        lblRecipeName.setText(loadRecipe.getName());
-        writeIngredientField(loadRecipe);
-        writeDirectionField(loadRecipe);
-        writeUnitField(loadRecipe);
+  /**
+   * Method for showing the units of ingredients in the Recipe view
+   *
+   * @param recipe - Recipe-object to get ingredient units from
+   */
+  public void writeUnitField(Recipe recipe) {
+    List<Ingredient> ingredients = recipe.getIngredients();
+    for (Ingredient ingredient : ingredients) {
+      Text unitText =
+          new Text("" + ingredient.getIngredientAmount() + ingredient.getIngredientUnit() + "\n");
+      unitText.setFont(Font.font("Helvetica", 14));
+      unitFlow.getChildren().add(unitText);
+
     }
+  }
 
-    /**
-     * Method for showing the ingredients in the Recipe view
-     *
-     * @param recipe - Recipe-object to get ingredients from
-     */
-    public void writeIngredientField(Recipe recipe) {
-        List<Ingredient> ingredients = recipe.getIngredients();
-        for (Ingredient ingredient : ingredients) {
-            Text ingredientText = new Text(ingredient.getIngredientName() + "\n");
-            ingredientText.setFont(Font.font("Helvetica", 14));
-            ingredientField.getChildren().add(ingredientText);
-
-        }
+  /**
+   * Method for showing the instructions in the Recipe view
+   *
+   * @param recipe - Recipe-object to get instructions from
+   */
+  public void writeDirectionField(Recipe recipe) {
+    List<String> instructions = recipe.getInstructions();
+    int i = 1;
+    for (String instruction : instructions) {
+      Text instructionText = new Text(i + ". " + instruction + "\n");
+      instructionText.setFont(Font.font("Helvetica", 14));
+      directionField.getChildren().add(instructionText);
+      i++;
     }
+  }
 
-    /**
-     * Method for showing the units of ingredients in the Recipe view
-     *
-     * @param recipe - Recipe-object to get ingredient units from
-     */
-    public void writeUnitField(Recipe recipe) {
-        List<Ingredient> ingredients = recipe.getIngredients();
-        for (Ingredient ingredient : ingredients) {
-            Text unitText = new Text("" + ingredient.getIngredientAmount() + ingredient.getIngredientUnit() + "\n");
-            unitText.setFont(Font.font("Helvetica", 14));
-            unitFlow.getChildren().add(unitText);
+  /**
+   * Switches scene back to Sultn menu
+   */
+  public void handRecipeBack(ActionEvent event) throws IOException {
 
-        }
-    }
-
-    /**
-     * Method for showing the instructions in the Recipe view
-     *
-     * @param recipe - Recipe-object to get instructions from
-     * 
-     */
-    public void writeDirectionField(Recipe recipe) {
-        List<String> instructions = recipe.getInstructions();
-        int i = 1;
-        for (String instruction : instructions) {
-            Text instructionText = new Text(i + ". " + instruction + "\n");
-            instructionText.setFont(Font.font("Helvetica", 14));
-            directionField.getChildren().add(instructionText);
-            i++;
-        }
-    }
-
-    /**
-     * Switches scene back to Sultn menu
-     *
-     */
-    public void handRecipeBack(ActionEvent event) throws IOException {
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Sultn.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(loader.load());
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
-    }
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("Sultn.fxml"));
+    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    scene = new Scene(loader.load());
+    stage.setScene(scene);
+    stage.setResizable(false);
+    stage.show();
+  }
 }
