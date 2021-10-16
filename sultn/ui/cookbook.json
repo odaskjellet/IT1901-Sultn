@@ -1,13 +1,40 @@
 {
   "recipes" : [ {
-    "name" : "Kjeks",
+    "name" : "test",
     "id" : 0,
     "ingredients" : [ {
-      "name" : "Kjeksstoff",
-      "unit" : "kg",
+      "name" : "test",
+      "unit" : "stk",
       "amount" : 1.0
     } ],
-    "instructions" : [ "Hell kjeksstoff i kjelen", "kok", "feridg" ]
+    "instructions" : [ "testets" ]
+  }, {
+    "name" : "Torje er dum",
+    "id" : 128,
+    "ingredients" : [ {
+      "name" : "KJEMPEDM",
+      "unit" : "LITER",
+      "amount" : 69.0
+    } ],
+    "instructions" : [ "Ka i faeaaaeen", "Robert?" ]
+  }, {
+    "name" : "HVA FA",
+    "id" : 129,
+    "ingredients" : [ {
+      "name" : "aaaaaaa",
+      "unit" : "k",
+      "amount" : 1.0
+    } ],
+    "instructions" : [ "HVORFOR", "GJØR DU SÅNN" ]
+  }, {
+    "name" : "TEstse",
+    "id" : 130,
+    "ingredients" : [ {
+      "name" : "asfds",
+      "unit" : "fsdaf",
+      "amount" : 2.0
+    } ],
+    "instructions" : [ "asdf", "asfd" ]
   }, {
     "name" : "Carbonara",
     "id" : 123,
@@ -17,5 +44,44 @@
       "amount" : 2.0
     } ],
     "instructions" : [ "Fry guanciale in a pan.", "Cook pasta.", "Make slurry of eggs, parmigiano, and pepper.", "Add al dente pasta to frying pan along with slurry", "Stir constantly", "Add salt to taste" ]
+  }, {
+    "name" : "sfd",
+    "id" : 124,
+    "ingredients" : [ {
+      "name" : "asd",
+      "unit" : "s",
+      "amount" : 2.0
+    }, {
+      "name" : "dcd",
+      "unit" : "d",
+      "amount" : 4.0
+    } ],
+    "instructions" : [ "asdfsdf", "fsadf" ]
+  }, {
+    "name" : "Pizza",
+    "id" : 125,
+    "ingredients" : [ {
+      "name" : "Mel",
+      "unit" : "kg",
+      "amount" : 1.0
+    }, {
+      "name" : "Vann",
+      "unit" : "dl",
+      "amount" : 5.0
+    }, {
+      "name" : "Topping",
+      "unit" : "stk",
+      "amount" : 5.0
+    } ],
+    "instructions" : [ "Bland mel og vann til en deig\nLa deigen heve\nRull ut pizza\nTa på topping\nStek i 15 min" ]
+  }, {
+    "name" : "Kjeks",
+    "id" : 126,
+    "ingredients" : [ {
+      "name" : "Kjeksstoff",
+      "unit" : "stk",
+      "amount" : 1.0
+    } ],
+    "instructions" : [ "Bland vann og kjeksstoff\nStek\nSpis" ]
   } ]
 }
