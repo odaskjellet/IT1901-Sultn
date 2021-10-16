@@ -43,7 +43,7 @@ public class RecipeController {
   public void initialize() {}
 
   /**
-   * Method for passing data from sultnController to recipeController
+   * Method for passing data from sultnController to recipeController.
    *
    * @param cookbook - Cookbook-object to get recipe from
    * @param id - id to the chosen recipe from sultnController, used to get chosen recipe from
@@ -58,7 +58,7 @@ public class RecipeController {
   }
 
   /**
-   * Method for showing the ingredients in the Recipe view
+   * Method for showing the ingredients in the Recipe view.
    *
    * @param recipe - Recipe-object to get ingredients from
    */
@@ -73,7 +73,7 @@ public class RecipeController {
   }
 
   /**
-   * Method for showing the units of ingredients in the Recipe view
+   * Method for showing the units of ingredients in the Recipe view.
    *
    * @param recipe - Recipe-object to get ingredient units from
    */
@@ -89,7 +89,7 @@ public class RecipeController {
   }
 
   /**
-   * Method for showing the instructions in the Recipe view
+   * Method for showing the instructions in the Recipe view.
    *
    * @param recipe - Recipe-object to get instructions from
    */
@@ -105,7 +105,7 @@ public class RecipeController {
   }
 
   /**
-   * Switches scene back to Sultn menu
+   * Switches scene back to Sultn menu.
    */
   public void handRecipeBack(ActionEvent event) throws IOException {
 

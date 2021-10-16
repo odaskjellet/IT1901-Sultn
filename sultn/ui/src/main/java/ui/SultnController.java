@@ -53,25 +53,34 @@ public class SultnController {
   private Stage stage;
   private Scene scene;
 
+  private String saveFile = "cookbook.json";
+
   /**
    * Initializes a Cookbook with stored Recipes from JSON.
    */
   public void initialize() {
-    persistence.setSaveFile("cookbook.json");
+    persistence.setSaveFile(saveFile);
 
     try {
-      cookbook = persistence.loadCookbook();
-    } catch (Exception e) {
-      cookbook = new Cookbook();
-      System.out.println("No cookbook found. Creating a new one.");
-      e.printStackTrace();
+      this.cookbook = persistence.loadCookbook();
+    } catch (IllegalStateException e) {
+      System.out.println("Savefile not set");
+    } catch (IOException e) {
+      try {
+        persistence.saveCookBook(this.cookbook);
+
+      } catch (IOException exception) {
+        System.out.println("Error");
+      }
+      System.out.println("Cannot read file");
     }
 
     createRecipeList();
+    this.cookbook.setCounter(this.cookbook.getLargestKey() + 1);
   }
 
   /**
-   * HBoxCell class inhereted from HBox Makes cells in an HBox
+   * HBoxCell class inhereted from HBox Makes cells in an HBox.
    */
   public class HBoxCell extends HBox {
     Label label = new Label();
@@ -79,7 +88,7 @@ public class SultnController {
 
     /**
      * HBoxCell constructor.
-     * 
+     *
      * @param recipeName - recipeName to label the HBox
      * @param id - id of chosen recipe to be parsed to a RecipeController through a button
      * @param cookbook - cookbook-object to be parsed to a RecipeController
@@ -127,7 +136,7 @@ public class SultnController {
 
   /**
    * Makes a list of Recipes in the cookbook with a button to open a new window with selected recipe
-   * in
+   * in.
    */
   private void createRecipeList() {
 
@@ -146,17 +155,35 @@ public class SultnController {
   }
 
   /**
-   * Switches scene to add a new recipe form
+   * Switches scene to add a new recipe form.
    */
   public void switchToSultnForm(ActionEvent event) throws IOException {
 
     FXMLLoader loader = new FXMLLoader(getClass().getResource("SultnForm.fxml"));
+    SultnFormController sultnFormController =
+        new SultnFormController(this.cookbook, this, saveFile);
     loader.setController(sultnFormController);
     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     scene = new Scene(loader.load());
     stage.setScene(scene);
     stage.setResizable(false);
+    // sultnFormController.dataInit(cookbook);
     stage.show();
   }
 
+  /**
+   * Method for reloading the cookbook and updating the recipeview in Sultn.
+   */
+  public void updateView() {
+
+    try {
+      this.cookbook = persistence.loadCookbook();
+      this.cookbook.setCounter(this.cookbook.getLargestKey() + 1);
+    } catch (Exception e) {
+      this.cookbook.setCounter(this.cookbook.getLargestKey() + 1);
+      System.out.println("Could not update view. Using old coookbook");
+      e.printStackTrace();
+    }
+    createRecipeList();
+  }
 }

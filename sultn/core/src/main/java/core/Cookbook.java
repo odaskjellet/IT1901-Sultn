@@ -11,6 +11,7 @@ import java.util.List;
 public class Cookbook {
 
   private HashMap<Integer, Recipe> recipeMap = new HashMap<>();
+
   private int counter = 0; // Recipe ID-counter
 
   /**
@@ -19,8 +20,8 @@ public class Cookbook {
   public Cookbook() {}
 
   /**
-   * Cookbook constructor
-   * 
+   * Cookbook constructor.
+   *
    * @param recipeMap - A HashMap of Recipe-objects
    */
   public Cookbook(HashMap<Integer, Recipe> recipeMap) {
@@ -28,8 +29,8 @@ public class Cookbook {
   }
 
   /**
-   * Get the recipe HashMap
-   * 
+   * Get the recipe HashMap.
+   *
    * @return The recipe HashMap
    */
   public HashMap<Integer, Recipe> getRecipeMap() {
@@ -49,7 +50,7 @@ public class Cookbook {
 
   /**
    * Get an ArrayList of all IDs in Cookbook.
-   * 
+   *
    * @return An ArrayList for IDs in Cookbook.
    */
   public List<Integer> getIds() {
@@ -78,14 +79,14 @@ public class Cookbook {
 
   /**
    * Makes a new Recipe and add it to Cookbook. Increments counter after adding.
-   * 
+   *
    * @param name - Name of the Recipe
    * @param instructions - List of instructions
    * @param ingredients - List of Ingredient-objects
    */
   public void makeNewRecipe(String name, List<String> instructions, List<Ingredient> ingredients) {
     if (this.getIds().contains(counter)) {
-      throw new IllegalArgumentException("A recipe with this ID already exists");
+      throw new IllegalArgumentException("A recipe with ID " + counter + " already exists");
     }
     int id = counter;
     Recipe newRecipe = new Recipe(name, id, ingredients, instructions);
@@ -95,7 +96,7 @@ public class Cookbook {
 
   /**
    * Delete a Recipe from Cookbook.
-   * 
+   *
    * @param recipe - Recipe-object to be deleted
    */
   public void deleteRecipe(Recipe recipe) {
@@ -109,8 +110,8 @@ public class Cookbook {
   }
 
   /**
-   * Add a Recipe to the recipeMap
-   * 
+   * Add a Recipe to the recipeMap.
+   *
    * @param recipe - Recipe-object to be added.
    */
   public void addRecipe(Recipe recipe) {
@@ -125,4 +126,17 @@ public class Cookbook {
   // return recipe;
   // }
 
+  /**
+   * Method for retrieveing the largest key used in the hashmapp.
+   */
+  public int getLargestKey() {
+    List<Integer> values = getIds();
+    int maxValue = 0;
+    for (int i = 0; i < values.size(); i++) {
+      if (maxValue < values.get(i)) {
+        maxValue = values.get(i);
+      }
+    }
+    return maxValue;
+  }
 }
