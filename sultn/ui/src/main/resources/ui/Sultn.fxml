@@ -23,6 +23,7 @@
             </Label>
             <BorderPane fx:id="borderPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #F6C7BC;" />
             <Label prefHeight="33.0" prefWidth="296.0" style="-fx-border-width: 1 0 0 0; -fx-border-color: black;" text="Copyright Sultn | Made by alle oss fire | Trademark" />
+            <Button fx:id="edit" mnemonicParsing="false" onAction="#editRecipe" text="Edit" />
          </children>
       </VBox>
       <Button fx:id="btnAddRecipe" layoutX="210.0" layoutY="345.0" mnemonicParsing="false" onAction="#switchToSultnForm" prefHeight="80.0" prefWidth="80.0" style="-fx-background-radius: 1000; -fx-background-color: #f6c7bc; -fx-border-color: black; -fx-border-radius: 1000;" text="Add Recipe">
