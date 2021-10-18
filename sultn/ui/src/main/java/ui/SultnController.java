@@ -118,8 +118,8 @@ public class SultnController {
             scene = new Scene(loader.load());
             stage.setScene(scene);
             stage.setResizable(false);
-
-            buttonRecipeController.initData(cookbook, id);
+            
+            buttonRecipeController.initData(cookbook, id, saveFile);
 
             stage.show();
 
@@ -151,7 +151,6 @@ public class SultnController {
     recipeView.setItems(observableList);
 
     borderPane.setCenter(recipeView);
-
   }
 
   /**
@@ -167,7 +166,6 @@ public class SultnController {
     scene = new Scene(loader.load());
     stage.setScene(scene);
     stage.setResizable(false);
-    // sultnFormController.dataInit(cookbook);
     stage.show();
   }
 

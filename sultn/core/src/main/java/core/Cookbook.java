@@ -99,13 +99,11 @@ public class Cookbook {
    *
    * @param recipe - Recipe-object to be deleted
    */
-  public void deleteRecipe(Recipe recipe) {
-    int id = recipe.getId();
-
+  public void deleteRecipe(int id) {
     if (recipeMap.containsKey(id)) {
       recipeMap.remove(id);
     } else {
-      throw new IllegalArgumentException("Recipe " + recipe.getName() + " not found. Invalid id.");
+      throw new IllegalArgumentException(id + " not found. Invalid id.");
     }
   }
 
