@@ -1,8 +1,8 @@
 package core;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.TreeMap;
 
 /**
  * A Cookbook object. A cookbook object is a collection of Recipe objects and contains methods that
@@ -10,9 +10,9 @@ import java.util.List;
  */
 public class Cookbook {
 
-  private HashMap<Integer, Recipe> recipeMap = new HashMap<>();
+  private TreeMap<Integer, Recipe> recipeMap = new TreeMap<>();
 
-  private int counter = 0; // Recipe ID-counter
+  private int idCounter = 0; // Keeps track of next available ID.
 
   /**
    * Cookbook - Default constructor (no parameters).
@@ -22,30 +22,21 @@ public class Cookbook {
   /**
    * Cookbook constructor.
    *
-   * @param recipeMap - A HashMap of Recipe-objects
+   * @param recipeMap - Map of Recipe objects
    */
-  public Cookbook(HashMap<Integer, Recipe> recipeMap) {
+  public Cookbook(TreeMap<Integer, Recipe> recipeMap) {
     recipeMap.forEach((key, value) -> this.recipeMap.put(key, value));
   }
 
   /**
-   * Get the recipe HashMap.
+   * Get the recipe map.
    *
-   * @return The recipe HashMap
+   * @return The recipe map
    */
-  public HashMap<Integer, Recipe> getRecipeMap() {
-    HashMap<Integer, Recipe> returnMap = new HashMap<>();
+  public TreeMap<Integer, Recipe> getRecipeMap() {
+    TreeMap<Integer, Recipe> returnMap = new TreeMap<>();
     returnMap.putAll(this.recipeMap);
     return returnMap;
-  }
-
-  /**
-   * Get the counter for HashMap.
-   *
-   * @return The counter-value
-   */
-  public int getCounter() {
-    return this.counter;
   }
 
   /**
@@ -67,37 +58,24 @@ public class Cookbook {
     return allRecipes;
   }
 
-
   /**
-   * Set the counter value.
-   *
-   * @param newCounter - The new value for the counter variable.
-   */
-  public void setCounter(int newCounter) {
-    this.counter = newCounter;
-  }
-
-  /**
-   * Makes a new Recipe and add it to Cookbook. Increments counter after adding.
+   * Makes a new Recipe and add it to Cookbook.
    *
    * @param name - Name of the Recipe
    * @param instructions - List of instructions
    * @param ingredients - List of Ingredient-objects
    */
   public void makeNewRecipe(String name, List<String> instructions, List<Ingredient> ingredients) {
-    if (this.getIds().contains(counter)) {
-      throw new IllegalArgumentException("A recipe with ID " + counter + " already exists");
-    }
-    int id = counter;
-    Recipe newRecipe = new Recipe(name, id, ingredients, instructions);
-    addRecipe(newRecipe);
-    counter++;
+    recipeMap.put(idCounter, new Recipe(name, idCounter, ingredients, instructions));
+
+    // Update next available ID. Should be incrementally if added in UI.
+    idCounter++;
   }
 
   /**
    * Delete a Recipe from Cookbook.
    *
-   * @param recipe - Recipe-object to be deleted
+   * @param recipe - Recipe object to be deleted
    */
   public void deleteRecipe(Recipe recipe) {
     int id = recipe.getId();
@@ -107,16 +85,31 @@ public class Cookbook {
     } else {
       throw new IllegalArgumentException("Recipe " + recipe.getName() + " not found. Invalid id.");
     }
+
+    // Frees up ID if deleted recipe had highest ID number.
+    idCounter = recipeMap.lastKey() + 1;
   }
 
   /**
-   * Add a Recipe to the recipeMap.
+   * Manually adds a Recipe to the recipeMap. Setting Recipe IDs manually is dangerous and should
+   * only be done when initializing from file.
    *
    * @param recipe - Recipe-object to be added.
+   * @throws IllegalArgumentException If a recipe with the same ID already exists.
    */
-  public void addRecipe(Recipe recipe) {
+  public void addRecipe(Recipe recipe) throws IllegalArgumentException {
     int id = recipe.getId();
+
+    // Check if recipe with this ID exists.
+    if (recipeMap.containsKey(id)) {
+      throw new IllegalArgumentException("Cookbook already contains a recipe with ID: " + id + ".");
+    }
+
+    // Add recipe to cookbook.
     recipeMap.put(id, recipe);
+
+    // Update next available ID.
+    idCounter = id + 1;
   }
 
   // denne burde kunne kalle på andre funksjoner slik at man kan endre på
@@ -125,18 +118,4 @@ public class Cookbook {
   // recipe.edit(); //gjøres i recipe
   // return recipe;
   // }
-
-  /**
-   * Method for retrieveing the largest key used in the hashmapp.
-   */
-  public int getLargestKey() {
-    List<Integer> values = getIds();
-    int maxValue = 0;
-    for (int i = 0; i < values.size(); i++) {
-      if (maxValue < values.get(i)) {
-        maxValue = values.get(i);
-      }
-    }
-    return maxValue;
-  }
 }
