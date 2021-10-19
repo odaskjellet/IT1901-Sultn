@@ -58,9 +58,9 @@ public class SultnFormController {
   /**
    * Constructor.
    *
-   * @param cookbook - Cookbook from SultnController
+   * @param cookbook        - Cookbook from SultnController
    * @param sultnController - Controller from the home screen
-   * @param saveFile - saveFile from the controller
+   * @param saveFile        - saveFile from the controller
    */
   public SultnFormController(Cookbook cookbook, SultnController sultnController, String saveFile) {
     this.cookbook = cookbook;
@@ -69,7 +69,7 @@ public class SultnFormController {
   }
 
   /**
-   * Add new ingredient to tempIngrd, and show them on interface.
+   * Add new ingredient to tempIngrd, and show on interface.
    * 
    */
   public void addIngredient() {
