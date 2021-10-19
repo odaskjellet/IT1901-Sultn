@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
@@ -69,37 +70,49 @@ public class SultnFormController {
 
   /**
    * Add new ingredient to tempIngrd, and show them on interface.
+   * 
    */
   public void addIngredient() {
-    String ingrName = ingredientText.getText();
-    Double ingrAmount = Double.parseDouble(ingredientAmnt.getText());
-    String ingrUnit = unitBox.getText();
-    String fullIngr = ingrName + " " + ingrAmount + " " + ingrUnit;
-    Ingredient newIngr = new Ingredient(ingrName, ingrAmount, ingrUnit);
-    tempIngrd.add(newIngr);
-    listIngredients.getItems().add(fullIngr);
+    try{
+      String ingrName = ingredientText.getText();
+      if(ingrName.isBlank()){
+         throw new Exception("Ingredient name is empty.");
+      }
 
-    ingredientText.clear();
-    ingredientAmnt.clear();
-    unitBox.clear();
+      Double ingrAmount = Double.parseDouble(ingredientAmnt.getText());
+      if(ingrAmount.isNaN()){
+        throw new Exception("Ingredient amount must be a number. E.g. '1.2', '3.14', etc.");
+      }
+      String ingrUnit = unitBox.getText();
+      if(ingrUnit.isBlank()){
+        throw new Exception("The unit is empty. Must be 'dl', 'l', etc.");
+      }
 
+      String fullIngr = ingrName + " " + ingrAmount + " " + ingrUnit;
+      Ingredient newIngr = new Ingredient(ingrName, ingrAmount, ingrUnit);
+      tempIngrd.add(newIngr);
+      listIngredients.getItems().add(fullIngr);
+      clearIngredientFields();
+    }
+    catch (Exception e){
+      exceptionHandling(e.getLocalizedMessage());
+    }
   }
 
   /**
-   * Make new recipe and save to file, then clear the text fields.
+   * Clears the ingredient fields of the form.
+   * 
    */
-  public void addNewRecipe() {
-    cookbook.setCounter(cookbook.getLargestKey() + 1);
-    String[] newInstr = instructionsText.getText().split(", ");
-    List<String> listInstr = Arrays.asList(newInstr);
-    cookbook.makeNewRecipe(titleText.getText(), listInstr, tempIngrd);
+  public void clearIngredientFields(){
+    ingredientText.clear();
+    ingredientAmnt.clear();
+    unitBox.clear();
+  }
 
-    try {
-      persistence.saveCookBook(cookbook);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-
+  /**
+   * Clears the fields of the form after passing to cookbook.
+   */
+  public void clearFormFields(){
     tempIngrd.clear();
     titleText.clear();
     ingredientAmnt.clear();
@@ -110,11 +123,36 @@ public class SultnFormController {
 
   }
 
+  public void exceptionHandling(String message){
+    Alert alert = new Alert(Alert.AlertType.ERROR, message);
+    alert.showAndWait();
+  }
+
+  /**
+   * Make new recipe and save to file, then clear the text fields.
+   */
+  public void addNewRecipe() {
+    try{
+      cookbook.setCounter(cookbook.getLargestKey() + 1);
+      String[] newInstr = instructionsText.getText().split(", ");
+      List<String> listInstr = Arrays.asList(newInstr);
+      cookbook.makeNewRecipe(titleText.getText(), listInstr, tempIngrd);
+      try {
+        persistence.saveCookBook(cookbook);
+        clearFormFields();
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+    catch (Exception e){
+      exceptionHandling(e.getMessage());
+    }
+  }
+
   /**
    * Switches scene back to Sultn menu.
    */
   public void handleCancel(ActionEvent event) throws IOException {
-
     FXMLLoader loader = new FXMLLoader(getClass().getResource("Sultn.fxml"));
     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     scene = new Scene(loader.load());
