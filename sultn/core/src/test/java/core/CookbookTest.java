@@ -69,7 +69,7 @@ public class CookbookTest {
        int idPizza = pizza.getId();
        //int idKake = kake.getId();
        cookbook.deleteRecipe(idPizza);
-       assert(cookbook.getRecipeMap().containsKey(idPizza) != true);
+       assertTrue((cookbook.getRecipeMap().containsKey(idPizza)) != true);
     }
    
 
