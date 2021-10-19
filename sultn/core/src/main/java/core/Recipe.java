@@ -129,7 +129,7 @@ public class Recipe {
    */
   private void validateString(String toValidate) throws IllegalArgumentException {
     if (toValidate.isEmpty()) {
-      throw new IllegalArgumentException("Recipe name cannot be empty.");
+      throw new IllegalArgumentException("Name cannot be empty.");
     }
   }
 

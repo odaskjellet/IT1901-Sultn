@@ -11,7 +11,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
@@ -58,9 +57,9 @@ public class SultnFormController {
   /**
    * Constructor.
    *
-   * @param cookbook        - Cookbook from SultnController
+   * @param cookbook - Cookbook from SultnController
    * @param sultnController - Controller from the home screen
-   * @param saveFile        - saveFile from the controller
+   * @param saveFile - saveFile from the controller
    */
   public SultnFormController(Cookbook cookbook, SultnController sultnController, String saveFile) {
     this.cookbook = cookbook;
@@ -69,62 +68,36 @@ public class SultnFormController {
   }
 
   /**
-   * Add new ingredient to tempIngrd, and show on interface. Displays exceptions
-   * to the user to ensure proper formatting.
-   * 
+   * Add new ingredient to tempIngrd, and show them on interface.
    */
   public void addIngredient() {
-    try {
-      String ingrName = ingredientText.getText();
-      if (ingrName.isBlank()) {
-        throw new Exception("Ingredient name is empty.");
-      }
+    String ingrName = ingredientText.getText();
+    Double ingrAmount = Double.parseDouble(ingredientAmnt.getText());
+    String ingrUnit = unitBox.getText();
+    String fullIngr = ingrName + " " + ingrAmount + " " + ingrUnit;
+    Ingredient newIngr = new Ingredient(ingrName, ingrAmount, ingrUnit);
+    tempIngrd.add(newIngr);
+    listIngredients.getItems().add(fullIngr);
 
-      String ingrAmountStr = ingredientAmnt.getText();
-      if (ingrAmountStr.isBlank()) {
-        throw new Exception("Ingredient amount is empty. Must be a number. E.g. '1.2', '3.14', etc.");
-      }
-
-      Double ingrAmount = -1.0;
-      try {
-        ingrAmount = Double.parseDouble(ingrAmountStr);
-      } catch (Exception e) {
-        throw new Exception("Ingredient amount must be a number. E.g. '1.2', '3.14', etc.");
-      }
-      if (ingrAmount == -1.0) {
-        throw new Exception("Ingredient amount must be a number. E.g. '1.2', '3.14', etc.");
-      }
-
-      String ingrUnit = unitBox.getText();
-      if (ingrUnit.isBlank()) {
-        throw new Exception("The unit is empty. Must be 'dl', 'l', etc.");
-      }
-
-      String fullIngr = ingrName + " " + ingrAmount + " " + ingrUnit;
-      Ingredient newIngr = new Ingredient(ingrName, ingrAmount, ingrUnit);
-      tempIngrd.add(newIngr);
-      listIngredients.getItems().add(fullIngr);
-
-      clearIngredientFields();
-    } catch (Exception e) {
-      exceptionHandling(e.getLocalizedMessage());
-    }
-  }
-
-  /**
-   * Clears the ingredient fields of the form.
-   * 
-   */
-  public void clearIngredientFields() {
     ingredientText.clear();
     ingredientAmnt.clear();
     unitBox.clear();
   }
 
   /**
-   * Clears the fields of the form after passing to cookbook.
+   * Make new recipe and save to file, then clear the text fields.
    */
-  public void clearFormFields() {
+  public void addNewRecipe() {
+    String[] newInstr = instructionsText.getText().split(", ");
+    List<String> listInstr = Arrays.asList(newInstr);
+    cookbook.makeNewRecipe(titleText.getText(), listInstr, tempIngrd);
+
+    try {
+      persistence.saveCookBook(cookbook);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
     tempIngrd.clear();
     titleText.clear();
     ingredientAmnt.clear();
@@ -132,37 +105,7 @@ public class SultnFormController {
     instructionsText.clear();
     ingredientText.clear();
     listIngredients.getItems().clear();
-  }
 
-  /**
-   * Pops up a dialog box for the user, displaying what went wrong.
-   */
-  public void exceptionHandling(String message) {
-    Alert alert = new Alert(Alert.AlertType.ERROR, message);
-    alert.showAndWait();
-  }
-
-  /**
-   * Make new recipe and save to file, then clear the text fields. Also alerts the
-   * user that it was successfull in making a new recipe.
-   */
-  public void addNewRecipe() {
-    try {
-      cookbook.setCounter(cookbook.getLargestKey() + 1);
-      String[] newInstr = instructionsText.getText().split(". ");
-      List<String> listInstr = Arrays.asList(newInstr);
-      cookbook.makeNewRecipe(titleText.getText(), listInstr, tempIngrd);
-      try {
-        persistence.saveCookBook(cookbook);
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, "New recipe added! Feel free to add another one.");
-        alert.showAndWait();
-        clearFormFields();
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
-    } catch (Exception e) {
-      exceptionHandling(e.getMessage());
-    }
   }
 
   /**
