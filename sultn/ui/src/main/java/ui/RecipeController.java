@@ -124,8 +124,8 @@ public class RecipeController {
     cookbook.deleteRecipe(recipeId);
     try {
       persistence.saveCookBook(cookbook);
-      new Alert(Alert.AlertType.CONFIRMATION, 
-        "Recipe is now deleted. Return to previous window.").showAndWait();
+      new Alert(Alert.AlertType.INFORMATION, 
+        "Recipe is now deleted. Close this box and press 'X' to return to menu.").showAndWait();
     } catch (Exception e) {
       e.printStackTrace();
     }
