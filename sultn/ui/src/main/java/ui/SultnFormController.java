@@ -73,18 +73,18 @@ public class SultnFormController {
    * 
    */
   public void addIngredient() {
-    try{
+    try {
       String ingrName = ingredientText.getText();
-      if(ingrName.isBlank()){
-         throw new Exception("Ingredient name is empty.");
+      if (ingrName.isBlank()) {
+        throw new Exception("Ingredient name is empty.");
       }
 
       Double ingrAmount = Double.parseDouble(ingredientAmnt.getText());
-      if(ingrAmount.isNaN()){
+      if (ingrAmount.isNaN()) {
         throw new Exception("Ingredient amount must be a number. E.g. '1.2', '3.14', etc.");
       }
       String ingrUnit = unitBox.getText();
-      if(ingrUnit.isBlank()){
+      if (ingrUnit.isBlank()) {
         throw new Exception("The unit is empty. Must be 'dl', 'l', etc.");
       }
 
@@ -93,8 +93,7 @@ public class SultnFormController {
       tempIngrd.add(newIngr);
       listIngredients.getItems().add(fullIngr);
       clearIngredientFields();
-    }
-    catch (Exception e){
+    } catch (Exception e) {
       exceptionHandling(e.getLocalizedMessage());
     }
   }
@@ -103,7 +102,7 @@ public class SultnFormController {
    * Clears the ingredient fields of the form.
    * 
    */
-  public void clearIngredientFields(){
+  public void clearIngredientFields() {
     ingredientText.clear();
     ingredientAmnt.clear();
     unitBox.clear();
@@ -112,7 +111,7 @@ public class SultnFormController {
   /**
    * Clears the fields of the form after passing to cookbook.
    */
-  public void clearFormFields(){
+  public void clearFormFields() {
     tempIngrd.clear();
     titleText.clear();
     ingredientAmnt.clear();
@@ -123,7 +122,10 @@ public class SultnFormController {
 
   }
 
-  public void exceptionHandling(String message){
+  /**
+   * Pops up a dialog box for the user, displaying what went wrong.
+   */
+  public void exceptionHandling(String message) {
     Alert alert = new Alert(Alert.AlertType.ERROR, message);
     alert.showAndWait();
   }
@@ -132,9 +134,9 @@ public class SultnFormController {
    * Make new recipe and save to file, then clear the text fields.
    */
   public void addNewRecipe() {
-    try{
+    try {
       cookbook.setCounter(cookbook.getLargestKey() + 1);
-      String[] newInstr = instructionsText.getText().split(", ");
+      String[] newInstr = instructionsText.getText().split(". ");
       List<String> listInstr = Arrays.asList(newInstr);
       cookbook.makeNewRecipe(titleText.getText(), listInstr, tempIngrd);
       try {
@@ -143,8 +145,7 @@ public class SultnFormController {
       } catch (Exception e) {
         e.printStackTrace();
       }
-    }
-    catch (Exception e){
+    } catch (Exception e) {
       exceptionHandling(e.getMessage());
     }
   }
