@@ -82,7 +82,6 @@ public class SultnFormController {
     ingredientText.clear();
     ingredientAmnt.clear();
     unitBox.clear();
-
   }
 
   /**
@@ -113,13 +112,11 @@ public class SultnFormController {
    * Switches scene back to Sultn menu.
    */
   public void handleCancel(ActionEvent event) throws IOException {
-
     FXMLLoader loader = new FXMLLoader(getClass().getResource("Sultn.fxml"));
     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     scene = new Scene(loader.load());
     stage.setScene(scene);
     stage.setResizable(false);
-    sultnController.updateView();
     stage.show();
   }
 }
