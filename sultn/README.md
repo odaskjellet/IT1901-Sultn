@@ -20,7 +20,7 @@ Bygges, kjøres og testes med maven.
 
 - Kodelageret og riktig utgivelse ligger på greinen ***master***.
 - Klon repoet lokalt eller kjør det med bruk av Gitpod (bruk Gitpod-knappen øverst).
-- Fra mappen "gr2118/sultn" kjøres først ***mvn clean install***.
+- Fra mappen "gr2118/sultn" kjøres først ***mvn clean install***. Dette gjøres automatisk i GitPod.
 - Prosjektet bygges fra mappen "gr2118/sultn/ui".
 - Kan så enten kjøres med run eller med test:
     - ***mvn javafx:run***
