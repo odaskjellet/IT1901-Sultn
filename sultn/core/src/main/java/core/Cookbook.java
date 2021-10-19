@@ -65,11 +65,11 @@ public class Cookbook {
    * @param instructions - List of instructions
    * @param ingredients - List of Ingredient-objects
    */
-  public void makeNewRecipe(String name, List<String> instructions, List<Ingredient> ingredients) {
+  public int makeNewRecipe(String name, List<String> instructions, List<Ingredient> ingredients) {
     recipeMap.put(idCounter, new Recipe(name, idCounter, ingredients, instructions));
 
     // Update next available ID. Should be incrementally if added in UI.
-    idCounter++;
+    return idCounter++;
   }
 
   /**
