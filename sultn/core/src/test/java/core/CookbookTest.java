@@ -64,18 +64,13 @@ public class CookbookTest {
             //testMap.containsKey(kake.getId()));
     //}
 
-    //@Test
-    //public void testDeleteRecipe() {
-    //    System.out.println(pizza.getId());
-    //    System.out.println(carbonara.getId());
-    //    System.out.println(cookbook.getRecipeMap());
-    //    System.out.println(cookbook.getIds());
-
-    //    cookbook.deleteRecipe(pizza);
-    //    assertFalse(testMap.containsKey(1));
-    //    assertThrows(Exception.class, () -> cookbook.deleteRecipe(kake), 
-    //        "Kake is not in list, should throw IllegalArgumentException");
-    //}
+    @Test
+    public void testDeleteRecipe() {
+       int idPizza = pizza.getId();
+       //int idKake = kake.getId();
+       cookbook.deleteRecipe(idPizza);
+       assert(cookbook.getRecipeMap().containsKey(idPizza) != true);
+    }
    
 
     //@Test

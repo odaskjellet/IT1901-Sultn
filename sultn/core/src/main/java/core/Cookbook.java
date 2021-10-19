@@ -97,7 +97,7 @@ public class Cookbook {
   /**
    * Delete a Recipe from Cookbook.
    *
-   * @param recipe - Recipe-object to be deleted
+   * @param id - ID of Recipe-object to be deleted
    */
   public void deleteRecipe(int id) {
     if (recipeMap.containsKey(id)) {

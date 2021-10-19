@@ -116,14 +116,19 @@ public class RecipeController {
     }
   }
 
-  public void deleteRecipe(){
+  /**
+   * Deletes a recipe by ID from cookbook, then saves to file. Throws exception.
+   * 
+   */
+  public void deleteRecipe() {
     cookbook.deleteRecipe(recipeId);
     try {
       persistence.saveCookBook(cookbook);
+      new Alert(Alert.AlertType.CONFIRMATION, 
+        "Recipe is now deleted. Return to previous window.").showAndWait();
     } catch (Exception e) {
       e.printStackTrace();
     }
-    new Alert(Alert.AlertType.WARNING, "Recipe is now deleted. Return to previous window.").showAndWait();
   }
 
   /**
