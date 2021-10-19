@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
+import java.util.TreeMap;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 public class CookbookTest {
 
     private Cookbook cookbook;
-    private HashMap<Integer, Recipe> testMap = new HashMap<>();
+    private TreeMap<Integer, Recipe> testMap = new TreeMap<>();
 
     private Recipe pizza;
     private Recipe carbonara;
@@ -25,9 +25,6 @@ public class CookbookTest {
     private Ingredient ost = new Ingredient("ost", 5, "stk");
     private Ingredient tomatsaus = new Ingredient("tomatsaus", 1, "glass");
     private Ingredient melk = new Ingredient("melk", 2, "l");
-
-   
-
     
     @BeforeEach
     public void setUp() {
@@ -50,8 +47,6 @@ public class CookbookTest {
         testMap.put(1, carbonara);
         testMap.put(2, pizza);
         cookbook = new Cookbook(testMap);
-
-        cookbook.setCounter(3);
         
     }
 
