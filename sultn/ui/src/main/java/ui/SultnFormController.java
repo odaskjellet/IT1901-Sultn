@@ -69,7 +69,8 @@ public class SultnFormController {
   }
 
   /**
-   * Add new ingredient to tempIngrd, and show on interface.
+   * Add new ingredient to tempIngrd, and show on interface. Displays exceptions
+   * to the user to ensure proper formatting.
    * 
    */
   public void addIngredient() {
@@ -79,10 +80,21 @@ public class SultnFormController {
         throw new Exception("Ingredient name is empty.");
       }
 
-      Double ingrAmount = Double.parseDouble(ingredientAmnt.getText());
-      if (ingrAmount.isNaN()) {
+      String ingrAmountStr = ingredientAmnt.getText();
+      if (ingrAmountStr.isBlank()) {
+        throw new Exception("Ingredient amount is empty. Must be a number. E.g. '1.2', '3.14', etc.");
+      }
+
+      Double ingrAmount = -1.0;
+      try {
+        ingrAmount = Double.parseDouble(ingrAmountStr);
+      } catch (Exception e) {
         throw new Exception("Ingredient amount must be a number. E.g. '1.2', '3.14', etc.");
       }
+      if (ingrAmount == -1.0) {
+        throw new Exception("Ingredient amount must be a number. E.g. '1.2', '3.14', etc.");
+      }
+
       String ingrUnit = unitBox.getText();
       if (ingrUnit.isBlank()) {
         throw new Exception("The unit is empty. Must be 'dl', 'l', etc.");
@@ -92,6 +104,7 @@ public class SultnFormController {
       Ingredient newIngr = new Ingredient(ingrName, ingrAmount, ingrUnit);
       tempIngrd.add(newIngr);
       listIngredients.getItems().add(fullIngr);
+
       clearIngredientFields();
     } catch (Exception e) {
       exceptionHandling(e.getLocalizedMessage());
@@ -119,7 +132,6 @@ public class SultnFormController {
     instructionsText.clear();
     ingredientText.clear();
     listIngredients.getItems().clear();
-
   }
 
   /**
@@ -131,7 +143,8 @@ public class SultnFormController {
   }
 
   /**
-   * Make new recipe and save to file, then clear the text fields.
+   * Make new recipe and save to file, then clear the text fields. Also alerts the
+   * user that it was successfull in making a new recipe.
    */
   public void addNewRecipe() {
     try {
@@ -141,6 +154,8 @@ public class SultnFormController {
       cookbook.makeNewRecipe(titleText.getText(), listInstr, tempIngrd);
       try {
         persistence.saveCookBook(cookbook);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "New recipe added! Feel free to add another one.");
+        alert.showAndWait();
         clearFormFields();
       } catch (Exception e) {
         e.printStackTrace();
