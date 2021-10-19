@@ -89,7 +89,6 @@ public class SultnFormController {
    * Make new recipe and save to file, then clear the text fields.
    */
   public void addNewRecipe() {
-    cookbook.setCounter(cookbook.getLargestKey() + 1);
     String[] newInstr = instructionsText.getText().split(", ");
     List<String> listInstr = Arrays.asList(newInstr);
     cookbook.makeNewRecipe(titleText.getText(), listInstr, tempIngrd);
