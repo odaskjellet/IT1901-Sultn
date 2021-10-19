@@ -1,11 +1,14 @@
 package core;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class CookbookTest {
@@ -65,11 +68,20 @@ public class CookbookTest {
     //}
 
     @Test
+    @DisplayName("Test deleteRecipe()")
     public void testDeleteRecipe() {
        int idPizza = pizza.getId();
        //int idKake = kake.getId();
        cookbook.deleteRecipe(idPizza);
        assertTrue((cookbook.getRecipeMap().containsKey(idPizza)) != true);
+    }
+
+    @Test
+    @DisplayName("Testing deleteRecipe() exception")
+    public void testDeleteThrow() {
+        int id = -1;
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> cookbook.deleteRecipe(id));
+        assertEquals(id + " not found. Invalid id.", exception.getMessage());
     }
    
 
