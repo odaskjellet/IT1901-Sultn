@@ -63,20 +63,15 @@ public class SultnController {
 
     try {
       this.cookbook = persistence.loadCookbook();
-    } catch (IllegalStateException e) {
-      System.out.println("Savefile not set");
-    } catch (IOException e) {
-      try {
-        persistence.saveCookBook(this.cookbook);
+    } catch (Exception e) {
+      System.err.println(e);
+      System.err.println("Empty cookbook will be made.");
+      e.printStackTrace();
 
-      } catch (IOException exception) {
-        System.out.println("Error");
-      }
-      System.out.println("Cannot read file");
+      this.cookbook = new Cookbook();
     }
 
     createRecipeList();
-    this.cookbook.setCounter(this.cookbook.getLargestKey() + 1);
   }
 
   /**
@@ -118,8 +113,8 @@ public class SultnController {
             scene = new Scene(loader.load());
             stage.setScene(scene);
             stage.setResizable(false);
-
-            buttonRecipeController.initData(cookbook, id);
+            
+            buttonRecipeController.initData(cookbook, id, saveFile);
 
             stage.show();
 
@@ -151,7 +146,6 @@ public class SultnController {
     recipeView.setItems(observableList);
 
     borderPane.setCenter(recipeView);
-
   }
 
   /**
@@ -167,7 +161,6 @@ public class SultnController {
     scene = new Scene(loader.load());
     stage.setScene(scene);
     stage.setResizable(false);
-    // sultnFormController.dataInit(cookbook);
     stage.show();
   }
 
@@ -178,10 +171,9 @@ public class SultnController {
 
     try {
       this.cookbook = persistence.loadCookbook();
-      this.cookbook.setCounter(this.cookbook.getLargestKey() + 1);
     } catch (Exception e) {
-      this.cookbook.setCounter(this.cookbook.getLargestKey() + 1);
-      System.out.println("Could not update view. Using old coookbook");
+      System.err.println(e);
+      System.err.println("Changes were not saved.");
       e.printStackTrace();
     }
     createRecipeList();

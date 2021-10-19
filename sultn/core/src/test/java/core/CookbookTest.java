@@ -1,17 +1,20 @@
 package core;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
+import java.util.TreeMap;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class CookbookTest {
 
     private Cookbook cookbook;
-    private HashMap<Integer, Recipe> testMap = new HashMap<>();
+    private TreeMap<Integer, Recipe> testMap = new TreeMap<>();
 
     private Recipe pizza;
     private Recipe carbonara;
@@ -22,9 +25,6 @@ public class CookbookTest {
     private Ingredient ost = new Ingredient("ost", 5, "stk");
     private Ingredient tomatsaus = new Ingredient("tomatsaus", 1, "glass");
     private Ingredient melk = new Ingredient("melk", 2, "l");
-
-   
-
     
     @BeforeEach
     public void setUp() {
@@ -47,8 +47,6 @@ public class CookbookTest {
         testMap.put(1, carbonara);
         testMap.put(2, pizza);
         cookbook = new Cookbook(testMap);
-
-        cookbook.setCounter(3);
         
     }
 
@@ -64,18 +62,22 @@ public class CookbookTest {
             //testMap.containsKey(kake.getId()));
     //}
 
-    //@Test
-    //public void testDeleteRecipe() {
-    //    System.out.println(pizza.getId());
-    //    System.out.println(carbonara.getId());
-    //    System.out.println(cookbook.getRecipeMap());
-    //    System.out.println(cookbook.getIds());
+    @Test
+    @DisplayName("Test deleteRecipe()")
+    public void testDeleteRecipe() {
+       int idPizza = pizza.getId();
+       //int idKake = kake.getId();
+       cookbook.deleteRecipe(idPizza);
+       assertTrue((cookbook.getRecipeMap().containsKey(idPizza)) != true);
+    }
 
-    //    cookbook.deleteRecipe(pizza);
-    //    assertFalse(testMap.containsKey(1));
-    //    assertThrows(Exception.class, () -> cookbook.deleteRecipe(kake), 
-    //        "Kake is not in list, should throw IllegalArgumentException");
-    //}
+    @Test
+    @DisplayName("Testing deleteRecipe() exception")
+    public void testDeleteThrow() {
+        int id = -1;
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> cookbook.deleteRecipe(id));
+        assertEquals(id + " not found. Invalid id.", exception.getMessage());
+    }
    
 
     //@Test

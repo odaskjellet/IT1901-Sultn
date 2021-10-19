@@ -174,7 +174,6 @@ public class SultnFormController {
     scene = new Scene(loader.load());
     stage.setScene(scene);
     stage.setResizable(false);
-    sultnController.updateView();
     stage.show();
   }
 }

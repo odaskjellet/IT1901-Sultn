@@ -10,12 +10,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
+import json.SultnPersistence;
 
 /**
  * RecipeController class.
@@ -40,6 +42,13 @@ public class RecipeController {
   @FXML
   private TextFlow unitFlow;
 
+  @FXML 
+  private Button deleteRecipe;
+
+  private int recipeId;
+  private Cookbook cookbook;
+  private static SultnPersistence persistence = new SultnPersistence();
+
   public void initialize() {}
 
   /**
@@ -49,8 +58,11 @@ public class RecipeController {
    * @param id - id to the chosen recipe from sultnController, used to get chosen recipe from
    *        cookbook
    */
-  public void initData(Cookbook cookbook, int id) {
+  public void initData(Cookbook cookbook, int id, String saveFile) {
+    persistence.setSaveFile(saveFile);
+    this.cookbook = cookbook;
     Recipe loadRecipe = cookbook.getRecipeMap().get(id);
+    recipeId = id;
     lblRecipeName.setText(loadRecipe.getName());
     writeIngredientField(loadRecipe);
     writeDirectionField(loadRecipe);
@@ -105,10 +117,24 @@ public class RecipeController {
   }
 
   /**
+   * Deletes a recipe by ID from cookbook, then saves to file. Throws exception.
+   * 
+   */
+  public void deleteRecipe() {
+    cookbook.deleteRecipe(recipeId);
+    try {
+      persistence.saveCookBook(cookbook);
+      new Alert(Alert.AlertType.INFORMATION, 
+        "Recipe is now deleted. Close this box and press 'X' to return to menu.").showAndWait();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  /**
    * Switches scene back to Sultn menu.
    */
   public void handRecipeBack(ActionEvent event) throws IOException {
-
     FXMLLoader loader = new FXMLLoader(getClass().getResource("Sultn.fxml"));
     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     scene = new Scene(loader.load());
