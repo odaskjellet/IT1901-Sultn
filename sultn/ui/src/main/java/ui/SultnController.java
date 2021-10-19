@@ -113,7 +113,7 @@ public class SultnController {
             scene = new Scene(loader.load());
             stage.setScene(scene);
             stage.setResizable(false);
-            
+
             buttonRecipeController.initData(cookbook, id, saveFile);
 
             stage.show();

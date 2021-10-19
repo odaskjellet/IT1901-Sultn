@@ -62,7 +62,7 @@ public class SultnPersistence {
 
   /**
    * Load a cookbook from file.
-   * 
+   *
    * @throws IllegalStateException If savefile path is not set.
    */
   public Cookbook loadCookbook() throws IOException, IllegalStateException {
