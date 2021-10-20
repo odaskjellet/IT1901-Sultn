@@ -93,6 +93,7 @@ public class SultnController {
 
       label.setText(recipeName);
       label.setMaxWidth(Double.MAX_VALUE);
+      label.setId("label" + id);
       HBox.setHgrow(label, Priority.ALWAYS);
 
       button.setText("Open");
@@ -142,6 +143,7 @@ public class SultnController {
     }
 
     ListView<HBoxCell> recipeView = new ListView<HBoxCell>();
+    recipeView.setId("recipeView");
     ObservableList<HBoxCell> observableList = FXCollections.observableList(horisontalBoxList);
     recipeView.setItems(observableList);
 
