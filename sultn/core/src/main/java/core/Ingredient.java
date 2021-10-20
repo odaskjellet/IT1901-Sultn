@@ -1,74 +1,109 @@
 package core;
 
 /**
- * Ingredient class with constructor for name, amount and unit.
- * Contains "getters" and "setters" for each of the three variables.
- * Throws exception if strings are empty or amount is <= 0.0
-*/
-
+ * An Ingredient object An Ingredient object represents ingredients to be added in a Recipe object.
+ * Contains methods to get or set each of the member variables and validations.
+ */
 public class Ingredient {
-    
-    // Variables
-    private String name;
-    private String unit;
-    private double amount;
 
-    // Constructor
-    public Ingredient(String name, double amount, String unit) {
-        validateString(name);
-        validateNumber(amount);
-        validateString(unit);
+  private String name;
+  private String unit;
+  private double amount;
 
-        this.name = name;
-        this.amount = amount;
-        this.unit = unit;
-    }
+  /**
+   * Ingredient constructor Validates before adding.
+   *
+   * @param name - The name of the ingredient
+   * @param amount - The amount of said ingredient
+   * @param unit - The unit (kg, lbs, tbs) of the amount
+   */
+  public Ingredient(String name, double amount, String unit) throws IllegalArgumentException {
+    validateString(name);
+    validateNumber(amount);
+    validateString(unit);
 
-    // Validates
-    public void validateNumber(double number){
-        if (number <= 0.0){
-            throw new IllegalArgumentException("Amount must be a positive number (0 or larger).");
-        }
-    }
+    this.name = name;
+    this.amount = amount;
+    this.unit = unit;
+  }
 
-    public void validateString(String string){
-        if (string.isEmpty()){
-            throw new IllegalArgumentException("Name has no content.");
-        }
+  /**
+   * Validation of doubles.
+   *
+   * @param number - Number to be validated
+   */
+  public void validateNumber(double number) throws IllegalArgumentException {
+    if (number <= 0.0) {
+      throw new IllegalArgumentException("Amount must be a positive number (0 or larger).");
     }
+  }
 
-    // Gets
-    public String getIngredientName(){
-        return name;
+  /**
+   * Validation of strings.
+   *
+   * @param string - String to be validated
+   */
+  public void validateString(String string) throws IllegalArgumentException {
+    if (string.isEmpty()) {
+      throw new IllegalArgumentException("Name has no content.");
     }
+  }
 
-    public double getIngredientAmount(){
-        return amount;
-    }
+  /**
+   * Get the name of the Ingredient.
+   *
+   * @return - The Ingredient name
+   */
+  public String getIngredientName() {
+    return name;
+  }
 
-    public String getIngredientUnit(){
-        return unit;
-    }
+  /**
+   * Get the Ingredient amount.
+   *
+   * @return - The Ingredient amount
+   */
+  public double getIngredientAmount() {
+    return amount;
+  }
 
-    // Sets
-    public void setIngredientName(String name){
-        validateString(name);
-        this.name = name;
-    }
+  /**
+   * Get the unit of the Ingredient.
+   *
+   * @return - The Ingredient unit
+   */
+  public String getIngredientUnit() {
+    return unit;
+  }
 
-    public void setIngredientAmount(double amount){
-        validateNumber(amount);
-        this.amount = amount;
-    }
+  /**
+   * Set the Ingredient name.
+   *
+   * @param name - The new name of the Ingredient
+   */
+  public void setIngredientName(String name) throws IllegalArgumentException {
+    validateString(name);
+    this.name = name;
+  }
 
-    public void setIngredientUnit(String unit){
-        validateString(unit);
-        this.unit = unit;
-    }
-    
-    @Override
-    public String toString(){
-        String str = getIngredientName() + "      Antall: " + getIngredientAmount() + getIngredientUnit();
-        return str;
-    }
+  /**
+   * Set the Ingredient amount.
+   *
+   * @param amount - The new Ingredient amount
+   */
+  public void setIngredientAmount(double amount) throws IllegalArgumentException {
+    validateNumber(amount);
+    this.amount = amount;
+  }
+
+  /**
+   * Set the unit of the Ingredient.
+   *
+   * @param unit - The new Ingredient unit
+   */
+  public void setIngredientUnit(String unit) throws IllegalArgumentException {
+    validateString(unit);
+    this.unit = unit;
+  }
+
 }

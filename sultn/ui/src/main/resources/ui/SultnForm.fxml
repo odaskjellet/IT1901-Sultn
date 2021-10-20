@@ -9,39 +9,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="300.0" style="-fx-background-color: #6f9e98; -fx-border-color: black;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.SultnController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="300.0" style="-fx-background-color: #6f9e98; -fx-border-color: black;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label id="title" layoutX="104.0" layoutY="14.0" prefHeight="58.0" prefWidth="92.0" text="Sultn" textFill="#f6c7bc">
+      <Label id="title" fx:id="unitBox2" layoutX="104.0" layoutY="14.0" prefHeight="58.0" prefWidth="92.0" text="Sultn" textFill="#f6c7bc">
          <font>
             <Font name="Century Gothic Bold Italic" size="40.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="2.0" layoutY="433.0" prefHeight="33.0" prefWidth="296.0" style="-fx-border-width: 1 0 0 0; -fx-border-color: black;" text="Copyright Sultn | Made by alle oss fire | Trademark" />
-      <TextField fx:id="txtIngredientName" layoutX="14.0" layoutY="164.0" prefHeight="26.0" prefWidth="82.0" />
-      <Label alignment="CENTER" layoutX="2.0" layoutY="94.0" prefHeight="31.0" prefWidth="296.0" style="-fx-background-color: #f6c7bc; -fx-border-color: black;" text="Add recipe" textAlignment="RIGHT">
-         <font>
-            <Font name="Century Gothic Italic" size="24.0" />
-         </font>
-      </Label>
-      <ListView fx:id="listIngredients" layoutX="14.0" layoutY="191.0" prefHeight="88.0" prefWidth="270.0" />
-      <TextField fx:id="txtIngredientAmount" layoutX="110.0" layoutY="163.0" prefHeight="26.0" prefWidth="40.0" />
-      <TextField fx:id="txtIngredientUnit" layoutX="167.0" layoutY="164.0" prefHeight="26.0" prefWidth="40.0" />
-      <TextArea fx:id="txtInstructions" layoutX="14.0" layoutY="307.0" prefHeight="115.0" prefWidth="206.0" />
-      <Label layoutX="17.0" layoutY="290.0" text="Instructions" />
-      <Button fx:id="btnAddIngredient" layoutX="218.0" layoutY="163.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="55.0" style="-fx-background-color: #f6c7bc; -fx-border-color: black; -fx-background-radius: 15; -fx-border-radius: 15;" text="Add">
-         <font>
-            <Font name="Century Gothic" size="12.0" />
-         </font>
-      </Button>
-      <Label layoutX="17.0" layoutY="146.0" text="Ingredient" />
-      <Label layoutX="110.0" layoutY="146.0" text="Amount" />
-      <Label layoutX="173.0" layoutY="146.0" text="Unit" />
-      <Button fx:id="btnNewRecipe" layoutX="215.0" layoutY="325.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" style="-fx-background-radius: 1000; -fx-background-color: #f6c7bc; -fx-border-color: black; -fx-border-radius: 1000;" text="Add Recipe">
-         <font>
-            <Font name="Century Gothic Italic" size="10.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnRecipeBack" layoutX="13.0" layoutY="20.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="70.0" style="-fx-background-color: #6f9e98;" text="X" textFill="#f6c7bc" AnchorPane.bottomAnchor="410.6" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="250.6" AnchorPane.topAnchor="27.0">
+      <Button fx:id="handleCancel" layoutX="13.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleCancel" prefHeight="46.0" prefWidth="70.0" style="-fx-background-color: #6f9e98;" text="X" textFill="#f6c7bc" AnchorPane.bottomAnchor="410.6" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="250.6" AnchorPane.topAnchor="27.0">
          <font>
             <Font size="36.0" />
          </font>
@@ -49,5 +24,32 @@
             <Insets bottom="-15.0" left="-15.0" right="-15.0" top="-15.0" />
          </padding>
       </Button>
+      <Label alignment="CENTER" layoutX="2.0" layoutY="94.0" prefHeight="31.0" prefWidth="296.0" style="-fx-background-color: #f6c7bc; -fx-border-color: black;" text="Add recipe" textAlignment="RIGHT">
+         <font>
+            <Font name="Century Gothic Italic" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="13.0" layoutY="125.0" text="Recipe name" />
+      <TextField fx:id="titleText" layoutX="15.0" layoutY="144.0" />
+      <Label layoutX="17.0" layoutY="169.0" text="Ingredient" />
+      <TextField fx:id="ingredientText" layoutX="14.0" layoutY="187.0" prefHeight="26.0" prefWidth="82.0" />
+      <Label layoutX="110.0" layoutY="169.0" text="Amount" />
+      <TextField fx:id="ingredientAmnt" layoutX="110.0" layoutY="186.0" prefHeight="26.0" prefWidth="40.0" />
+      <Label layoutX="173.0" layoutY="169.0" text="Unit" />
+      <TextField fx:id="unitBox" layoutX="174.0" layoutY="188.0" prefHeight="25.0" prefWidth="44.0" />
+      <Button fx:id="addIngredient" layoutX="230.0" layoutY="186.0" mnemonicParsing="false" onAction="#addIngredient" prefHeight="26.0" prefWidth="55.0" style="-fx-background-color: #f6c7bc; -fx-border-color: black; -fx-background-radius: 15; -fx-border-radius: 15;" text="Add">
+         <font>
+            <Font name="Century Gothic" size="12.0" />
+         </font>
+      </Button>
+      <ListView fx:id="listIngredients" layoutX="15.0" layoutY="222.0" prefHeight="88.0" prefWidth="270.0" />
+      <Label layoutX="14.0" layoutY="317.0" text="Instructions" />
+      <TextArea fx:id="instructionsText" layoutX="14.0" layoutY="334.0" prefHeight="88.0" prefWidth="180.0" promptText="Write instructions. To separate steps, use '. ' and they will appear as a numbered list!" />
+      <Button fx:id="finish" layoutX="200.0" layoutY="334.0" mnemonicParsing="false" onAction="#addNewRecipe" prefHeight="88.0" prefWidth="92.0" style="-fx-background-radius: 1000; -fx-background-color: #f6c7bc; -fx-border-color: black; -fx-border-radius: 1000;" text="Add Recipe">
+         <font>
+            <Font name="Century Gothic Italic" size="10.0" />
+         </font>
+      </Button>
+      <Label alignment="CENTER" layoutX="2.0" layoutY="433.0" prefHeight="33.0" prefWidth="296.0" style="-fx-border-width: 1 0 0 0; -fx-border-color: black;" text="Copyright Sultn | Made by alle oss fire | Trademark" />
    </children>
 </AnchorPane>

@@ -1,14 +1,5 @@
 {
   "recipes" : [ {
-    "name" : "Kjeks",
-    "id" : 0,
-    "ingredients" : [ {
-      "name" : "Kjeksstoff",
-      "unit" : "kg",
-      "amount" : 1.0
-    } ],
-    "instructions" : [ "Hell kjeksstoff i kjelen", "kok", "feridg" ]
-  }, {
     "name" : "Carbonara",
     "id" : 123,
     "ingredients" : [ {
@@ -17,5 +8,22 @@
       "amount" : 2.0
     } ],
     "instructions" : [ "Fry guanciale in a pan.", "Cook pasta.", "Make slurry of eggs, parmigiano, and pepper.", "Add al dente pasta to frying pan along with slurry", "Stir constantly", "Add salt to taste" ]
-  } ]
+  }, {
+    "name" : "Pizza",
+    "id" : 125,
+    "ingredients" : [ {
+      "name" : "Mel",
+      "unit" : "kg",
+      "amount" : 1.0
+    }, {
+      "name" : "Vann",
+      "unit" : "dl",
+      "amount" : 5.0
+    }, {
+      "name" : "Topping",
+      "unit" : "stk",
+      "amount" : 5.0
+    } ],
+    "instructions" : [ "Bland mel og vann til en deig.", "La deigen heve.", "Rull ut pizza.", "Ta på topping.", "Stek i 15 min." ]
+  }]
 }

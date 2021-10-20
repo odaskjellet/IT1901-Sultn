@@ -97,7 +97,7 @@
                 </plugin>
 
                 <!-- Run the spotbugs code quality tool -->
-                <!-- <plugin>
+                <plugin>
                     <groupId>com.github.spotbugs</groupId>
                     <artifactId>spotbugs-maven-plugin</artifactId>
                     <version>4.2.2</version>
@@ -114,7 +114,7 @@
                         </goals>
                         </execution>
                     </executions>
-                </plugin> -->
+                </plugin>
 
                 <!-- Configure jacoco code coverage -->
                 <plugin>
