@@ -118,7 +118,7 @@ public class RecipeControllerTest extends ApplicationTest {
   }
 
   public void setUpRecipe() {
-    recipeController.initData(cookbook, 0);
+    recipeController.initData(cookbook, 0, saveFile);
   }
 
 
