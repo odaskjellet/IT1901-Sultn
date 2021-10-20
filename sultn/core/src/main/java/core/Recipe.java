@@ -71,18 +71,6 @@ public class Recipe {
   }
 
   /**
-   * Specific override for UI representation of a Recipe object.
-   */
-  @Override
-  public String toString() {
-    String empt = "";
-    for (String str : this.getInstructions()) {
-      empt = empt.concat(str + "/n");
-    }
-    return empt;
-  }
-
-  /**
    * Set the name of the Recipe.
    *
    * @param newName - The new name for the Recipe.

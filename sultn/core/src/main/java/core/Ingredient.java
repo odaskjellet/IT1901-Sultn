@@ -106,13 +106,4 @@ public class Ingredient {
     this.unit = unit;
   }
 
-  /**
-   * Make a string specifically to be displayed in UI.
-   */
-  @Override
-  public String toString() {
-    String str =
-        getIngredientName() + "      Antall: " + getIngredientAmount() + getIngredientUnit();
-    return str;
-  }
 }
