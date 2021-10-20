@@ -24,15 +24,6 @@
       "unit" : "stk",
       "amount" : 5.0
     } ],
-    "instructions" : [ "Bland mel og vann til en deig\nLa deigen heve\nRull ut pizza\nTa på topping\nStek i 15 min" ]
-  }, {
-    "name" : "Kjeks",
-    "id" : 126,
-    "ingredients" : [ {
-      "name" : "Kjeksstoff",
-      "unit" : "stk",
-      "amount" : 1.0
-    } ],
-    "instructions" : [ "Bland vann og kjeksstoff\nStek\nSpis" ]
-  } ]
+    "instructions" : [ "Bland mel og vann til en deig.", "La deigen heve.", "Rull ut pizza.", "Ta på topping.", "Stek i 15 min." ]
+  }]
 }

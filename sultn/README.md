@@ -28,13 +28,6 @@ Inne på en oppskrift kan man trykke på "Delete recipe" for å slette en oppskr
     <img src="/img/example-recipe.png" alt="Example recipe" height="400">
 </div>
 
-## Organisering
-Dette prosjektet er en applikasjon som bruker en trelagsarkitektur med domene, brukergrensesnitt (UI) og persistenslag (lagring).
-
-- **core-modul:** `sultn/core/src/main/java` for klasser og logikk.
-- **ui-modul:** `sultn/ui/src/main/java` for UI og ressurser tilhørende dette.
-- **json-modul:** `sultn/json/src/main/java` for persistenshåndtering.
-
 ## Bygging og kjøring av prosjektet
 
 Prosjektet er skrevet i Java ved bruk av [JavaFX](https://openjfx.io/). Koden bygges, kjøres og testes med [Maven](https://maven.apache.org/).
@@ -63,6 +56,23 @@ Dokumentasjon for arbeidsflyt, rutiner, møter og kodekvalitet er å finne i vå
 - [Merge requests](https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2118/gr2118/-/wikis/Merge-requests)
 - [Code review](https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2118/gr2118/-/wikis/Code-review)
 - [Filformat for lagring](https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2118/gr2118/-/wikis/Filformat-for-lagring)
+
+## Organisering
+Dette prosjektet er en applikasjon som bruker en trelagsarkitektur med domene, brukergrensesnitt (UI) og persistenslag (lagring).
+
+- **core-modul:** `sultn/core/src/main/java` for klasser og logikk.
+- **ui-modul:** `sultn/ui/src/main/java` for UI og ressurser tilhørende dette.
+- **json-modul:** `sultn/json/src/main/java` for persistenshåndtering.
+
+### PUML-diagrammer
+#### Klassediagram (klikk for større bilde)
+<img src="/img/diagrams/ClassDiagram.png" alt="Class diagram" width="300">
+
+#### Pakkediagram (klikk for større bilde)
+<img src="/img/diagrams/PackageDiagram.png" alt="Package diagram" width="300">
+
+#### Sekvensdiagram (klikk for større bilde)
+<img src="/img/diagrams/SequenceDiagram.png" alt="Sequence diagram" width="300">
 
 ## Designskisse
 
