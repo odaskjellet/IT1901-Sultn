@@ -1,0 +1,125 @@
+@startuml Class Diagram
+
+class Cookbook < core >{
+    - HashMap<Integer, Recipe> recipeMap
+    - counter
+    -- Methods --
+    + Cookbook (HashMap<Integer, Recipe>)
+    + getCounter()
+    + getRecipeMap()
+    + setCounter()
+    + getIds()
+    + getRecipes()
+    + makeNewRecipe(String, List<String>, List<Ingredient>)
+    + deleteRecipe(Recipe)
+    + addRecipe(Recipe)
+}
+
+class Recipe < core > {
+    - name
+    - id
+    - List<Ingredient> ingredients
+    - List<String> instructions
+    -- Methods --
+    + getName()
+    + getId()
+    + getIngredients()
+    + getInstructions()
+    + toString()
+    + setName(String)
+    + setId(int)
+    + setIngredients(List<Ingredient>)
+    + setInstructions(List<String>)
+    + validateString(String)
+    + validateInt(int)
+    + validateIngArray(List<Ingredient>)
+    + validateStrArray(List<String>)
+}
+
+class Ingredient < core > {
+    - name
+    - unit
+    - amount
+    -- Methods --
+    + validateNumber(double)
+    + validateString(String)
+    + getIngredientName()
+    + getIngredientAmount()
+    + getIngredientAmount()
+    + getIngredientUnit()
+    + setIngredientName(String)
+    + setIngredientAmount(Double)
+    + setIngredientUnit(String)
+    + toString()
+}
+
+class Sultn < ui >{
+    -- Methods --
+    start(Stage)
+    main(String[])
+}
+
+class SultnController < ui >{
+    - Cookbook
+    - SultnPersistence
+    -- Methods --
+    + initialize()
+    + createRecipeList()
+    + addRecipe()
+    + addNewRecipe()
+    + cancelNewRecipe()
+
+}
+
+class SultnFormController < ui >{
+    - SultnController
+    - SultnPersistence
+    - Cookbook
+    -- Methods --
+    + addIngredient
+    + addNewRecipe
+    + handleCancel
+}
+
+class RecipeController < ui >{
+    -- Methods --
+    + initData
+    + writeIngredientField
+    + writeUnitField
+    + writeDirectionField
+    + deleteRecipe
+    + handRecipeBack
+}
+
+class SultnModule < json >{
+
+}
+
+class SultnPersistence < json >{
+
+}
+
+package Serializers{
+
+}
+
+package DeSerializer{
+
+}
+
+Cookbook --> Recipe
+Recipe --> Ingredient
+SultnController --> SultnPersistence
+SultnController --> Cookbook
+SultnController --> SultnFormController
+SultnFormController --> Cookbook
+SultnFormController --> SultnPersistence
+SultnController --> RecipeController
+SultnPersistence --> SultnModule
+SultnPersistence <..> Cookbook
+SultnModule --> Serializers
+DeSerializer --> SultnModule
+
+Sultn --> SultnController
+
+@enduml

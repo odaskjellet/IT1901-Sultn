@@ -4,75 +4,66 @@
 
 # SULTN
 
-Dette prosjektet er en applikasjon som bruker en trelagsarkitektur med domene, brukergrensesnitt (UI) og persistenslag (lagring).
-Applikasjonen er en kokebok, hvor man (når den er ferdig) skal kunne ha oversikt og lese, lagre, legge til og redigere oppskrifter.
-Prosjektet inneholder foreløpig noen tester for å lage, legge til og slette en oppskrift i kokebok-klassen.
+**SULTN** er en personlig digital kokebok. Her kan du lagre dine egne oppskrifter ved å gi den et navn, lage en ingrediensliste og skrive instruksjoner for hvordan retten lages. Oppskriften lagres så i din kokebok og kan hentes opp neste gang du er på kjøkkenet eller i butikken.
+
+Per nå har Sultn følgende funksjonalitet:
+- Legge til ny oppskrift gjennom et skjema.
+- Se liste over alle oppskrifter på hjemskjermen.
+- Klikke inn på hver oppskrift for å se instruksjoner og ingredienser.
+- Slette oppskrifter.
+
+## Hvordan SULTN fungerer
+### Åpne oppskrift
+Når applikasjonen åpnes tas man direkte til oversikt over lagrede oppskrifter. Herfra kan man åpne tilgjengelige oppskrifter ved å klikke "Open" ved siden av navnet på retten som tar deg til oppskriftens ingredienser og instruksjoner.
+
+### Ny oppskrift
+For å legge til ny oppskrift klikker man på "Add Recipe" på hjemskjermen. Man blir tatt videre til et skjema som fylles ut med rettens navn, ingredienser og instruksjoner. Ingredienser legges til én og én, hvor "Amount" er et tall og "Unit" er tekst som signaliserer enhet, f.eks. "stk", "liter", "kg". Instruksjoner skrives inn som tekst og adskilles ved å skrive punktum etter en instruksjon. Når man har lagt til alle ingredienser og instruksjoner, klikker man "Add Recipe" som tar deg tilbake til hjemskjermen, hvor den nye oppskriften nå er lagt til.
+
+### Slette oppskrift
+Inne på en oppskrift kan man trykke på "Delete recipe" for å slette en oppskrift. En dialogboks signaliserer at oppskriften er slettet, og man kan trykke på "X" for å gå ut av den slettede oppskriften.
+
+<div>
+    <img src="/img/home-screen.png" alt="Home" height="400">
+    <img src="/img/new-recipe-form.png" alt="New recipe" height="400">
+    <img src="/img/example-recipe.png" alt="Example recipe" height="400">
+</div>
 
 ## Organisering
+Dette prosjektet er en applikasjon som bruker en trelagsarkitektur med domene, brukergrensesnitt (UI) og persistenslag (lagring).
 
-- sultn/core/src/main/java for klasser og logikk.
-- sultn/ui/src/main/java for UI og ressurser tilhørende dette.
-- sultn/json/src/main/java for persistenshåndtering.
+- **core-modul:** `sultn/core/src/main/java` for klasser og logikk.
+- **ui-modul:** `sultn/ui/src/main/java` for UI og ressurser tilhørende dette.
+- **json-modul:** `sultn/json/src/main/java` for persistenshåndtering.
 
 ## Bygging og kjøring av prosjektet
 
-Bygges, kjøres og testes med maven.
+Prosjektet er skrevet i Java ved bruk av [JavaFX](https://openjfx.io/). Koden bygges, kjøres og testes med [Maven](https://maven.apache.org/).
 
 - Kodelageret og riktig utgivelse ligger på greinen ***master***.
 - Klon repoet lokalt eller kjør det med bruk av Gitpod (bruk Gitpod-knappen øverst).
-- Fra mappen "gr2118/sultn" kjøres først ***mvn clean install***. Dette gjøres automatisk i GitPod.
-- Prosjektet bygges fra mappen "gr2118/sultn/ui".
-- Kan så enten kjøres med run eller med test:
-    - ***mvn javafx:run***
-    - ***mvn test***
-- ***mvn test*** kan også kjøres i hver modul: ***core***, ***json*** og ***ui***.
+- Fra mappen `gr2118/sultn` kjøres først `mvn clean install`.
+- For å kjøre applikasjonen brukes `mvn javafx:run` inn i mappen `gr2118/sultn/ui`.
+- Andre kommandoer som kan kjøres enten inni en enkelt modul (`core`, `json` eller `ui`) eller globalt i `gr2118/sultn`:
+    - `mvn test` - kjører tilgjengelige tester.
+    - `mvn jacoco:report` - rapporterer testdekningsgrad lokalt i `target/site/index.html`, evt. `sultn/ui/target/site/index.html` hvis kommandoen ble kjørt globalt (benytt tillegget [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) for å vise html i Gitpod).
+    - `mvn checkstyle:checkstyle` - rapporterer formateringsfeil i koden.
+    - `mvn spotbugs:spotbugs` - rapporterer bugs i koden.
+    - `mvn verify` - kjører alle de overnevnte vektøyene samtidig.
 
-## Testdekningsgrad
+## Rutiner for arbeidsflyt og kodekvalitet
 
-For å sjekke testdekningsgrad følges disse stegene:
-- cd inn til gr2118/sultn
-- I terminalen skriver vi:
-    - `mvn clean jacoco:prepare-agent install jacoco:report`
-- Deretter går man i Explorer til ..core/target/site/jacoco
-- Her høyreklikker du på `index.html`, så `Copy Path` og limer det inn i nettleseren din.
+Dokumentasjon for arbeidsflyt, rutiner, møter og kodekvalitet er å finne i vår Gitlab-wiki:
 
-## Utvikling
+### [Wiki](https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2118/gr2118/-/wikis/home)
+- [Sprint workflow](https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2118/gr2118/-/wikis/Sprint-workflow)
+- [Møter](https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2118/gr2118/-/wikis/M%C3%B8ter)
+- [Issues](https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2118/gr2118/-/wikis/Issues)
+- [Branches](https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2118/gr2118/-/wikis/Branches)
+- [Kodekvalitet](https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2118/gr2118/-/wikis/Kodekvalitet)
+- [Merge requests](https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2118/gr2118/-/wikis/Merge-requests)
+- [Code review](https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2118/gr2118/-/wikis/Code-review)
+- [Filformat for lagring](https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2118/gr2118/-/wikis/Filformat-for-lagring)
 
-Utviklingen av applikasjonen gjøres med bruk av smidig-praksis og SCRUM-metoden.
-Vi har designet brukerhistorier som vi knytter utviklingsoppgaver (issues) til.
-Disse utviklingsoppgavene er markert etter viktighet, type oppgave, hvilket nåværende status (om oppgaven jobbes med) og blir tildelt ledige gruppemedlemmer.
-
-### Første brukerhistorie
-
-(UserStory) Åpne kokebok // issue #5
-
-*"Jeg som bruker vil kunne åpne appen og se en oversikt med liste av oppskrifter."*
-
-Her har vi laget flere deloppgaver:
-- Lag kokebok (oversikt over oppskrifter).
-- Lag oppskriftt-klasse 
-- Lag ingrediens-klasse.
-- Lag grafisk brukergrensesnitt for å vise kokebok og oppskrifter.
-- Populer database med demo-oppskrifter.
-- Last inn oppskrifter med json.
-
-### Andre brukerhistorie
-
-(UserStory) Opprette ny oppskrift // issue #6
-
-*"Som bruker ønsker jeg å kunne legge til ny oppskrifter i min kokebok. Jeg vil kunne benytte et skjema for å lage en ny oppskrift, som så legges til i den eksisterende lista over oppskrifter."*
-
-### Tredje brukerhistorie
-
-(UserStory) Se på oppskrift // issue #18
-
-Denne brukerhistorien ble ikke fullført i sprint 1 pga. tidsmangel. Dermed valgte vi å omformulere brukerhistorien slik at den kunne gjennomføres, og heller utsette den opprinnelige brukerhistorien til neste sprint.
-
-*"Jeg vil som bruker kunne bla nedover på hovedsiden til appen og lese oppskriftene som ligger i kokeboken slik. Disse oppskriftene skal inneholde navn, ingrediensliste og instruksjoner på hvordan retten lages."*
-
-#### Tidligere brukerhistorie:
-*"Jeg vil som bruker kunne velge en av oppskriftene på hovedsiden. Denne skal ta meg til en ny side som viser oppskriften. Oppskriften skal inneholde navn, ingrediensliste og instruksjoner på hvordan den lages."*
-
-## Visuell støtte
+## Designskisse
 
 ![](img/sultn-design.png)
