@@ -147,7 +147,7 @@ public class SultnFormController {
    */
   public void addNewRecipe() {
     try {
-      String[] newInstr = instructionsText.getText().split(". ");
+      String[] newInstr = instructionsText.getText().split("\n");
       List<String> listInstr = Arrays.asList(newInstr);
       cookbook.makeNewRecipe(titleText.getText(), listInstr, tempIngrd);
       try {
