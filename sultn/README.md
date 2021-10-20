@@ -17,7 +17,7 @@ Per nå har Sultn følgende funksjonalitet:
 Når applikasjonen åpnes tas man direkte til oversikt over lagrede oppskrifter. Herfra kan man åpne tilgjengelige oppskrifter ved å klikke "Open" ved siden av navnet på retten som tar deg til oppskriftens ingredienser og instruksjoner.
 
 ### Ny oppskrift
-For å legge til ny oppskrift klikker man på "Add Recipe" på hjemskjermen. Man blir tatt videre til et skjema som fylles ut med rettens navn, ingredienser og instruksjoner. Ingredienser legges til én og én, hvor "Amount" er et tall og "Unit" er tekst som signaliserer enhet, f.eks. "stk", "liter", "kg". Instruksjoner skrives inn som tekst og adskilles ved å skrive punktum etter en instruksjon. Når man har lagt til alle ingredienser og instruksjoner, klikker man "Add Recipe" som tar deg tilbake til hjemskjermen, hvor den nye oppskriften nå er lagt til.
+For å legge til ny oppskrift klikker man på "Add Recipe" på hjemskjermen. Man blir tatt videre til et skjema som fylles ut med rettens navn, ingredienser og instruksjoner. Ingredienser legges til én og én, hvor "Amount" er et tall og "Unit" er tekst som signaliserer enhet, f.eks. "stk", "liter", "kg". Instruksjoner skrives inn som tekst og adskilles ved å skrive hver instruksjon på ny linje. Når man har lagt til alle ingredienser og instruksjoner, klikker man "Add Recipe" som tar deg tilbake til hjemskjermen, hvor den nye oppskriften nå er lagt til.
 
 ### Slette oppskrift
 Inne på en oppskrift kan man trykke på "Delete recipe" for å slette en oppskrift. En dialogboks signaliserer at oppskriften er slettet, og man kan trykke på "X" for å gå ut av den slettede oppskriften.
