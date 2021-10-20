@@ -35,6 +35,11 @@ Dette prosjektet er en applikasjon som bruker en trelagsarkitektur med domene, b
 - **ui-modul:** `sultn/ui/src/main/java` for UI og ressurser tilhørende dette.
 - **json-modul:** `sultn/json/src/main/java` for persistenshåndtering.
 
+### PUML-diagrammer
+![Class diagram]("img/diagrams/ClassDiagram.png")
+![Package diagram]("img/diagrams/PackageDiagram.png")
+![Sequence diagram]("img/diagrams/SequenceDiagram.png")
+
 ## Bygging og kjøring av prosjektet
 
 Prosjektet er skrevet i Java ved bruk av [JavaFX](https://openjfx.io/). Koden bygges, kjøres og testes med [Maven](https://maven.apache.org/).
