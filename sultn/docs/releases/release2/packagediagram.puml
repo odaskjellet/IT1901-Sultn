@@ -1,0 +1,48 @@
+@startuml Package Diagram
+
+package "sultn.core"{
+    [Cookbook]
+    [Recipe]
+    [Ingredient]
+}
+
+package "sultn.ui"{
+    [Sultn] as S
+    [SultnController] as SC
+    [SultnFormController] as SFC
+    [RecipeController] as RC
+}
+
+package "sultn.json"{
+    [CookbookDeserializer]
+    [CookbookSerializer]
+    
+    [IngredientDeserializer]
+    [IngredientSerializer]
+    
+    [RecipeDeserializer]
+    [RecipeSerializer]
+    [SultnModule]
+    [SultnPersistence]
+}
+
+[FXML] as FX << Sultn.fxml >>
+[FXML] as FXF << SultnForm.fxml >>
+[FXML] as FXR << Recipe.fxml >>
+
+skinparam component{
+    BorderColor black
+    BorderColor<<Sultn.fxml>> red
+    BorderColor<<SultnForm.fxml>> red
+    BorderColor<<Recipe.fxml>> red
+}
+
+S ..> FX
+SFC ..> FXF
+RC ..> FXR
+
+sultn.ui --> sultn.json
+sultn.ui --> sultn.core
+sultn.json --> sultn.core
+
+@enduml

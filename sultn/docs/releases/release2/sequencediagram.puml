@@ -1,0 +1,40 @@
+@startuml Sequence Diagram
+
+actor User
+participant Sultn
+participant SultnController
+participant SultnFormController
+participant RecipeController
+participant Persistence
+database LocalStorage
+
+User -> Sultn : Open app
+Sultn -> SultnController : start()
+SultnController -> SultnController : intialize()
+SultnController -> Persistence : loadCookbook()
+Persistence -> LocalStorage : .readValue()
+SultnController -> SultnController : createRecipeList()
+User -> SultnController : 'click' addNewRecipe()
+SultnController -> SultnFormController : switchToSultnForm()
+User -> SultnFormController : 'click' addIngredient()
+User -> SultnFormController : 'click' addNewRecipe()
+SultnFormController -> SultnFormController : cookbook.makeNewRecipe()
+SultnFormController -> Persistence : .saveCookbook()
+Persistence -> LocalStorage : writeValue() 
+User -> SultnFormController : 'click' handleCancel()
+User -> SultnController : 'click' handle()
+SultnController -> RecipeController
+RecipeController -> RecipeController : initData()
+RecipeController -> RecipeController : writeIngredientField()
+RecipeController -> RecipeController : writeUnitField()
+RecipeController -> RecipeController : writeDirectionField()
+User -> RecipeController : 'click' delete()
+RecipeController -> RecipeController : cookbook.deleteRecipe()
+RecipeController -> Persistence : .saveCookbook()
+Persistence -> LocalStorage : .writeValue()
+User -> RecipeController : 'click' handRecipeBack()
+SultnController -> SultnController : .createRecipeList()
+SultnController -> Persistence : .saveCookbook()
+Persistence -> LocalStorage : .writeValue()
+
+@enduml
