@@ -1,16 +1,32 @@
 @startuml Package Diagram
 
+
 package "sultn.core"{
     [Cookbook]
     [Recipe]
     [Ingredient]
 }
+package "sultn.springboot" {
+  [SultnApplication]
+  [SultnController]
+  [SultnService]
+}
 
 package "sultn.ui"{
-    [Sultn] as S
-    [SultnController] as SC
-    [SultnFormController] as SFC
-    [RecipeController] as RC
+
+  [AbstractController] as AC
+  [AbstractFormController] as AFC
+  [AlertBox] as AB
+  [IconPicker] as IP
+  [RecipeListItem] as RLI
+  [SultnApp] as SA
+  [SultnController] as SC
+  [EditController] as EC
+  [RecipeController] as RC
+  [SultnFormController] as SFC
+  [CookbookSelectorController] as CSC
+  [RestAccess] as RA
+  
 }
 
 package "sultn.json"{
@@ -22,27 +38,38 @@ package "sultn.json"{
     
     [RecipeDeserializer]
     [RecipeSerializer]
+
     [SultnModule]
     [SultnPersistence]
 }
 
+
+
 [FXML] as FX << Sultn.fxml >>
 [FXML] as FXF << SultnForm.fxml >>
 [FXML] as FXR << Recipe.fxml >>
+[FXML] as FXE <<EditRecipe.fxml >>
+[FXML] as FXC <<CookbookSelector.fxml>>
 
 skinparam component{
     BorderColor black
     BorderColor<<Sultn.fxml>> red
     BorderColor<<SultnForm.fxml>> red
     BorderColor<<Recipe.fxml>> red
+    BorderColor<<EditRecipe.fxml>> red
+    BorderColor<<CookbookSelector.fxml>> red
 }
 
-S ..> FX
-SFC ..> FXF
-RC ..> FXR
+SC -down..> FX
+SFC -down..> FXF
+RC -down..> FXR
+EC -down..> FXE
+CSC -down..> FXC
 
-sultn.ui --> sultn.json
+
+sultn.ui --> sultn.springboot
 sultn.ui --> sultn.core
 sultn.json --> sultn.core
+sultn.springboot --> sultn.json
 
 @enduml

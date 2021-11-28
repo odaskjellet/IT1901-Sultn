@@ -1,0 +1,35 @@
+@startuml Class Diagram
+
+package sultn.springboot {
+  class SultnApplication {
+    + ObjectMapper sultnObjectMapper()
+    + main(): void
+
+  }
+
+  class SultnController {
+    - SultnService sultnService;
+
+    -- Methods --
+    + SultnController(sultnService:SultnService)
+    + getCookbook(): Cookbook
+    + autoSaveCookbook(): void
+    + getRecipe(int): Recipe
+    + addNewRecipe(Recipe): ResponseEntity<String> 
+    + editRecipe(Recipe): ResponseEntity<String> 
+    + deleteRecipe(int): ResponseEntity<String> 
+
+  }
+
+  class SultnService {
+    - sultnPersistence: SultnPersistence
+    - cookbook: Cookbook
+    -- Methods --
+    + SultnService(cookbook:Cookbook)
+    + SultnService() 
+  }
+}
+SultnController--> SultnService
+SultnApplication --> SultnController
+
+@end

@@ -10,29 +10,34 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>16</maven.compiler.source>
         <maven.compiler.target>16</maven.compiler.target>
-        <skipTests>false</skipTests>
     </properties>
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-api</artifactId>
-                <version>5.7.2</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-engine</artifactId>
-                <version>5.7.2</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-params</artifactId>
-                <version>5.7.2</version>
-                <scope>test</scope>
-            </dependency>
+          <dependency>
+              <groupId>org.junit.jupiter</groupId>
+              <artifactId>junit-jupiter-api</artifactId>
+              <version>5.8.1</version>
+              <scope>test</scope>
+          </dependency>
+          <dependency>
+              <groupId>org.junit.jupiter</groupId>
+              <artifactId>junit-jupiter-engine</artifactId>
+              <version>5.8.1</version>
+              <scope>test</scope>
+          </dependency>
+          <dependency>
+              <groupId>org.junit.jupiter</groupId>
+              <artifactId>junit-jupiter-params</artifactId>
+              <version>5.8.1</version>
+              <scope>test</scope>
+          </dependency>
+          <dependency>
+              <groupId>org.mockito</groupId>
+              <artifactId>mockito-core</artifactId>
+              <version>3.12.4</version>
+              <scope>test</scope>
+          </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -51,19 +56,6 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>3.0.0-M5</version>
-                    <configuration>
-                        <skipTests>${skipTests}</skipTests>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.openjfx</groupId>
-                    <artifactId>javafx-maven-plugin</artifactId>
-                    <version>0.0.6</version>
-                    <!-- Default configuration for running -->
-                    <!-- Usage: mvn javafx:run -->
-                    <configuration>
-                        <mainClass>sultn/ui.Sultn</mainClass>
-                    </configuration>
                 </plugin>
                 
                 <!-- Run the checkstyle code quality tool -->
@@ -120,8 +112,8 @@
                 <plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
-                    <version>0.8.6</version>
-                    <executions>
+                    <version>0.8.7</version>
+                        <executions>
                         <execution>
                             <id>jacoco-prepare-agent</id>
                             <phase>process-test-classes</phase>
@@ -133,12 +125,68 @@
                             <id>jacoco-report</id>
                             <phase>verify</phase>
                             <goals>
-                                <goal>report-aggregate</goal>
+                                <goal>report</goal>
                             </goals>
                         </execution>
-                    </executions>
+                    </executions> 
                 </plugin>
-    
+
+                <!--Spring-->
+                <!-- <plugin>
+                  <groupId>org.springframework.boot</groupId>
+                  <artifactId>spring-boot-maven-plugin</artifactId>
+                  <version>2.4.4</version>
+                  <configuration>
+                    <skip>true</skip>
+                  </configuration>
+                </plugin> -->
+
+                 <!-- congif gor jlink and jpackage taken from https://dev.to/cherrychain/javafx-jlink-and-jpackage-h9 -->
+              <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.8</version>
+                <configuration>
+                  <!-- Default configuration for running -->
+                    <!-- Usage: mvn javafx:run -->
+                    <mainClass>sultn/sultn.ui.SultnApp</mainClass>
+                    <compress>2</compress>
+                    <noHeaderFiles>true</noHeaderFiles>
+                    <stripDebug>true</stripDebug>
+                    <noManPages>true</noManPages>
+                    <launcher>sultnfx</launcher>
+                    <mainClass>sultn.ui/sultn.ui.SultnApp</mainClass>
+                    <jlinkImageName>sultnfx</jlinkImageName>
+                    <jlinkZipName>sultnfx</jlinkZipName>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.panteleyev</groupId>
+                <artifactId>jpackage-maven-plugin</artifactId>
+                <version>1.4.0</version>
+                <configuration>
+                    <name>SultnFX</name>
+                    <appVersion>1.0.0</appVersion>
+                    <vendor>it1901</vendor>
+                    <destination>target/dist</destination>
+                    <module>sultn.ui/sultn.ui.SultnApp</module>
+                    <runtimeImage>target/sultnfx</runtimeImage>
+                    <javaOptions>
+                        <option>-Dfile.encoding=UTF-8</option>
+                    </javaOptions>
+                    <!-- linux options --> 
+                    <!-- <linuxShortcut>true</linuxShortcut>
+                    <linuxMenuGroup>SultnFX</linuxMenuGroup> -->
+                    <!-- windows options --> 
+                    <winDirChooser>true</winDirChooser>
+                    <winShortcut>true</winShortcut>
+                    <winMenu>true</winMenu>
+                    <winMenuGroup>SultnFX</winMenuGroup>
+                </configuration>
+            </plugin>
+
+
+
             </plugins>
         </pluginManagement>
     </build>
@@ -147,5 +195,7 @@
         <module>core</module>
         <module>json</module>
         <module>ui</module>
+        <module>jacoco</module>
+        <module>springboot</module>
     </modules>
 </project>

@@ -3,8 +3,13 @@ image:
   file: .gitpod.Dockerfile
 
 tasks:
-  - init: sdk use java 16.0.1.hs-adpt
-    command: cd sultn; mvn clean install; cd ui
+  - name: Dependencies and Clean Install
+    init: |
+      sdk use java 16.0.1.hs-adpt
+      cd sultn; mvn clean install; cd ui;
+      gp sync-done build
+  - name: Springboot server
+    init: gp sync-await build && cd sultn; cd springboot; mvn spring-boot:run;
 
 ports:
   # used by virtual desktop and vnc, supports JavaFX
@@ -13,3 +18,4 @@ ports:
 vscode:
   extensions:
     - ritwickdey.liveserver
+    - jebbs.plantuml
