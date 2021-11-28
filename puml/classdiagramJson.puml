@@ -1,0 +1,65 @@
+@startuml Class Diagram
+package sultn.json {
+  frame Serializers {
+    class CookbookSerializer < extends JsonSerializer<Cookbook> > {
+      -- Methods --
+      + serialize(Cookbook, JsonGenerator, SerializerProvider)
+    }
+
+    class RecipeSerializer < extends JsonSerializer<Recipe> > {
+      -- Methods --
+      + serialize(Recipe, JsonGenerator, SerializerProvider)
+    }
+
+    class IngredientSerializer < extends JsonSerializer<Ingredient> > {
+      -- Methods --
+      + serialize(Recipe, JsonGenerator, SerializerProvider)
+    }
+  }
+  class SultnModule < extends SimpleModule > {
+    - {static} String NAME
+    -- Methods --
+    + SultnModule()
+  }
+
+  class SultnPersistence {
+    - mapper : ObjectMapper
+    - saveFilePath : Path
+    -- Methods --
+    + SultnPersistence()
+    - readCookbook(Reader) : Cookbook
+    - writeCookbook(Cookbook, Writer) : void
+    + setSaveFile(String) : void
+    + loadCookbook() : Cookbook
+    + saveCookbook(Cookbook) : void
+  }
+  frame Deserializers {
+    class CookbookDeserializer < extends JsonDeserializer<Cookbook> > {
+      - recipeDeserializer : RecipeDeserializer 
+      -- Methods --
+      + deserialize(JsonParser, DeserializationContext) : Cookbook
+      + deserialize(JsonNode) : Cookbook
+    }
+
+    class RecipeDeserializer < extends JsonDeserializer<Recipe> > {
+      - ingredientDeserializer : IngredientDeserializer 
+      -- Methods --
+      + deserialize(JsonParser, DeserializationContext) : Recipe
+      + deserialize(JsonNode) : Recipe
+    }
+
+    class IngredientDeserializer < extends JsonDeserializer<Ingredient> > {
+      -- Methods --
+      + deserialize(JsonParser, DeserializationContext) : Ingredient
+      + deserialize(JsonNode) : Ingredient
+    }
+  }
+}
+
+CookbookDeserializer --> sultn.core.Cookbook
+CookbookDeserializer --> RecipeDeserializer
+RecipeDeserializer --> sultn.core.Recipe
+RecipeDeserializer --> IngredientDeserializer
+IngredientDeserializer --> sultn.core.Ingredient
+
+@enduml

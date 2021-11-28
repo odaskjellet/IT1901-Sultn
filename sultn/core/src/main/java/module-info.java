@@ -1,4 +1,4 @@
 
 module sultn.core {
-    exports core;
+    exports sultn.core;
 }

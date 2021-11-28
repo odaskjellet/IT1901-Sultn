@@ -1,0 +1,197 @@
+@startuml Class Diagram
+package sultn.ui {
+  abstract class AbstractController {
+    - anchorpane : AnchorPane
+    # stage : Stage
+    # cookbook : Cookbook
+    # title : String
+    # saveFile : String
+    # restAccess : RestAccess
+    # prevSceneStack : Stack<Pair<String, String>>
+    # currentFxml : String
+    -- Methods --
+    # setup() : void
+    + initData(AbstractController, String) : void
+    + setCookbookName()(String) : void
+    + getSaveFile() : String
+    + getCookbook() : Cookbook
+    + getTitle() : String
+    + getPrevStack(): Stack<Pair<String, String>> 
+    + pushSceneToStack(Pair<String,String>) : void
+    + handlePrevScene(ActionEvent) : void
+
+  }
+
+  abstract class AbstractFormController < extends AbstractController > {
+    - anchorPane : AnchorPane
+    # recipeNameField : TextField 
+    # categoryIconField : ComboBox<Image> 
+    # ingredientNameField : TextField
+    # ingredientAmountField : TextField
+    # ingredientUnitField : ComboBox<String>
+    # ingredientList : ListView<String> 
+    # instructionList : ListView<TextField> 
+    # tempIngrd : List<Ingredient>
+    # instructions : List<String> 
+    # {static} units : List<String> 
+    -- Methods --
+    + addIngredient() : void
+    + clearIngredientFields() : void
+    + addInstruction() : void
+    + clearFormFields() : void
+    + comboBoxInitialize() : void
+    + iconBoxInitialize() : void
+    - fetchIcons() : ObservableList<Image>
+    # getIconCategory() : Category
+  }
+
+  class ImageListCell < ? extends ListCell<image> > {
+    - view : ImageView 
+    -- Methods --
+    ImageListCell()
+    # updateItem(Image, boolean) : voic
+  }
+
+  class AlertBox {
+    - closeButton : Button
+    - anchorPane : AnchorPane
+    -- Methods --
+    + AlertBox(String, AnchorPane)
+    + handleCloseAlert(ActionEvent) : void
+  }
+
+  class CookbookSelectionController {
+    - anchorPane : AnchorPane
+    - cookbookText : TextField
+    - loadCookbook : Button
+    - showLoadButton : Button
+    - showCreateButton : Button
+    - stage : Stage
+    - create : boolean
+    -- Methods --
+    + toggleButtons() : void
+    + showCreate() : void
+    + loadCookbook(ActionEvent) : void 
+    - private validateCookbook(String) : void
+  }
+
+  class EditController {
+    - anchorPane : AnchorPane
+    - saveRecipeButton : Button
+    - instructionList : ListView<TextField>
+    - currentRecipeId : int
+    - currentRecpe : Recipe
+    -- Methods --
+    # setup() : void
+    + setRecipeId(int) : void
+    + addInstruction() : void
+    + handleEdit(ActionEvent) : void
+    + recipeIconInitialize() : void
+    + handlePrevScene(ActionEvent) : void
+  }
+
+  class IconPicker {
+    - category : Category
+    -- Methods --
+    + IconPicker(Category)
+    + getIcon() : Image
+    + getIconPath() : String
+    + getIconNumber() : int
+  }
+
+  class RecipeController {
+    - recipeNameLabel : Label
+    - ingredientView : TextArea
+    - instructionView : TextArea
+    - deleteRecipeButton : Button
+    - deletedLabel : Labek
+    - anchorPane : AnchorPane
+    - recipeId : int
+    - currentFxml : String
+    -- Methods --
+    # setup()
+    + setCurrentRecipe(Recipe) : void
+    + writeIngredientField(Recipe) : void
+    + writeDirectionField(Recipe) : void
+    + handleDeleteRecipe(ActionEvent) : void
+    + handleOpenEditRecipe(ActionEvent) : void
+  }
+
+  class RecipeListItem < ? extends HBox > {
+    button : Button
+    -- Methods --
+    RecipeListItem(int, AbstractController, Pair<String, String>)
+  }
+
+  class RestAccess {
+    - protocol : String
+    - host : String
+    - port : int
+    - basePath : String
+    - mapper : ObjectMapper
+    -- Methods --
+    + RestAccess()
+    + getCookbook() : void
+    + getRecipe(int) : Recipe
+    + addRecipe(String, Category, List<Ingredient>, List<String>) : void
+    + deleteRecipe() : void
+    + editRecipe(Recipe) : void
+    - createHttpConnectino(String, String, String, String, boolean) : HttpURLConnection
+    - get(String, String) : String
+    - post(byte[], String, String, String) : int
+    - put(byte[], String, String, String) : int
+    - delete(String) : int
+  }
+
+  class SultnApp {
+    stageTitle : String
+    cookbookSaveFile : String
+    -- Methods --
+    + start(Stage) : void
+    + main(String[]) : void
+  }
+
+  class SultnController {
+    borderPane : BorderPane
+    -- Methods --
+    + setup() : void
+    + handleOpenSultnForm(ActionEvent) : void
+    - createRecipeList() : void
+  }
+
+  class SultnFormController {
+    - anchorPane : AnchorPane
+    -- Methods --
+    + setup() : void
+    + addInstruction : void
+    + addNewRecipe() : void
+  }
+}
+
+RestAccess --> AbstractController
+
+AbstractFormController <|-- AbstractController
+SultnController <|-- AbstractController
+SultnFormController <|-- AbstractFormController
+ImageListCell +-- AbstractFormController : contains
+
+SultnApp --> CookbookSelectionController
+CookbookSelectionController --> SultnController
+
+SultnController --> SultnFormController
+SultnController --> RecipeListItem
+RecipeListItem --> RecipeController
+RecipeController --> EditController
+
+IconPicker <-- EditController
+IconPicker <-- RecipeController
+IconPicker <-- RecipeListItem
+
+AlertBox <-- AbstractFormController
+AlertBox <-- EditController
+AlertBox <-- RecipeController
+AlertBox <-- SultnFormController
+
+sultn.json.SultnPersistence <-- AbstractController
+
+@enduml

@@ -1,0 +1,39 @@
+{
+  "recipes" : [ {
+    "name" : "Carbonara",
+    "id" : 123,
+    "category" : "OTHER",
+    "ingredients" : [ {
+      "name" : "Eggs",
+      "unit" : "pcs",
+      "amount" : 2.0
+    }, {
+      "name" : "Bacon",
+      "unit" : "g",
+      "amount" : 150
+    }, {
+      "name" : "Parmgiano",
+      "unit" : "g",
+      "amount" : 50
+    } ],
+    "instructions" : [ "Fry guanciale in a pan.", "Cook pasta.", "Make slurry of eggs, parmigiano, and pepper.", "Add al dente pasta to frying pan along with slurry", "Stir constantly", "Add salt to taste" ]
+  }, {
+    "name" : "Pizza",
+    "id" : 125,
+    "category" : "PIZZA",
+    "ingredients" : [ {
+      "name" : "Flour",
+      "unit" : "kg",
+      "amount" : 1.0
+    }, {
+      "name" : "Water",
+      "unit" : "dl",
+      "amount" : 5.0
+    }, {
+      "name" : "Toppings",
+      "unit" : "stk",
+      "amount" : 5.0
+    } ],
+    "instructions" : [ "Mix flour and water to a dough.", "Let dough rise.", "Roll it out.", "Put on toppings.", "Cook on a pizza stone for ultimate flavor." ]
+  } ]
+}

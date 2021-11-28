@@ -1,0 +1,59 @@
+@startuml Class Diagram
+
+package sultn.core {
+  class Cookbook {
+      - recipeMap: TreeMap<Integer, Recipe> 
+      - idCounter: int
+      -- Methods --
+      + Cookbook ()
+      + accessor methods (getters and setters)
+      + makeNewRecipe(String, List<String>, List<Ingredient>): void
+      + deleteRecipe(int) : void
+      + addRecipe(Recipe) : void
+      + editRecipe(Recipe) : void
+  }
+
+  enum Category {
+    OTHER
+    FISH
+    MEAT
+    CHICKEN
+    VEGETARIAN
+    BREAD
+    PIZZA
+    DESSERT
+  }
+
+  class Recipe {
+    - name : String
+    - id : int
+    - ingredients : Collection<Ingredient> 
+    - instructions : List<String> 
+    - category : Category
+    -- Methods --
+    + Recipe(String, int, Collection<Ingredient>, List<String>, Category)
+    + accessor methods (getters and setters)
+    - validateName(String) : void
+    - validateId(int) : void
+    - validateIngredientArray(List<Ingredient>) : void
+    - validateInstructionArray(List<String>) : void
+  }
+
+  class Ingredient {
+    - name : String
+    - unit : String
+    - amount : double
+    -- Methods --
+    + Ingredient(String name, double amount, String unit)
+    + accessor methods (getters and setters)
+    - validateAmount(double) : void
+    - validateName(String) : void
+    - validateUnit(String) : void
+  }
+}
+
+Recipe --> Ingredient
+Category +-- Recipe : contains
+Cookbook --> Recipe
+
+@enduml

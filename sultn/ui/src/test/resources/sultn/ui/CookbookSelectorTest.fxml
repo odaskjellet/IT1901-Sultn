@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="443.0" prefWidth="783.0" style="-fx-background-color: DCD6D1; -fx-border-color: black;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sultn.ui.CookbookSelectorController">
+   <children>
+      <Label id="title" alignment="CENTER" layoutX="1.0" prefHeight="111.0" prefWidth="783.0" text="SULTN" textFill="#798c92">
+         <font>
+            <Font name="Arial Italic" size="55.0" />
+         </font>
+      </Label>
+      <Label id="title" alignment="CENTER" layoutX="420.0" prefHeight="111.0" prefWidth="90.0" text="N" textFill="#d6b0a7">
+         <font>
+            <Font name="Arial Italic" size="55.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="BOTTOM" layoutY="394.0" prefHeight="49.0" prefWidth="783.0" style="-fx-border-width: 1 0 0 0; -fx-border-color: black;" text="Copyright Sultn | Made by Group 18" textAlignment="CENTER" textFill="#808080" wrapText="true">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Label>
+      <VBox layoutX="14.0" layoutY="108.0" prefHeight="209.0" prefWidth="756.0">
+         <children>
+            <HBox prefHeight="251.0" prefWidth="756.0">
+               <children>
+                  <Button fx:id="showLoadButton" mnemonicParsing="false" onAction="#showLoad" prefHeight="272.0" prefWidth="378.0" style="-fx-background-radius: 50; -fx-border-radius: 50; -fx-border-color: white; -fx-background-color: #f6c7bc;" text="Load an existing cookbook">
+                     <HBox.margin>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="showCreateButton" mnemonicParsing="false" onAction="#showCreate" prefHeight="272.0" prefWidth="370.0" style="-fx-background-radius: 50; -fx-border-radius: 50; -fx-border-color: white; -fx-background-color: #f6c7bc;" text="Create a new cookbook">
+                     <HBox.margin>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <TextField fx:id="cookbookText" layoutX="209.0" layoutY="180.0" prefHeight="75.0" prefWidth="310.0" promptText="Cookbook name" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: black;" visible="false">
+         <font>
+            <Font size="20.0" />
+         </font></TextField>
+      <Button fx:id="loadCookbook" layoutX="480.0" layoutY="178.0" mnemonicParsing="false" onAction="#loadCookbook" prefHeight="80.0" prefWidth="80.0" style="-fx-background-color: #f6c7bc; -fx-border-color: white; -fx-background-radius: 1000; -fx-border-radius: 1000;" text="Load" textAlignment="CENTER" visible="false" wrapText="true">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="returnBtn" layoutX="33.0" layoutY="19.0" mnemonicParsing="false" visible="false" onAction="#returnToSelect" prefHeight="30.0" prefWidth="25.0" style="-fx-background-color: DCD6D1 DCD6D1;" textFill="#daafa6" AnchorPane.bottomAnchor="396.0" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="727.0" AnchorPane.topAnchor="19.0">
+         <font>
+            <Font size="36.0" />
+         </font>
+         <padding>
+            <Insets bottom="-15.0" left="-15.0" right="-15.0" top="-15.0" />
+         </padding>
+         <graphic>
+            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons/system-icons/iconX.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>

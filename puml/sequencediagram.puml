@@ -1,40 +1,83 @@
 @startuml Sequence Diagram
 
 actor User
-participant Sultn
+participant SultnApp
+participant CookbookSelectorController
 participant SultnController
 participant SultnFormController
+participant RecipeListItem
 participant RecipeController
-participant Persistence
-database LocalStorage
+participant EditController
+participant RestAccess
+database RESTServer
 
-User -> Sultn : Open app
-Sultn -> SultnController : start()
-SultnController -> SultnController : intialize()
-SultnController -> Persistence : loadCookbook()
-Persistence -> LocalStorage : .readValue()
-SultnController -> SultnController : createRecipeList()
-User -> SultnController : 'click' addNewRecipe()
-SultnController -> SultnFormController : switchToSultnForm()
-User -> SultnFormController : 'click' addIngredient()
-User -> SultnFormController : 'click' addNewRecipe()
-SultnFormController -> SultnFormController : cookbook.makeNewRecipe()
-SultnFormController -> Persistence : .saveCookbook()
-Persistence -> LocalStorage : writeValue() 
-User -> SultnFormController : 'click' handleCancel()
-User -> SultnController : 'click' handle()
-SultnController -> RecipeController
+
+User -> SultnApp : Open app
+SultnApp -> CookbookSelectorController : start()
+CookbookSelectorController -> RestAccess : loadCookbook()
+RestAccess -> RESTServer : GET REQUEST
+RESTServer --> RestAccess : GET RESPONSE
+RestAccess -> CookbookSelectorController : restAccess.getAllCookbookNames()
+CookbookSelectorController -> SultnController : loadCookbook() 
+SultnController -> SultnController : initData()
+SultnController -> RestAccess: createRecipeList()
+RestAccess -> RESTServer : GET REQUEST
+RESTServer --> RestAccess : GET RESPONSE
+RestAccess -> RecipeListItem : restAccess.getCookbook()
+
+User -> SultnController : 'click' "X"
+SultnController -> CookbookSelectorController : returnToSelect()
+
+User -> SultnController : 'click' Make new recipe
+SultnController -> SultnFormController : handleOpenSultnForm()
+SultnFormController -> SultnFormController : initData()
+SultnFormController -> RestAccess : setCookbookName()
+
+User -> SultnFormController : 'click' Add ingredient
+SultnFormController -> SultnFormController : addIngredient()
+
+User -> SultnFormController : 'click' Add instruction
+SultnFormController -> SultnFormController : addInstruction()
+
+User -> SultnFormController : 'click' Add recipe
+SultnFormController -> RestAccess : addNewRecipe()
+RestAccess -> RESTServer : POST REQUEST
+RESTServer --> RestAccess : POST RESPONSE
+
+User -> SultnFormController : 'click' "X"
+SultnFormController -> SultnController : handlePrevScene()
+
+User -> RecipeListItem : 'click' Open
+RecipeListItem -> RecipeController : handle() 
 RecipeController -> RecipeController : initData()
-RecipeController -> RecipeController : writeIngredientField()
-RecipeController -> RecipeController : writeUnitField()
-RecipeController -> RecipeController : writeDirectionField()
-User -> RecipeController : 'click' delete()
-RecipeController -> RecipeController : cookbook.deleteRecipe()
-RecipeController -> Persistence : .saveCookbook()
-Persistence -> LocalStorage : .writeValue()
-User -> RecipeController : 'click' handRecipeBack()
-SultnController -> SultnController : .createRecipeList()
-SultnController -> Persistence : .saveCookbook()
-Persistence -> LocalStorage : .writeValue()
+RecipeController -> RestAccess : setCookbookName()
+
+User -> RecipeController : 'click' Edit Recipe
+RecipeController -> EditController : handleOpenEditRecipe()
+EditController -> EditController : initData()
+RestAccess -> RESTServer : GET REQUEST
+RESTServer --> RestAccess : GET RESPONSE
+RestAccess -> EditController : restAcces.getRecipe()
+EditController -> RestAccess : setCookbookName()
+
+User -> EditController : 'click' Add ingredient
+EditController -> EditController : addIngredient()
+
+User -> EditController : 'click' Add instruction
+EditController -> EditController : addInstruction()
+
+User -> EditController : 'click' Save Recipe
+EditController -> RestAccess : handleEditRecipe()
+RestAccess -> RESTServer : PUT REQUEST
+RESTServer --> RestAccess : PUT RESPONSE
+EditController -> RecipeController : handlePrevScene()
+RecipeController -> RecipeController : initData()
+RecipeController -> RestAccess : setCookbookName()
+
+User -> RecipeController : 'click' Delete Recipe
+RecipeController -> RestAccess : handleDeleteRecipe()
+RestAccess -> RESTServer : DELETE REQUEST
+RESTServer --> RestAccess : DELETE RESPONSE
+RecipeController -> SultnController : handlePrevScene()
 
 @enduml

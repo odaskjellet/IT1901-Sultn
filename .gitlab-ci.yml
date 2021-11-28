@@ -1,0 +1,65 @@
+image: maven:3.8.1-openjdk-16
+
+variables:
+    MAVEN_OPTS: -Dhttps.protocols=TLSv1.2 -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true
+    MAVEN_CLI_OPTS: --batch-mode -DskipUiTests=true --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true
+
+cache:
+  key: $CI_COMMIT_REF_SLUG
+  paths:
+    - .m2/repository/
+
+stages:
+  - build
+  - test
+  - deploy
+
+build:
+    stage: build
+    script:
+        - cd sultn
+        - mvn $MAVEN_CLI_OPTS compile
+    only:
+        - merge_requests
+
+test:
+    stage: test
+    script:
+        - cd sultn
+        - mvn $MAVEN_CLI_OPTS org.jacoco:jacoco-maven-plugin:prepare-agent test jacoco:report
+    only:
+        - merge_requests
+    artifacts:
+        paths:
+            - sultn/jacoco/target/site/jacoco/jacoco.xml
+
+checkstyle:
+    stage: test
+    script:
+        - cd sultn
+        - mvn $MAVEN_CLI_OPTS checkstyle:check
+    only:
+        - merge_requests
+
+spotbugs:
+    stage: test
+    script:
+        - cd sultn
+        - mvn $MAVEN_OPTS $MAVEN_CLI_OPTS compile spotbugs:check
+    only:
+        - merge_requests
+
+# coverage:
+#     stage: deploy
+#     image: registry.gitlab.com/haynes/jacoco2cobertura:1.0.7
+#     script:
+#         - cd sultn/ui
+#         # convert report from jacoco to cobertura, using relative project path
+#         - python /opt/cover2cover.py target/site/jacoco/jacoco.xml $CI_PROJECT_DIR/src/main/java/ > target/site/cobertura.xml
+#     needs: ["test"]
+#     artifacts:
+#         reports:
+#             cobertura: target/site/cobertura.xml
+#     only:
+#         - merge_requests
+            

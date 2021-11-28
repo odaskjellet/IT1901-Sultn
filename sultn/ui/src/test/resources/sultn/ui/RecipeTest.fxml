@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="443.0" prefWidth="783.0" style="-fx-background-color: DCD6D1;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sultn.ui.RecipeController"> 
+   <children>
+      <Pane layoutX="15.0" layoutY="119.0" prefHeight="267.0" prefWidth="756.0" style="-fx-background-color: #f6c7bc;">
+         <children>
+            <Label layoutX="14.0" layoutY="15.0" text="Ingredients">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="304.0" layoutY="15.0" text="Instructions">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="ingredientView" editable="false" layoutX="14.0" layoutY="41.0" prefHeight="214.0" prefWidth="282.0" wrapText="true" />
+            <TextArea fx:id="instructionView" editable="false" layoutX="304.0" layoutY="41.0" prefHeight="214.0" prefWidth="438.0" />
+         </children>
+      </Pane>
+      <Label alignment="CENTER" layoutX="15.0" layoutY="64.0" prefHeight="45.0" prefWidth="756.0" style="-fx-background-color: #f6c7bc; -fx-border-color: black;" textAlignment="CENTER">
+         <font>
+            <Font name="Arial Italic" size="21.0" />
+         </font>
+      </Label>
+      <Label id="title" alignment="CENTER" prefHeight="65.0" prefWidth="783.0" text="SULTN" textFill="#798c92">
+         <font>
+            <Font name="Arial Italic" size="40.0" />
+         </font>
+      </Label>
+      <Label id="title" alignment="CENTER" layoutX="396.0" prefHeight="65.0" prefWidth="90.0" text="N" textFill="#d6b0a7">
+         <font>
+            <Font name="Arial Italic" size="40.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="BOTTOM" layoutY="394.0" prefHeight="49.0" prefWidth="783.0" style="-fx-border-width: 1 0 0 0; -fx-border-color: black;" text="Copyright Sultn | Made by Group 18" textAlignment="CENTER" textFill="#808080" wrapText="true">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Label>
+      <Button fx:id="deleteRecipeButton" layoutX="632.0" layoutY="25.0" mnemonicParsing="false" onAction="#handleDeleteRecipe" style="-fx-background-color: #f6c7bc; -fx-border-color: black; -fx-border-radius: 5;" text="Delete Recipe" textAlignment="CENTER" textFill="#e86e6e">
+         <font>
+            <Font name="Arial Bold Italic" size="15.0" />
+         </font></Button>
+      <Button fx:id="prevSceneButton" layoutX="25.0" layoutY="18.0" mnemonicParsing="false" onAction="#handlePrevScene" prefHeight="30.0" prefWidth="25.0" style="-fx-background-color: DCD6D1 DCD6D1;" textFill="#daafa6" AnchorPane.bottomAnchor="396.0" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="727.0" AnchorPane.topAnchor="19.0">
+         <font>
+            <Font size="36.0" />
+         </font>
+         <padding>
+            <Insets bottom="-15.0" left="-15.0" right="-15.0" top="-15.0" />
+         </padding>
+         <graphic>
+            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons/system-icons/iconX.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Label fx:id="recipeNameLabel" alignment="CENTER" layoutX="123.0" layoutY="64.0" prefHeight="39.0" prefWidth="454.0" text="#NAVN" AnchorPane.bottomAnchor="340.0" AnchorPane.topAnchor="69.0">
+         <font>
+            <Font name="Arial Italic" size="21.0" />
+         </font>
+      </Label>
+      <Button fx:id="openEditRecipeButton" layoutX="520.0" layoutY="25.0" mnemonicParsing="false" onAction="#handleOpenEditRecipe" style="-fx-background-color: #f6c7bc; -fx-border-color: black; -fx-border-radius: 5;" text="Edit Recipe" textAlignment="CENTER" textFill="#6e93e5">
+         <font>
+            <Font name="Arial Bold Italic" size="15.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
