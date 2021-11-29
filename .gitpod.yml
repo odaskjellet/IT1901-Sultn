@@ -6,7 +6,7 @@ tasks:
   - name: Dependencies and Clean Install
     init: |
       sdk use java 16.0.1.hs-adpt
-      cd sultn; mvn clean install; cd ui;
+      cd sultn; mvn clean install -DskipUiTests; cd ui;
       gp sync-done build
   - name: Springboot server
     init: gp sync-await build && cd sultn; cd springboot; mvn spring-boot:run;
